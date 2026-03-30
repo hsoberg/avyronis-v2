@@ -6,7 +6,6 @@ export default function robots(): MetadataRoute.Robots {
             userAgent: '*',
             allow: '/',
         },
-        // Viktig: Her må det stå /sitemap.xml til slutt
         sitemap: 'https://avyronis.com',
     }
 }

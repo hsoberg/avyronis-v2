@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BraveBrand — Your Business is Invisible Without a Brand People Feel</title>
+  <meta name="description" content="BraveBrand helps ambitious businesses build brands that are felt, not ignored. Branding, marketing, and strategy for bold founders." />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,300;0,14..32,400;0,14..32,500;0,14..32,600;0,14..32,700;1,14..32,400&family=Inter+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link href="https://api.fontshare.com/v2/css?f[]=switzer@300,400,500,600,700&f[]=sentient@300,400,500,600,700,300i,400i,500i,600i,700i&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+  <!-- ============================================================
+       NAVIGATION
+  ============================================================ -->
+  <nav class="nav" role="navigation" aria-label="Main navigation">
+    <div class="nav__inner">
+
+      <a href="/" class="nav__logo" aria-label="BraveBrand Home">
+        <span class="nav__logo-text">BraveBrand</span>
+      </a>
+
+      <div class="nav__links" role="list">
+        <a href="#work" class="nav__link" role="listitem">Case Studies</a>
+        <a href="#about" class="nav__link" role="listitem">About</a>
+        <a href="#services" class="nav__link" role="listitem">Services</a>
+        <a href="#faq" class="nav__link" role="listitem">FAQ</a>
+      </div>
+
+      <a href="#contact" class="nav__cta">
+        Let's Talk
+        <svg class="icon" width="14" height="14" viewBox="0 0 24 24" aria-hidden="true">
+          <line x1="5" y1="12" x2="19" y2="12"/>
+          <polyline points="12 5 19 12 12 19"/>
+        </svg>
+      </a>
+
+      <button class="nav__hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobile-menu" role="dialog" aria-label="Mobile navigation" aria-hidden="true">
+    <nav class="mobile-menu__links">
+      <a href="#work" class="mobile-menu__link">Case Studies</a>
+      <a href="#about" class="mobile-menu__link">About</a>
+      <a href="#services" class="mobile-menu__link">Services</a>
+      <a href="#faq" class="mobile-menu__link">FAQ</a>
+    </nav>
+    <a href="#contact" class="mobile-menu__cta">Let's Talk →</a>
+  </div>
+
+  <main>
+
+    <!-- ============================================================
+         HERO — Video Background
+    ============================================================ -->
+    <section class="hero" id="home" aria-label="Hero">
+      <div class="hero__video-wrap" aria-hidden="true">
+        <video
+          class="hero__video"
+          src="henning.mp4"
+          autoplay
+          muted
+          loop
+          playsinline
+          preload="auto"
+        >
+        </video>
+      </div>
+      <div class="hero__overlay" aria-hidden="true"></div>
+
+      <div class="hero__content">
+        <h1 class="hero__headline">
+          Vi bygger nettsider som gjør besøkende til kunder – ikke bare pent design.
+        </h1>
+        <div class="hero__buttons">
+          <a href="#work" class="btn btn--primary">
+            <span class="btn__icon" aria-hidden="true">
+              <svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2">
+                <rect x="3" y="3" width="7" height="7" rx="1"/>
+                <rect x="14" y="3" width="7" height="7" rx="1"/>
+                <rect x="3" y="14" width="7" height="7" rx="1"/>
+                <rect x="14" y="14" width="7" height="7" rx="1"/>
+              </svg>
+            </span>
+            See Case Studies
+          </a>
+          <a href="#contact" class="btn btn--outline">
+            <span class="btn__icon" aria-hidden="true">
+              <svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="2">
+                <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                <path d="M2 17l10 5 10-5"/>
+                <path d="M2 12l10 5 10-5"/>
+              </svg>
+            </span>
+            Build My BraveBrand
+          </a>
+        </div>
+      </div>
+
+      <div class="hero__scroll" aria-hidden="true">
+        <div class="hero__scroll-line"></div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         TEXT SECTION 1
+    ============================================================ -->
+    <section class="text-section" aria-label="Brand philosophy">
+      <div class="text-section__inner fade-up">
+        <p class="text-section__body">
+          Most businesses blend in. They follow templates, copy competitors, and wonder why growth stalls.
+          <em>A BraveBrand doesn't ask for attention — it commands it.</em>
+        </p>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         SPLIT SECTION — About / Story
+    ============================================================ -->
+    <section class="split-section" id="about" aria-label="About BraveBrand">
+      <div class="split-section__inner">
+        <div class="split-section__image fade-in">
+          <img
+            src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=900&q=80&auto=format&fit=crop"
+            alt="Brand strategy session"
+            loading="lazy"
+          />
+        </div>
+        <div class="split-section__content">
+          <span class="split-section__label fade-up">Who We Are</span>
+          <h2 class="split-section__heading fade-up">We build brands that earn authority and drive revenue</h2>
+          <p class="split-section__body fade-up">
+            BraveBrand is a brand strategy and design studio for ambitious founders who refuse to be ignored. We combine deep strategic thinking with bold visual identity to create brands that don't just look good — they work hard.
+          </p>
+          <a href="#work" class="split-section__link fade-up">
+            See our work
+            <svg class="icon" width="14" height="14" viewBox="0 0 24 24" aria-hidden="true">
+              <line x1="5" y1="12" x2="19" y2="12"/>
+              <polyline points="12 5 19 12 12 19"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         TEXT SECTION 2
+    ============================================================ -->
+    <section class="text-section text-section--bordered" aria-label="Brand impact statement">
+      <div class="text-section__inner fade-up">
+        <p class="text-section__body">
+          <em>"Your brand is not your logo. It's the feeling people get when they think of you."</em>
+          That feeling is what we design. That feeling is what closes deals.
+        </p>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         LOGO TICKER
+    ============================================================ -->
+    <div class="ticker" aria-label="Client logos" aria-hidden="true">
+      <div class="ticker__track">
+        <div class="ticker__item">
+          <span class="ticker__item-text">Accenture</span>
+        </div>
+        <div class="ticker__item">
+          <span class="ticker__item-text">HubSpot</span>
+        </div>
+        <div class="ticker__item">
+          <span class="ticker__item-text">Stripe</span>
+        </div>
+        <div class="ticker__item">
+          <span class="ticker__item-text">Notion</span>
+        </div>
+        <div class="ticker__item">
+          <span class="ticker__item-text">Linear</span>
+        </div>
+        <div class="ticker__item">
+          <span class="ticker__item-text">Vercel</span>
+        </div>
+        <div class="ticker__item">
+          <span class="ticker__item-text">Figma</span>
+        </div>
+        <div class="ticker__item">
+          <span class="ticker__item-text">Loom</span>
+        </div>
+        <div class="ticker__item">
+          <span class="ticker__item-text">Webflow</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============================================================
+         PROCESS SECTION
+    ============================================================ -->
+    <section class="process" aria-label="Our process">
+      <div class="process__inner">
+        <div class="process__header">
+          <h2 class="process__title fade-up">A BraveBrand means your business is felt, not ignored.</h2>
+        </div>
+        <div class="process__cards stagger">
+          <div class="process__card">
+            <span class="process__card-number">01</span>
+            <h3 class="process__card-title">Authority</h3>
+            <p class="process__card-body">We position your brand as the obvious choice in your market. When people encounter you, they immediately understand why you're different and why it matters.</p>
+          </div>
+          <div class="process__card">
+            <span class="process__card-number">02</span>
+            <h3 class="process__card-title">Emotion</h3>
+            <p class="process__card-body">Decisions are emotional. We design brands that create a visceral reaction — the kind that makes people feel something before they even read a word.</p>
+          </div>
+          <div class="process__card">
+            <span class="process__card-number">03</span>
+            <h3 class="process__card-title">Leverage</h3>
+            <p class="process__card-body">A great brand is your highest-leverage asset. It compounds over time, attracts better clients, and lets you charge what you're actually worth.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         SELECTED WORK
+    ============================================================ -->
+    <section class="work" id="work" aria-label="Selected work">
+      <div class="work__inner">
+        <div class="work__header">
+          <h2 class="work__title fade-up">Selected Work</h2>
+          <a href="#" class="work__view-all fade-up">
+            View all
+            <svg class="icon" width="14" height="14" viewBox="0 0 24 24" aria-hidden="true">
+              <line x1="5" y1="12" x2="19" y2="12"/>
+              <polyline points="12 5 19 12 12 19"/>
+            </svg>
+          </a>
+        </div>
+
+        <div class="work__grid stagger">
+
+          <!-- Card 1 — Wide -->
+          <article class="case-card case-card--wide" data-href="#">
+            <div class="case-card__image">
+              <img
+                src="https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=1400&q=80&auto=format&fit=crop"
+                alt="Momentum — Brand Identity"
+                loading="lazy"
+              />
+              <span class="case-card__tag">Brand Identity</span>
+            </div>
+            <div class="case-card__body">
+              <h3 class="case-card__title">Momentum</h3>
+              <p class="case-card__desc">Complete brand overhaul for a Series A fintech startup. Strategy, identity, and launch system.</p>
+            </div>
+            <div class="case-card__footer">
+              <span></span>
+              <div class="case-card__arrow" aria-hidden="true">
+                <svg class="icon" width="16" height="16" viewBox="0 0 24 24">
+                  <line x1="5" y1="12" x2="19" y2="12"/>
+                  <polyline points="12 5 19 12 12 19"/>
+                </svg>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 2 -->
+          <article class="case-card" data-href="#">
+            <div class="case-card__image">
+              <img
+                src="https://images.unsplash.com/photo-1558655146-d09347e92766?w=900&q=80&auto=format&fit=crop"
+                alt="Roven — Brand Strategy"
+                loading="lazy"
+              />
+              <span class="case-card__tag">Brand Strategy</span>
+            </div>
+            <div class="case-card__body">
+              <h3 class="case-card__title">Roven</h3>
+              <p class="case-card__desc">Market positioning and visual identity for a premium SaaS platform entering a crowded space.</p>
+            </div>
+            <div class="case-card__footer">
+              <span></span>
+              <div class="case-card__arrow" aria-hidden="true">
+                <svg class="icon" width="16" height="16" viewBox="0 0 24 24">
+                  <line x1="5" y1="12" x2="19" y2="12"/>
+                  <polyline points="12 5 19 12 12 19"/>
+                </svg>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 3 -->
+          <article class="case-card" data-href="#">
+            <div class="case-card__image">
+              <img
+                src="https://images.unsplash.com/photo-1524758631624-e2822e304c36?w=900&q=80&auto=format&fit=crop"
+                alt="Aura — Brand System"
+                loading="lazy"
+              />
+              <span class="case-card__tag">Brand System</span>
+            </div>
+            <div class="case-card__body">
+              <h3 class="case-card__title">Aura</h3>
+              <p class="case-card__desc">Full brand system for a wellness company scaling to retail — from identity to in-store experience.</p>
+            </div>
+            <div class="case-card__footer">
+              <span></span>
+              <div class="case-card__arrow" aria-hidden="true">
+                <svg class="icon" width="16" height="16" viewBox="0 0 24 24">
+                  <line x1="5" y1="12" x2="19" y2="12"/>
+                  <polyline points="12 5 19 12 12 19"/>
+                </svg>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         SERVICES ACCORDION
+    ============================================================ -->
+    <section class="services" id="services" aria-label="Our services">
+      <div class="services__inner">
+
+        <div class="services__left">
+          <span class="services__label">What We Do</span>
+          <h2 class="services__heading">Everything your brand needs to win</h2>
+          <p class="services__body">
+            We don't do half-measures. Every engagement is a full-stack brand build — strategy, identity, and the systems to deploy it consistently across every touchpoint.
+          </p>
+          <a href="#contact" class="services__cta">
+            Start a Project
+            <svg class="icon" width="16" height="16" viewBox="0 0 24 24" aria-hidden="true">
+              <line x1="5" y1="12" x2="19" y2="12"/>
+              <polyline points="12 5 19 12 12 19"/>
+            </svg>
+          </a>
+        </div>
+
+        <div class="accordion" role="list">
+
+          <div class="accordion__item open" role="listitem">
+            <button class="accordion__trigger" aria-expanded="true" aria-controls="service-1">
+              <span class="accordion__title">Brave Brains</span>
+              <span class="accordion__icon" aria-hidden="true"></span>
+            </button>
+            <div class="accordion__content" id="service-1" role="region">
+              <div class="accordion__body">
+                <p>Strategic brand positioning and market differentiation. We dig deep into your business, your competitors, and your customers to uncover the exact story that makes you the obvious choice.</p>
+                <div class="accordion__tags">
+                  <span class="accordion__tag">Brand Strategy</span>
+                  <span class="accordion__tag">Market Research</span>
+                  <span class="accordion__tag">Positioning</span>
+                  <span class="accordion__tag">Messaging</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion__item" role="listitem">
+            <button class="accordion__trigger" aria-expanded="false" aria-controls="service-2">
+              <span class="accordion__title">Brave Marketing</span>
+              <span class="accordion__icon" aria-hidden="true"></span>
+            </button>
+            <div class="accordion__content" id="service-2" role="region">
+              <div class="accordion__body">
+                <p>Marketing systems built on a brand foundation that actually works. We create content strategies, campaign frameworks, and growth engines that feel authentic because they are.</p>
+                <div class="accordion__tags">
+                  <span class="accordion__tag">Content Strategy</span>
+                  <span class="accordion__tag">Campaign Design</span>
+                  <span class="accordion__tag">Social Identity</span>
+                  <span class="accordion__tag">Launch Systems</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion__item" role="listitem">
+            <button class="accordion__trigger" aria-expanded="false" aria-controls="service-3">
+              <span class="accordion__title">Brave Systems</span>
+              <span class="accordion__icon" aria-hidden="true"></span>
+            </button>
+            <div class="accordion__content" id="service-3" role="region">
+              <div class="accordion__body">
+                <p>Brand guidelines, design systems, and asset libraries so your team can execute consistently at scale. The brand lives beyond the launch.</p>
+                <div class="accordion__tags">
+                  <span class="accordion__tag">Design System</span>
+                  <span class="accordion__tag">Brand Guidelines</span>
+                  <span class="accordion__tag">Asset Library</span>
+                  <span class="accordion__tag">Templates</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion__item" role="listitem">
+            <button class="accordion__trigger" aria-expanded="false" aria-controls="service-4">
+              <span class="accordion__title">Brave Branding</span>
+              <span class="accordion__icon" aria-hidden="true"></span>
+            </button>
+            <div class="accordion__content" id="service-4" role="region">
+              <div class="accordion__body">
+                <p>Visual identity design that stops scrolls and opens wallets. Logo systems, typography, color palettes, and the full brand identity package — built to last and built to scale.</p>
+                <div class="accordion__tags">
+                  <span class="accordion__tag">Logo Design</span>
+                  <span class="accordion__tag">Visual Identity</span>
+                  <span class="accordion__tag">Typography</span>
+                  <span class="accordion__tag">Color System</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         TEXT SECTION 3
+    ============================================================ -->
+    <section class="text-section text-section--bordered" aria-label="Closing statement">
+      <div class="text-section__inner fade-up">
+        <p class="text-section__body">
+          You don't need more followers. You need a brand that makes the right people
+          <em>stop, feel something, and choose you.</em>
+        </p>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         TESTIMONIAL
+    ============================================================ -->
+    <section class="testimonial" aria-label="Client testimonial">
+      <img
+        class="testimonial__bg"
+        src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&q=80&auto=format&fit=crop"
+        alt=""
+        aria-hidden="true"
+        loading="lazy"
+      />
+      <div class="testimonial__overlay" aria-hidden="true"></div>
+      <div class="testimonial__content">
+        <blockquote class="testimonial__quote fade-up">
+          "Working with BraveBrand was a turning point. Within six months of our rebrand, we closed our largest contract to date. The brand did the selling before we even got on the call."
+        </blockquote>
+        <div class="testimonial__author fade-up">
+          <span class="testimonial__author-name">Marcus Webb</span>
+          <span class="testimonial__author-title">Founder & CEO, Momentum</span>
+        </div>
+        <a href="#contact" class="testimonial__cta fade-up">
+          Let's work together
+          <svg class="icon" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
+            <line x1="5" y1="12" x2="19" y2="12"/>
+            <polyline points="12 5 19 12 12 19"/>
+          </svg>
+        </a>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         FAQ
+    ============================================================ -->
+    <section class="faq" id="faq" aria-label="Frequently asked questions">
+      <div class="faq__inner">
+        <div class="faq__header">
+          <span class="faq__label">FAQ</span>
+          <h2 class="faq__title fade-up">Questions we get asked</h2>
+        </div>
+
+        <div class="accordion">
+
+          <div class="accordion__item">
+            <button class="accordion__trigger" aria-expanded="false" aria-controls="faq-1">
+              <span class="accordion__title">How long does a brand project take?</span>
+              <span class="accordion__icon" aria-hidden="true"></span>
+            </button>
+            <div class="accordion__content" id="faq-1">
+              <div class="accordion__body">
+                <p>A full brand build typically takes 6–10 weeks from kickoff to final delivery. This includes strategy, identity design, and the brand system. Expedited timelines are available for select projects.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion__item">
+            <button class="accordion__trigger" aria-expanded="false" aria-controls="faq-2">
+              <span class="accordion__title">What's your pricing structure?</span>
+              <span class="accordion__icon" aria-hidden="true"></span>
+            </button>
+            <div class="accordion__content" id="faq-2">
+              <div class="accordion__body">
+                <p>Every project is scoped based on your specific needs and goals. Brand projects typically start at $8,000 for a focused identity build and scale based on deliverables and strategic depth. We'll give you a clear proposal after our initial call.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion__item">
+            <button class="accordion__trigger" aria-expanded="false" aria-controls="faq-3">
+              <span class="accordion__title">Do you work with early-stage startups?</span>
+              <span class="accordion__icon" aria-hidden="true"></span>
+            </button>
+            <div class="accordion__content" id="faq-3">
+              <div class="accordion__body">
+                <p>Yes — some of our best work has been with founders pre-revenue who understood that brand is infrastructure, not decoration. If you're serious about building something that lasts, we're interested in talking.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion__item">
+            <button class="accordion__trigger" aria-expanded="false" aria-controls="faq-4">
+              <span class="accordion__title">What do you need from us to get started?</span>
+              <span class="accordion__icon" aria-hidden="true"></span>
+            </button>
+            <div class="accordion__content" id="faq-4">
+              <div class="accordion__body">
+                <p>An open mind and honest context about your business. We do deep discovery — your job is to show up with clarity on your goals, your customers, and what's not working right now. We handle everything else.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion__item">
+            <button class="accordion__trigger" aria-expanded="false" aria-controls="faq-5">
+              <span class="accordion__title">Do you offer ongoing retainer work?</span>
+              <span class="accordion__icon" aria-hidden="true"></span>
+            </button>
+            <div class="accordion__content" id="faq-5">
+              <div class="accordion__body">
+                <p>Yes. After completing a brand build, many clients retain us for ongoing brand management, content design, and campaign work. These are structured as monthly engagements with defined scope.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion__item">
+            <button class="accordion__trigger" aria-expanded="false" aria-controls="faq-6">
+              <span class="accordion__title">Can you redesign an existing brand?</span>
+              <span class="accordion__icon" aria-hidden="true"></span>
+            </button>
+            <div class="accordion__content" id="faq-6">
+              <div class="accordion__body">
+                <p>Absolutely. Rebrands are some of the most impactful projects we take on. We'll audit what exists, identify what's worth keeping, and build a brand that reflects where you're going — not where you've been.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion__item">
+            <button class="accordion__trigger" aria-expanded="false" aria-controls="faq-7">
+              <span class="accordion__title">What industries do you work in?</span>
+              <span class="accordion__icon" aria-hidden="true"></span>
+            </button>
+            <div class="accordion__content" id="faq-7">
+              <div class="accordion__body">
+                <p>We work across B2B SaaS, professional services, e-commerce, and consumer brands. The common thread isn't the industry — it's founders who take brand seriously as a business driver.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion__item">
+            <button class="accordion__trigger" aria-expanded="false" aria-controls="faq-8">
+              <span class="accordion__title">How do we get started?</span>
+              <span class="accordion__icon" aria-hidden="true"></span>
+            </button>
+            <div class="accordion__content" id="faq-8">
+              <div class="accordion__body">
+                <p>Fill out the form below or send us a message. We review every inquiry personally and typically respond within 24 hours. If it's a good fit, we'll schedule a 30-minute discovery call — no pitch, just a real conversation.</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         CONTACT CTA
+    ============================================================ -->
+    <section class="text-section" id="contact" aria-label="Contact">
+      <div class="text-section__inner fade-up" style="max-width: 700px;">
+        <p class="text-section__body" style="margin-bottom: 48px;">
+          <em>Ready to stop being invisible?</em>
+        </p>
+        <a href="mailto:hello@bravebrand.com" class="btn btn--primary" style="font-size: 17px; padding: 18px 40px; display: inline-flex;">
+          hello@bravebrand.com
+          <svg class="icon" width="18" height="18" viewBox="0 0 24 24" style="margin-left: 8px;" aria-hidden="true">
+            <line x1="5" y1="12" x2="19" y2="12"/>
+            <polyline points="12 5 19 12 12 19"/>
+          </svg>
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============================================================
+       FOOTER
+  ============================================================ -->
+  <footer class="footer" role="contentinfo">
+    <div class="footer__inner">
+      <div class="footer__top">
+        <div class="footer__brand">
+          <span class="footer__brand-name">BraveBrand</span>
+          <p class="footer__tagline">We build brands that earn authority, create emotion, and drive revenue for ambitious founders.</p>
+        </div>
+        <nav aria-label="Footer pages">
+          <p class="footer__col-title">Pages</p>
+          <ul class="footer__links">
+            <li><a href="#work" class="footer__link">Case Studies</a></li>
+            <li><a href="#about" class="footer__link">About</a></li>
+            <li><a href="#services" class="footer__link">Services</a></li>
+            <li><a href="#faq" class="footer__link">FAQ</a></li>
+            <li><a href="#contact" class="footer__link">Contact</a></li>
+          </ul>
+        </nav>
+        <nav aria-label="Social links">
+          <p class="footer__col-title">Socials</p>
+          <ul class="footer__links">
+            <li><a href="#" class="footer__link" rel="noopener">Instagram</a></li>
+            <li><a href="#" class="footer__link" rel="noopener">LinkedIn</a></li>
+            <li><a href="#" class="footer__link" rel="noopener">Twitter / X</a></li>
+            <li><a href="#" class="footer__link" rel="noopener">Dribbble</a></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="footer__bottom">
+        <p class="footer__copy">© 2024 BraveBrand. All rights reserved.</p>
+        <div class="footer__bottom-links">
+          <a href="#" class="footer__bottom-link">Privacy Policy</a>
+          <a href="#" class="footer__bottom-link">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

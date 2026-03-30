@@ -3168,7 +3168,7 @@ ul, ol { list-style: none; }
 .insight-filter__btn:hover,
 .insight-filter__btn--active {
   background: var(--color-white);
-  color: var(--color-bg);
+  color: #070708;
   border-color: var(--color-white);
 }
 

@@ -1945,8 +1945,13 @@ ul, ol { list-style: none; }
   }
 }
 .system-section__left {
-  position: sticky;
-  top: 120px;
+  position: relative; /* Default for mobile. Stays in the document flow. */
+}
+@media (min-width: 900px) {
+  .system-section__left {
+    position: sticky;
+    top: 120px;
+  }
 }
 .system-section__headline {
   font-family: var(--font-sans);
@@ -3168,7 +3173,7 @@ ul, ol { list-style: none; }
 .insight-filter__btn:hover,
 .insight-filter__btn--active {
   background: var(--color-white);
-  color: #070708;
+  color: #000000 !important;
   border-color: var(--color-white);
 }
 

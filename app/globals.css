@@ -103,6 +103,7 @@ ul, ol { list-style: none; }
   margin: 0 auto;
   padding: 0 var(--space-8);
 }
+.text-accent { color: var(--color-accent); }
 
 /* ============================================================
    NAVIGATION
@@ -1338,12 +1339,14 @@ ul, ol { list-style: none; }
 }
 .proof-card__metric {
   font-family: var(--font-display);
-  font-size: 64px;
+  font-size: clamp(32px, 8vw, 64px);
   font-weight: 700;
   color: var(--color-accent);
-  line-height: 1;
+  line-height: 1.1;
   letter-spacing: -0.03em;
   margin-bottom: 24px;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 .proof-card__title {
   font-family: var(--font-sans);
@@ -2415,12 +2418,14 @@ ul, ol { list-style: none; }
 }
 .proof-card__metric {
   font-family: var(--font-sans);
-  font-size: clamp(40px, 5vw, 56px);
+  font-size: clamp(32px, 4.5vw, 48px);
   font-weight: 500;
   color: var(--color-accent);
-  line-height: 1;
+  line-height: 1.1;
   margin-bottom: 24px;
   letter-spacing: -0.02em;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 .proof-card__title {
   font-family: var(--font-sans);

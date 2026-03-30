@@ -1,8 +1,7 @@
 import { NextResponse } from 'next/server'
 import * as cheerio from 'cheerio'
-import { GoogleGenerativeAI } from '@google/generative-ai'
+import OpenAI from 'openai'
 
-// The methodology used for CRO analysis
 const SYSTEM_PROMPT = `Du er en verdensklasse CRO, AEO og SEO ekspert. 
 Din oppgave er å analysere innholdet fra en nettside (som jeg limer inn nedenfor som destillert tekst, overskrifter og knapper) og vurdere den basert på disse 3 pilarene.
 
@@ -25,14 +24,13 @@ Strukturen må være akkurat slik:
     {
       "title": "Kort tittel på et problem",
       "description": "Forklaring på hvorfor dette koster dem kunder (CRO, SEO eller AEO relatert)."
-    },
-    // Nøyaktig 3 slike oppdateringer
+    }
   ],
   "fullAudit": {
     "cro": "Din ekspertuttalelse på konverteringen (2-3 avsnitt). Bruk Making Websites Win metodikk som referanse.",
     "aeo": "Din ekspertuttalelse på AEO (1 avsnitt).",
     "seo": "Din vurdering av SEO og overskrifter (1 avsnitt).",
-    "overallScore": 65 // Et tall fra 1 til 100 som en totalscore
+    "overallScore": 65
   }
 }
 
@@ -47,18 +45,16 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: 'Mangler URL' }, { status: 400 })
     }
 
-    // Pass on if Gemini key is missing
-    const apiKey = process.env.GEMINI_API_KEY
+    const apiKey = process.env.OPENAI_API_KEY
     if (!apiKey) {
       return NextResponse.json({
-        error: 'Backend mangler GEMINI_API_KEY. Sjekk at nøkkelen er lagt til i .env.local filen.'
+        error: 'Backend mangler OPENAI_API_KEY. Sjekk at nøkkelen er lagt til i Vercel Environment Variables.'
       }, { status: 500 })
     }
 
     // 1. Skrap nettsiden
     let html = ""
     try {
-      // Enforce http/https
       const parsedUrl = url.startsWith('http') ? url : `https://${url}`
       const response = await fetch(parsedUrl, {
         headers: {
@@ -76,23 +72,15 @@ export async function POST(req: Request) {
 
     // 2. Rens HTML med Cheerio
     const $ = cheerio.load(html)
-
-    // Fjern scripts, styles, og nav-elementer som forstyrrer renteksten
     $('script, style, noscript, iframe, img, svg, header, footer, nav, aside').remove()
 
-    // Hent Tittel og Meta
     const pageTitle = $('title').text().trim()
     const metaDesc = $('meta[name="description"]').attr('content') || ''
-
-    // Trekk ut overskrifter og knapper for å gi Gemini kontekst
     const h1s = $('h1').map((_, el) => $(el).text().trim()).get().join(' | ')
     const h2s = $('h2').map((_, el) => $(el).text().trim()).get().join(' | ')
     const buttons = $('button, a.btn, .btn, a.button').map((_, el) => $(el).text().trim()).get().join(' | ')
+    const bodyText = $('body').text().replace(/\s+/g, ' ').trim().slice(0, 15000)
 
-    // Trekk ut alt gjenværende tekstinnhold (The Body)
-    const bodyText = $('body').text().replace(/\\s+/g, ' ').trim().slice(0, 15000) // Klipp for å unngå token-limit
-
-    // Sett sammen konteksten
     const siteContext = `
       URL: ${url}
       TITTEL: ${pageTitle}
@@ -105,32 +93,32 @@ export async function POST(req: Request) {
       ${bodyText}
     `
 
-    // 3. Spør Gemini (Google AI Studio)
-    // 3. Spør Gemini (Google AI Studio)
-    const genAI = new GoogleGenerativeAI(apiKey)
-    const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash-lite" })
-    const fullPrompt = `${SYSTEM_PROMPT}\n\n${siteContext}`
+    // 3. Spør OpenAI
+    const openai = new OpenAI({ apiKey })
+    const completion = await openai.chat.completions.create({
+      model: 'gpt-4o-mini',
+      messages: [
+        { role: 'system', content: SYSTEM_PROMPT },
+        { role: 'user', content: siteContext }
+      ],
+      response_format: { type: 'json_object' },
+    })
 
-    let responseText = ""
-    const result = await model.generateContent(fullPrompt)
-    responseText = result.response.text()
-
-    // Gemini pakker noen ganger JSON inn i \`\`\`json ... \`\`\` markdown blocks. Vi fjerner dette.
-    const rawJson = responseText.replace(/```json/g, '').replace(/```/g, '').trim()
+    const rawJson = completion.choices[0].message.content || ''
 
     let parsedData
     try {
       parsedData = JSON.parse(rawJson)
     } catch (parseError) {
-      console.error("Failed to parse Gemini output:", rawJson)
+      console.error("Failed to parse OpenAI output:", rawJson)
       return NextResponse.json({ error: 'AI returnerte et ugyldig format. Prøv igjen.' }, { status: 500 })
     }
 
-    // 4. Send den perfekte API responsen tilbake til frontenden
+    // 4. Send responsen tilbake til frontenden
     return NextResponse.json({ success: true, data: parsedData })
 
   } catch (error: any) {
-    console.error('Geo Audit API Error:', error)
+    console.error('Audit API Error:', error)
     return NextResponse.json({ error: 'Det oppstod en ukjent feil på serveren.' }, { status: 500 })
   }
 }

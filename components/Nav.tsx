@@ -33,7 +33,7 @@ export default function Nav() {
         <div className="nav__inner">
           <Link href="/" className="nav__logo" aria-label="Avyronis Home">
             <span className="nav__logo-text">
-              Avyronis<span style={{ color: 'var(--color-accent)' }}>.</span>
+              Avyronis<span className="text-accent">.</span>
             </span>
           </Link>
 

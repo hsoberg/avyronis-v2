@@ -21,7 +21,9 @@ export default function Footer() {
       <div className="footer__inner">
         <div className="footer__top">
           <div className="footer__brand">
-            <span className="footer__brand-name">Avyronis</span>
+            <span className="footer__brand-name">
+              Avyronis<span className="text-accent">.</span>
+            </span>
             <p className="footer__tagline">
               Vi bygger nettsider som gjør besøkende til kunder – ikke bare pent design.
             </p>
@@ -51,7 +53,7 @@ export default function Footer() {
         </div>
 
         <div className="footer__bottom">
-          <p className="footer__copy">© {new Date().getFullYear()} Avyronis. Alle rettigheter forbeholdt.</p>
+          <p className="footer__copy">© {new Date().getFullYear()} Avyronis<span className="text-accent">.</span> Alle rettigheter forbeholdt.</p>
           <div className="footer__bottom-links">
             <a href="#" className="footer__bottom-link">Personvern</a>
             <a href="#" className="footer__bottom-link">Vilkår</a>

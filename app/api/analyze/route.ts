@@ -50,45 +50,45 @@ export async function POST(req: Request) {
     // Pass on if Gemini key is missing
     const apiKey = process.env.GEMINI_API_KEY
     if (!apiKey) {
-      return NextResponse.json({ 
-        error: 'Backend mangler GEMINI_API_KEY. Sjekk at nøkkelen er lagt til i .env.local filen.' 
+      return NextResponse.json({
+        error: 'Backend mangler GEMINI_API_KEY. Sjekk at nøkkelen er lagt til i .env.local filen.'
       }, { status: 500 })
     }
 
     // 1. Skrap nettsiden
     let html = ""
     try {
-        // Enforce http/https
-        const parsedUrl = url.startsWith('http') ? url : `https://${url}`
-        const response = await fetch(parsedUrl, {
-            headers: {
-                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
-                'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
-            }
-        })
-        if (!response.ok) {
-            throw new Error(`Nettstedet returnerte ${response.status}`)
+      // Enforce http/https
+      const parsedUrl = url.startsWith('http') ? url : `https://${url}`
+      const response = await fetch(parsedUrl, {
+        headers: {
+          'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
+          'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
         }
-        html = await response.text()
+      })
+      if (!response.ok) {
+        throw new Error(`Nettstedet returnerte ${response.status}`)
+      }
+      html = await response.text()
     } catch (error: any) {
-        return NextResponse.json({ error: `Klarte ikke å skrape nettsiden: ${error.message}` }, { status: 400 })
+      return NextResponse.json({ error: `Klarte ikke å skrape nettsiden: ${error.message}` }, { status: 400 })
     }
 
     // 2. Rens HTML med Cheerio
     const $ = cheerio.load(html)
-    
+
     // Fjern scripts, styles, og nav-elementer som forstyrrer renteksten
     $('script, style, noscript, iframe, img, svg, header, footer, nav, aside').remove()
-    
+
     // Hent Tittel og Meta
     const pageTitle = $('title').text().trim()
     const metaDesc = $('meta[name="description"]').attr('content') || ''
-    
+
     // Trekk ut overskrifter og knapper for å gi Gemini kontekst
     const h1s = $('h1').map((_, el) => $(el).text().trim()).get().join(' | ')
     const h2s = $('h2').map((_, el) => $(el).text().trim()).get().join(' | ')
     const buttons = $('button, a.btn, .btn, a.button').map((_, el) => $(el).text().trim()).get().join(' | ')
-    
+
     // Trekk ut alt gjenværende tekstinnhold (The Body)
     const bodyText = $('body').text().replace(/\\s+/g, ' ').trim().slice(0, 15000) // Klipp for å unngå token-limit
 
@@ -107,31 +107,31 @@ export async function POST(req: Request) {
 
     // 3. Spør Gemini (Google AI Studio)
     const genAI = new GoogleGenerativeAI(apiKey)
-    
+
     // Bruker -latest for å sikre at API-versjonen treffer riktig modell, ellers fallback
-    let model = genAI.getGenerativeModel({ model: "gemini-1.5-flash-latest" })
+    let model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" })
     const fullPrompt = `${SYSTEM_PROMPT}\n\n${siteContext}`
-    
+
     let responseText = ""
     try {
-        const result = await model.generateContent(fullPrompt)
-        responseText = result.response.text()
+      const result = await model.generateContent(fullPrompt)
+      responseText = result.response.text()
     } catch (e: any) {
-        console.warn("Fallback to gemini-pro due to:", e.message)
-        model = genAI.getGenerativeModel({ model: "gemini-pro" })
-        const fallbackResult = await model.generateContent(fullPrompt)
-        responseText = fallbackResult.response.text()
+      console.warn("Fallback to gemini-pro due to:", e.message)
+      model = genAI.getGenerativeModel({ model: "gemini-1.5-pro" })
+      const fallbackResult = await model.generateContent(fullPrompt)
+      responseText = fallbackResult.response.text()
     }
 
     // Gemini pakker noen ganger JSON inn i \`\`\`json ... \`\`\` markdown blocks. Vi fjerner dette.
     const rawJson = responseText.replace(/```json/g, '').replace(/```/g, '').trim()
-    
+
     let parsedData
     try {
-        parsedData = JSON.parse(rawJson)
+      parsedData = JSON.parse(rawJson)
     } catch (parseError) {
-        console.error("Failed to parse Gemini output:", rawJson)
-        return NextResponse.json({ error: 'AI returnerte et ugyldig format. Prøv igjen.' }, { status: 500 })
+      console.error("Failed to parse Gemini output:", rawJson)
+      return NextResponse.json({ error: 'AI returnerte et ugyldig format. Prøv igjen.' }, { status: 500 })
     }
 
     // 4. Send den perfekte API responsen tilbake til frontenden

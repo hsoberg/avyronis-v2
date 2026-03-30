@@ -13,46 +13,118 @@ const filters = ["Alle", "SEO", "Konvertering", "Strategi", "Markedsføring"]
 
 function UrlAnalyzer() {
   const [url, setUrl] = useState("")
-  const [status, setStatus] = useState<"idle" | "loading" | "lead">("idle")
+  const [status, setStatus] = useState<"idle" | "loading" | "analyzed" | "error">("idle")
+  const [errorMessage, setErrorMessage] = useState("")
+  const [auditData, setAuditData] = useState<any>(null)
 
-  const handleAnalyze = (e: React.FormEvent) => {
+  const handleAnalyze = async (e: React.FormEvent) => {
     e.preventDefault()
     if (!url) return
     setStatus("loading")
+    setErrorMessage("")
     
-    // Fake loading for 2.5 seconds, then show lead form
-    setTimeout(() => {
-      setStatus("lead")
-    }, 2500)
+    try {
+      const res = await fetch("/api/analyze", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ url })
+      })
+
+      const data = await res.json()
+
+      if (!res.ok) {
+        throw new Error(data.error || "Noe gikk galt på serveren.")
+      }
+
+      setAuditData(data.data)
+      setStatus("analyzed")
+      
+    } catch (err: any) {
+      console.error(err)
+      setStatus("error")
+      setErrorMessage(err.message)
+    }
   }
 
   if (status === "loading") {
     return (
       <div className="url-analyzer__loading fade-up">
         <div className="url-analyzer__loader"></div>
-        <p className="url-analyzer__lead-text">Analyserer {url}... Dette tar et par sekunder.</p>
+        <p className="url-analyzer__lead-text">
+          Skraper <strong>{url}</strong> og analyserer the CRO, SEO & AEO...<br/>
+          <span style={{ fontSize: '14px', color: 'var(--color-muted-50)' }}>Dette tar gjerne 6-8 sekunder med Gemini AI.</span>
+        </p>
       </div>
     )
   }
 
-  if (status === "lead") {
+  if (status === "error") {
     return (
       <div className="url-analyzer__lead-form fade-up">
-        <p className="url-analyzer__lead-text">
-          Analysen for <strong>{url}</strong> er nesten klar!<br/>
-          Verktøyet er foreløpig i lukket beta. Legg igjen e-posten din, så sender vi rapporten manuelt.
+        <h3 className="insight-h3" style={{ color: '#ff4444', marginTop: 0 }}>Analyse feilet</h3>
+        <p className="url-analyzer__lead-text" style={{ maxWidth: '400px', margin: '0 auto 24px' }}>
+          {errorMessage}
         </p>
-        <div style={{ display: "flex", gap: "12px", justifyContent: "center", maxWidth: "480px", margin: "0 auto" }}>
-          <input 
-            type="email" 
-            placeholder="din@epost.no" 
-            className="url-analyzer__input" 
-            style={{ border: "1px solid var(--color-border-light)", borderRadius: "12px", padding: "12px 24px" }}
-          />
-          <button className="url-analyzer__btn" onClick={() => setStatus("idle")}>
-            Send meg analyse
-          </button>
+        <button className="url-analyzer__btn" onClick={() => setStatus("idle")}>
+          Prøv en annen URL
+        </button>
+      </div>
+    )
+  }
+
+  if (status === "analyzed" && auditData) {
+    return (
+      <div className="url-analyzer-report fade-up" style={{ textAlign: 'left', background: 'var(--color-bg-card)', padding: '40px', borderRadius: '24px', border: '1px solid var(--color-border-light)' }}>
+        
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '40px', borderBottom: '1px solid var(--color-border-light)', paddingBottom: '24px' }}>
+          <h2 className="insight-h2" style={{ margin: 0 }}>Audit Report: {url}</h2>
+          <div className="ia-score" style={{ background: 'var(--color-accent)', color: 'var(--color-bg)', padding: '8px 16px', borderRadius: '20px', fontWeight: 700 }}>
+            Score: {auditData.overallScore} / 100
+          </div>
         </div>
+
+        <h3 className="insight-h3" style={{ marginTop: 0, color: 'var(--color-accent)' }}>Topp 3 prioriterte tiltak (Teaser)</h3>
+        <p className="insight-p" style={{ fontSize: '16px' }}>Her er de tre største &ldquo;Customer Obstacles&rdquo; eller CRO/SEO feilene AI-sjekken identifiserte:</p>
+
+        <div className="audit-teasers" style={{ display: 'grid', gap: '16px', marginBottom: '48px' }}>
+          {auditData.top3Updates.map((update: any, i: number) => (
+            <div key={i} className="audit-teaser-card" style={{ padding: '24px', background: 'var(--color-bg)', border: '1px solid var(--color-border-light)', borderRadius: '16px' }}>
+              <div style={{ color: 'var(--color-accent)', fontWeight: 700, marginBottom: '8px', fontSize: '14px' }}>TILTAK {i + 1}</div>
+              <h4 style={{ fontFamily: 'var(--font-sans)', fontSize: '20px', color: 'var(--color-white)', margin: '0 0 12px' }}>{update.title}</h4>
+              <p style={{ margin: 0, color: 'var(--color-muted-70)', fontSize: '16px', lineHeight: 1.5 }}>{update.description}</p>
+            </div>
+          ))}
+        </div>
+
+        <div className="audit-paywall" style={{ position: 'relative', marginTop: '64px' }}>
+            <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '100%', background: 'linear-gradient(to bottom, transparent, var(--color-bg-card) 60%)', zIndex: 1, pointerEvents: 'none' }}></div>
+            
+            <h3 className="insight-h3" style={{ marginTop: 0, filter: 'blur(3px)', opacity: 0.5 }}>Fullstendig Rapport (Låst)</h3>
+            <p className="insight-p" style={{ filter: 'blur(4px)', opacity: 0.5 }}>
+              Din CRO Ekspertuttalelse: Basert på Making Websites Win metoden, mangler siden tydelige svar på "The Golden Questions". Intensjonen her fremstår som forvridd...
+            </p>
+
+            <div style={{ position: 'relative', zIndex: 2, textAlign: 'center', marginTop: '-80px', padding: '40px', background: 'var(--color-bg)', border: '1px solid var(--color-border-light)', borderRadius: '20px', boxShadow: '0 20px 40px rgba(0,0,0,0.5)' }}>
+              <h3 className="insight-h3" style={{ marginTop: 0, marginBottom: '16px' }}>Lås opp din fulle CRO, SEO & AEO Rapport</h3>
+              <p className="insight-p" style={{ fontSize: '16px', maxWidth: '400px', margin: '0 auto 32px' }}>
+                Hvor taper du kunder i dag? Legg igjen e-posten din for å få hele 12-punkts dommen sendt til innboksen (inklusiv en The Wireframe of Trust).
+              </p>
+              
+              <form style={{ display: "flex", gap: "12px", justifyContent: "center", maxWidth: "480px", margin: "0 auto" }}>
+                <input 
+                  type="email" 
+                  placeholder="din@epost.no" 
+                  className="url-analyzer__input" 
+                  style={{ border: "1px solid var(--color-border-light)", borderRadius: "12px", padding: "12px 24px" }}
+                  required
+                />
+                <button type="submit" className="url-analyzer__btn" onClick={(e) => { e.preventDefault(); alert("I produksjon vil dette sende e-posten. Nå resetter vi demoen!"); setStatus("idle"); }}>
+                  Send meg full rapport →
+                </button>
+              </form>
+            </div>
+        </div>
+
       </div>
     )
   }
@@ -65,6 +137,7 @@ function UrlAnalyzer() {
         placeholder="F.eks: www.dinside.no" 
         value={url}
         onChange={(e) => setUrl(e.target.value)}
+        required
       />
       <button type="submit" className="url-analyzer__btn">
         Analyser nettsiden

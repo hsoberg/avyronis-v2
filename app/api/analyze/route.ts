@@ -106,22 +106,14 @@ export async function POST(req: Request) {
     `
 
     // 3. Spør Gemini (Google AI Studio)
+    // 3. Spør Gemini (Google AI Studio)
     const genAI = new GoogleGenerativeAI(apiKey)
-
-    // Bruker -latest for å sikre at API-versjonen treffer riktig modell, ellers fallback
-    let model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" })
+    const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash-lite" })
     const fullPrompt = `${SYSTEM_PROMPT}\n\n${siteContext}`
 
     let responseText = ""
-    try {
-      const result = await model.generateContent(fullPrompt)
-      responseText = result.response.text()
-    } catch (e: any) {
-      console.warn("Fallback to gemini-pro due to:", e.message)
-      model = genAI.getGenerativeModel({ model: "gemini-1.5-pro" })
-      const fallbackResult = await model.generateContent(fullPrompt)
-      responseText = fallbackResult.response.text()
-    }
+    const result = await model.generateContent(fullPrompt)
+    responseText = result.response.text()
 
     // Gemini pakker noen ganger JSON inn i \`\`\`json ... \`\`\` markdown blocks. Vi fjerner dette.
     const rawJson = responseText.replace(/```json/g, '').replace(/```/g, '').trim()

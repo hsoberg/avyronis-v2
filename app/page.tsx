@@ -23,11 +23,12 @@ export default function Home() {
       <main>
         <Hero />
 
+
         <ProblemSolutionSection />
 
         <ProofSection />
         <HowItWorksSection />
-        
+
         <PricingSection />
 
         <FAQSection />

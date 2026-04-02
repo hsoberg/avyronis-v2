@@ -16,11 +16,21 @@ export default function ScrollAnimations() {
       { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
     )
 
-    document.querySelectorAll('.fade-up, .fade-in, .stagger').forEach((el) => {
-      observer.observe(el)
-    })
+    const observeNew = () => {
+      document.querySelectorAll('.fade-up:not(.visible), .fade-in:not(.visible), .stagger:not(.visible)').forEach((el) => {
+        observer.observe(el)
+      })
+    }
 
-    return () => observer.disconnect()
+    observeNew()
+
+    const mutationObserver = new MutationObserver(observeNew)
+    mutationObserver.observe(document.body, { childList: true, subtree: true })
+
+    return () => {
+      observer.disconnect()
+      mutationObserver.disconnect()
+    }
   }, [])
 
   return null

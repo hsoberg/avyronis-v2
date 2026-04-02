@@ -52,7 +52,7 @@ function UrlAnalyzer() {
         <div className="url-analyzer__loader"></div>
         <p className="url-analyzer__lead-text">
           Skraper <strong>{url}</strong> og analyserer the CRO, SEO & AEO...<br/>
-          <span style={{ fontSize: '14px', color: 'var(--color-muted-50)' }}>Dette tar gjerne 6-8 sekunder med Gemini AI.</span>
+          <span style={{ fontSize: '14px', color: 'var(--color-muted)' }}>Dette tar gjerne 15-20 sekunder med OpenAI.</span>
         </p>
       </div>
     )
@@ -78,8 +78,8 @@ function UrlAnalyzer() {
         
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '40px', borderBottom: '1px solid var(--color-border-light)', paddingBottom: '24px' }}>
           <h2 className="insight-h2" style={{ margin: 0 }}>Audit Report: {url}</h2>
-          <div className="ia-score" style={{ background: 'var(--color-accent)', color: 'var(--color-bg)', padding: '8px 16px', borderRadius: '20px', fontWeight: 700 }}>
-            Score: {auditData.overallScore} / 100
+          <div className="ia-score" style={{ background: 'var(--color-accent)', color: 'var(--color-black)', padding: '8px 16px', borderRadius: '20px', fontWeight: 700 }}>
+            Score: {auditData?.fullAudit?.overallScore ?? auditData?.overallScore ?? '–'} / 100
           </div>
         </div>
 
@@ -87,8 +87,8 @@ function UrlAnalyzer() {
         <p className="insight-p" style={{ fontSize: '16px' }}>Her er de tre største &ldquo;Customer Obstacles&rdquo; eller CRO/SEO feilene AI-sjekken identifiserte:</p>
 
         <div className="audit-teasers" style={{ display: 'grid', gap: '16px', marginBottom: '48px' }}>
-          {auditData.top3Updates.map((update: any, i: number) => (
-            <div key={i} className="audit-teaser-card" style={{ padding: '24px', background: 'var(--color-bg)', border: '1px solid var(--color-border-light)', borderRadius: '16px' }}>
+          {(auditData.top3Updates ?? []).map((update: any, i: number) => (
+            <div key={i} className="audit-teaser-card" style={{ padding: '24px', background: 'var(--color-surface)', border: '1px solid var(--color-border-light)', borderRadius: '16px' }}>
               <div style={{ color: 'var(--color-accent)', fontWeight: 700, marginBottom: '8px', fontSize: '14px' }}>TILTAK {i + 1}</div>
               <h4 style={{ fontFamily: 'var(--font-sans)', fontSize: '20px', color: 'var(--color-white)', margin: '0 0 12px' }}>{update.title}</h4>
               <p style={{ margin: 0, color: 'var(--color-muted-70)', fontSize: '16px', lineHeight: 1.5 }}>{update.description}</p>
@@ -104,7 +104,7 @@ function UrlAnalyzer() {
               Din CRO Ekspertuttalelse: Basert på Making Websites Win metoden, mangler siden tydelige svar på "The Golden Questions". Intensjonen her fremstår som forvridd...
             </p>
 
-            <div style={{ position: 'relative', zIndex: 2, textAlign: 'center', marginTop: '-80px', padding: '40px', background: 'var(--color-bg)', border: '1px solid var(--color-border-light)', borderRadius: '20px', boxShadow: '0 20px 40px rgba(0,0,0,0.5)' }}>
+            <div style={{ position: 'relative', zIndex: 2, textAlign: 'center', marginTop: '-80px', padding: '40px', background: 'var(--color-bg-dark)', border: '1px solid var(--color-border-light)', borderRadius: '20px', boxShadow: '0 20px 40px rgba(0,0,0,0.5)' }}>
               <h3 className="insight-h3" style={{ marginTop: 0, marginBottom: '16px' }}>Lås opp din fulle CRO, SEO & AEO Rapport</h3>
               <p className="insight-p" style={{ fontSize: '16px', maxWidth: '400px', margin: '0 auto 32px' }}>
                 Hvor taper du kunder i dag? Legg igjen e-posten din for å få hele 12-punkts dommen sendt til innboksen (inklusiv en The Wireframe of Trust).

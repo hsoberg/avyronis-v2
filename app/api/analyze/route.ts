@@ -2,6 +2,8 @@ import { NextResponse } from 'next/server'
 import * as cheerio from 'cheerio'
 import OpenAI from 'openai'
 
+export const maxDuration = 60
+
 const SYSTEM_PROMPT = `Du er en verdensklasse CRO, AEO og SEO ekspert. 
 Din oppgave er å analysere innholdet fra en nettside (som jeg limer inn nedenfor som destillert tekst, overskrifter og knapper) og vurdere den basert på disse 3 pilarene.
 
@@ -56,19 +58,28 @@ export async function POST(req: Request) {
     let html = ""
     try {
       const parsedUrl = url.startsWith('http') ? url : `https://${url}`
+      const controller = new AbortController()
+      const timeout = setTimeout(() => controller.abort(), 10000)
       const response = await fetch(parsedUrl, {
+        signal: controller.signal,
         headers: {
-          'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
-          'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+          'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+          'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+          'Accept-Language': 'nb-NO,nb;q=0.9,no;q=0.8,en;q=0.7',
         }
       })
+      clearTimeout(timeout)
       if (!response.ok) {
         throw new Error(`Nettstedet returnerte ${response.status}`)
       }
       html = await response.text()
     } catch (error: any) {
-      return NextResponse.json({ error: `Klarte ikke å skrape nettsiden: ${error.message}` }, { status: 400 })
+      const msg = error.name === 'AbortError'
+        ? 'Forespørselen tok for lang tid. Sjekk at URL-en er riktig og prøv igjen.'
+        : `Klarte ikke å hente nettsiden: ${error.message}`
+      return NextResponse.json({ error: msg }, { status: 400 })
     }
+
 
     // 2. Rens HTML med Cheerio
     const $ = cheerio.load(html)

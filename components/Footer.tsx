@@ -8,12 +8,7 @@ const pages = [
   { label: 'Kontakt', href: '/#contact' },
 ]
 
-const socials = [
-  { label: 'Instagram', href: '#' },
-  { label: 'LinkedIn', href: '#' },
-  { label: 'Twitter / X', href: '#' },
-  { label: 'Dribbble', href: '#' },
-]
+
 
 export default function Footer() {
   return (
@@ -40,23 +35,15 @@ export default function Footer() {
             </ul>
           </nav>
 
-          <nav aria-label="Social links">
-            <p className="footer__col-title">Sosiale medier</p>
-            <ul className="footer__links">
-              {socials.map((s) => (
-                <li key={s.label}>
-                  <a href={s.href} className="footer__link" rel="noopener noreferrer">{s.label}</a>
-                </li>
-              ))}
-            </ul>
-          </nav>
+
         </div>
 
         <div className="footer__bottom">
           <p className="footer__copy">© {new Date().getFullYear()} Avyronis<span className="text-accent">.</span> Alle rettigheter forbeholdt.</p>
           <div className="footer__bottom-links">
-            <a href="#" className="footer__bottom-link">Personvern</a>
-            <a href="#" className="footer__bottom-link">Vilkår</a>
+            <a href="/personvern" className="footer__bottom-link">Personvern</a>
+            <a href="/cookies" className="footer__bottom-link">Cookies</a>
+            <a href="/vilkar" className="footer__bottom-link">Vilkår</a>
           </div>
         </div>
       </div>

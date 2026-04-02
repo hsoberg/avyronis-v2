@@ -371,9 +371,12 @@ export async function POST(req: Request) {
       }
       html = await response.text()
     } catch (error: any) {
-      const msg = error.name === 'AbortError'
-        ? 'Forespørselen tok for lang tid. Sjekk at URL-en er riktig og prøv igjen.'
-        : `Klarte ikke å hente nettsiden: ${error.message}`
+      let msg = `Klarte ikke å hente nettsiden: ${error.message}`
+      if (error.name === 'AbortError') {
+        msg = 'Forespørselen tok for lang tid. Sjekk at URL-en er riktig og prøv igjen.'
+      } else if (error.code === 'ECONNRESET' || error.message?.includes('terminated') || error.message?.includes('ECONNRESET')) {
+        msg = 'Nettsiden avviste tilkoblingen. Den kan ha blokkering mot automatisk henting. Prøv en annen URL.'
+      }
       return NextResponse.json({ error: msg }, { status: 400 })
     }
 
@@ -429,6 +432,10 @@ export async function POST(req: Request) {
 
   } catch (error: any) {
     console.error('Audit API Error:', error)
-    return NextResponse.json({ error: 'Det oppstod en ukjent feil på serveren.' }, { status: 500 })
+    let msg = 'Det oppstod en ukjent feil på serveren.'
+    if (error.code === 'ECONNRESET' || error.message?.includes('terminated') || error.message?.includes('ECONNRESET')) {
+      msg = 'Nettsiden avviste tilkoblingen. Den kan ha blokkering mot automatisk henting. Prøv en annen URL.'
+    }
+    return NextResponse.json({ error: msg }, { status: 500 })
   }
 }

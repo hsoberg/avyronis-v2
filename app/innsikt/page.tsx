@@ -82,7 +82,7 @@ function UrlAnalyzer() {
       <div className="url-analyzer__loading fade-up">
         <div className="url-analyzer__loader"></div>
         <p className="url-analyzer__lead-text">
-          Skraper <strong>{url}</strong> og analyserer the CRO, SEO & AEO...<br/>
+          Identifiserer nettside-type og analyserer <strong>{url}</strong>...<br/>
           <span style={{ fontSize: '14px', color: 'var(--color-muted)' }}>Dette tar gjerne 15-20 sekunder med OpenAI.</span>
         </p>
       </div>
@@ -107,15 +107,22 @@ function UrlAnalyzer() {
     return (
       <div className="url-analyzer-report fade-up" style={{ textAlign: 'left', background: 'var(--color-bg-card)', padding: '40px', borderRadius: '24px', border: '1px solid var(--color-border-light)' }}>
         
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '40px', borderBottom: '1px solid var(--color-border-light)', paddingBottom: '24px' }}>
-          <h2 className="insight-h2" style={{ margin: 0 }}>Audit Report: {url}</h2>
-          <div className="ia-score" style={{ background: 'var(--color-accent)', color: 'var(--color-black)', padding: '8px 16px', borderRadius: '20px', fontWeight: 700 }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '40px', borderBottom: '1px solid var(--color-border-light)', paddingBottom: '24px' }}>
+          <div>
+            <h2 className="insight-h2" style={{ margin: '0 0 8px' }}>Audit Report: {url}</h2>
+            {auditData.siteCategoryLabel && (
+              <span style={{ display: 'inline-block', background: 'var(--color-surface)', border: '1px solid var(--color-border-light)', color: 'var(--color-muted)', padding: '4px 12px', borderRadius: '20px', fontSize: '13px' }}>
+                Analysert som: {auditData.siteCategoryLabel}
+              </span>
+            )}
+          </div>
+          <div className="ia-score" style={{ background: 'var(--color-accent)', color: 'var(--color-black)', padding: '8px 16px', borderRadius: '20px', fontWeight: 700, whiteSpace: 'nowrap' }}>
             Score: {auditData?.fullAudit?.overallScore ?? auditData?.overallScore ?? '–'} / 100
           </div>
         </div>
 
         <h3 className="insight-h3" style={{ marginTop: 0, color: 'var(--color-accent)' }}>Topp 3 prioriterte tiltak (Teaser)</h3>
-        <p className="insight-p" style={{ fontSize: '16px' }}>Her er de tre største &ldquo;Customer Obstacles&rdquo; eller CRO/SEO feilene AI-sjekken identifiserte:</p>
+        <p className="insight-p" style={{ fontSize: '16px' }}>Her er de tre viktigste forbedringsmulighetene AI-sjekken identifiserte:</p>
 
         <div className="audit-teasers" style={{ display: 'grid', gap: '16px', marginBottom: '48px' }}>
           {(auditData.top3Updates ?? []).map((update: any, i: number) => (
@@ -132,13 +139,13 @@ function UrlAnalyzer() {
             
             <h3 className="insight-h3" style={{ marginTop: 0, filter: 'blur(3px)', opacity: 0.5 }}>Fullstendig Rapport (Låst)</h3>
             <p className="insight-p" style={{ filter: 'blur(4px)', opacity: 0.5 }}>
-              Din CRO Ekspertuttalelse: Basert på Making Websites Win metoden, mangler siden tydelige svar på "The Golden Questions". Intensjonen her fremstår som forvridd...
+              {auditData?.fullAudit?.pillar1?.name}: Basert på analysen mangler siden flere viktige elementer som koster deg synlighet og leads. Her er vår ekspertvurdering...
             </p>
 
             <div style={{ position: 'relative', zIndex: 2, textAlign: 'center', marginTop: '-80px', padding: '40px', background: 'var(--color-bg-dark)', border: '1px solid var(--color-border-light)', borderRadius: '20px', boxShadow: '0 20px 40px rgba(0,0,0,0.5)' }}>
-              <h3 className="insight-h3" style={{ marginTop: 0, marginBottom: '16px' }}>Lås opp din fulle CRO, SEO & AEO Rapport</h3>
+              <h3 className="insight-h3" style={{ marginTop: 0, marginBottom: '16px' }}>Lås opp din fulle {auditData.siteCategoryLabel ? `${auditData.siteCategoryLabel}-` : ''}analyse</h3>
               <p className="insight-p" style={{ fontSize: '16px', maxWidth: '400px', margin: '0 auto 32px' }}>
-                Hvor taper du kunder i dag? Legg igjen e-posten din for å få hele 12-punkts dommen sendt til innboksen (inklusiv en The Wireframe of Trust).
+                Legg igjen e-posten din for å få hele rapporten sendt til innboksen.
               </p>
               
               <form onSubmit={handleLeadSubmit} style={{ display: "flex", gap: "12px", justifyContent: "center", maxWidth: "480px", margin: "0 auto" }}>

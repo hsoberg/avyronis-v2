@@ -13,9 +13,26 @@ const filters = ["Alle", "SEO", "Konvertering", "Strategi", "Markedsføring"]
 
 function UrlAnalyzer() {
   const [url, setUrl] = useState("")
-  const [status, setStatus] = useState<"idle" | "loading" | "analyzed" | "error">("idle")
+  const [status, setStatus] = useState<"idle" | "loading" | "analyzed" | "error" | "submitted">("idle")
   const [errorMessage, setErrorMessage] = useState("")
   const [auditData, setAuditData] = useState<any>(null)
+  const [leadEmail, setLeadEmail] = useState("")
+  const [leadSending, setLeadSending] = useState(false)
+
+  const handleLeadSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    if (!leadEmail) return
+    setLeadSending(true)
+    try {
+      await fetch("/api/send-lead", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: leadEmail, url, auditData })
+      })
+    } catch {}
+    setLeadSending(false)
+    setStatus("submitted")
+  }
 
   const handleAnalyze = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -44,6 +61,20 @@ function UrlAnalyzer() {
       setStatus("error")
       setErrorMessage(err.message)
     }
+  }
+
+  if (status === "submitted") {
+    return (
+      <div className="url-analyzer__lead-form fade-up" style={{ textAlign: 'center' }}>
+        <h3 className="insight-h3" style={{ marginTop: 0 }}>Takk!</h3>
+        <p className="url-analyzer__lead-text" style={{ maxWidth: '400px', margin: '0 auto 24px' }}>
+          Vi har mottatt forespørselen din og tar kontakt på <strong>{leadEmail}</strong> med din fulle rapport.
+        </p>
+        <button className="url-analyzer__btn" onClick={() => { setStatus("idle"); setUrl(""); setLeadEmail("") }}>
+          Analyser en ny nettside
+        </button>
+      </div>
+    )
   }
 
   if (status === "loading") {
@@ -110,16 +141,18 @@ function UrlAnalyzer() {
                 Hvor taper du kunder i dag? Legg igjen e-posten din for å få hele 12-punkts dommen sendt til innboksen (inklusiv en The Wireframe of Trust).
               </p>
               
-              <form style={{ display: "flex", gap: "12px", justifyContent: "center", maxWidth: "480px", margin: "0 auto" }}>
-                <input 
-                  type="email" 
-                  placeholder="din@epost.no" 
-                  className="url-analyzer__input" 
+              <form onSubmit={handleLeadSubmit} style={{ display: "flex", gap: "12px", justifyContent: "center", maxWidth: "480px", margin: "0 auto" }}>
+                <input
+                  type="email"
+                  placeholder="din@epost.no"
+                  className="url-analyzer__input"
                   style={{ border: "1px solid var(--color-border-light)", borderRadius: "12px", padding: "12px 24px" }}
+                  value={leadEmail}
+                  onChange={(e) => setLeadEmail(e.target.value)}
                   required
                 />
-                <button type="submit" className="url-analyzer__btn" onClick={(e) => { e.preventDefault(); alert("I produksjon vil dette sende e-posten. Nå resetter vi demoen!"); setStatus("idle"); }}>
-                  Send meg full rapport →
+                <button type="submit" className="url-analyzer__btn" disabled={leadSending}>
+                  {leadSending ? "Sender..." : "Send meg full rapport →"}
                 </button>
               </form>
             </div>

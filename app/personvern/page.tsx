@@ -23,7 +23,7 @@ export default function Personvern() {
         <li>Krav om retting eller sletting</li>
         <li>Begrensning av behandling</li>
       </ul>
-      <p>Kontakt oss på <a href="mailto:hei@avyronis.no">hei@avyronis.no</a> for spørsmål om personvern.</p>
+      <p>Kontakt oss på <a href="mailto:henning@avyronis.com">henning@avyronis.com</a> for spørsmål om personvern.</p>
     </main>
   );
 }

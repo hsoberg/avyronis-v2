@@ -9,7 +9,7 @@ export default function Vilkar() {
         <li>Vi er ikke ansvarlige for eventuelle tap eller skader som følge av bruk av nettsiden.</li>
         <li>Lenker til eksterne sider er kun til informasjon – vi har ikke ansvar for innholdet på disse.</li>
       </ul>
-      <p>Ta kontakt på <a href="mailto:hei@avyronis.no">hei@avyronis.no</a> ved spørsmål om vilkår.</p>
+      <p>Ta kontakt på <a href="mailto:henning@avyronis.com">henning@avyronis.com</a> ved spørsmål om vilkår.</p>
     </main>
   );
 }

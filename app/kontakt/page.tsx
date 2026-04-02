@@ -78,7 +78,7 @@ export default function ContactPage() {
 
           {/* RIGHT: High-Converting Form */}
           <div className="contact-form-container">
-            <form className="contact-form" action="mailto:hei@avyronis.no" method="POST" encType="text/plain">
+            <form className="contact-form" action="mailto:henning@avyronis.com" method="POST" encType="text/plain">
 
               <div className="form-group">
                 <label htmlFor="name">Navn</label>
@@ -116,7 +116,7 @@ export default function ContactPage() {
               <div className="direct-contact__links">
                 <a href="tel:+4799000000">+47 99 00 00 00</a>
                 <span style={{ color: 'var(--color-muted-70)', opacity: 0.5 }}>|</span>
-                <a href="mailto:hei@avyronis.no">hei@avyronis.no</a>
+                <a href="mailto:henning@avyronis.com">henning@avyronis.com</a>
               </div>
             </div>
 

@@ -46,15 +46,15 @@ export default function ContactPage() {
             {/* The Trust Card */}
             <div className="trust-card fade-up">
               <h2 className="trust-card__headline">Du snakker direkte med meg – ikke et salgsteam</h2>
-              
+
               <p className="trust-card__text">
                 Jeg går gjennom nettsiden din og viser deg nøyaktig hvor du mister kunder – og hva du bør gjøre for å få flere.
               </p>
-              
+
               <p className="trust-card__reinforcement">
                 De fleste blir overrasket over hvor mye som kan forbedres med små justeringer.
               </p>
-              
+
               <div style={{ marginTop: '8px' }}>
                 <span style={{ fontFamily: 'var(--font-body)', fontSize: '15px', fontWeight: 600, color: 'var(--color-white)' }}>Du får konkret:</span>
                 <ul className="trust-card__list">
@@ -63,13 +63,13 @@ export default function ContactPage() {
                   <li>Hva som faktisk gir flere henvendelser</li>
                 </ul>
               </div>
-              
+
               <div>
                 <span className="contact-trust__badge">
                   Svarer vanligvis innen noen timer – ofte raskere
                 </span>
               </div>
-              
+
               <p className="trust-card__credibility">
                 Vi jobber med et begrenset antall kunder om gangen – slik at vi faktisk kan levere resultater.
               </p>
@@ -114,7 +114,7 @@ export default function ContactPage() {
             <div className="direct-contact">
               <p>Vil du heller ta det direkte?</p>
               <div className="direct-contact__links">
-                <a href="tel:+4799000000">+47 99 00 00 00</a>
+                <a href="tel:+4798288634">+47 98 28 86 34</a>
                 <span style={{ color: 'var(--color-muted-70)', opacity: 0.5 }}>|</span>
                 <a href="mailto:henning@avyronis.com">henning@avyronis.com</a>
               </div>

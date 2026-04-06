@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__claude_ai_Vercel__deploy_to_vercel",
+      "mcp__claude_ai_Vercel__list_projects",
+      "mcp__claude_ai_Vercel__list_deployments",
+      "Bash(curl:*)",
+      "Bash(nslookup:*)",
+      "Bash(grep -rn \"OPENAI_API_KEY\\\\|RESEND_API_KEY\\\\|GOOGLE\" /c/Users/HenningNavrud-Søberg/avyronis-2/.env*)"
+    ]
+  }
+}

@@ -2,6 +2,7 @@ import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
 import ScrollAnimations from '@/components/ScrollAnimations'
 import Image from 'next/image'
+import ContactForm from '@/components/ContactForm'
 
 export const metadata = {
   title: 'Kontakt | Avyronis',
@@ -78,37 +79,7 @@ export default function ContactPage() {
 
           {/* RIGHT: High-Converting Form */}
           <div className="contact-form-container">
-            <form className="contact-form" action="mailto:henning@avyronis.com" method="POST" encType="text/plain">
-
-              <div className="form-group">
-                <label htmlFor="name">Navn</label>
-                <input type="text" id="name" name="Navn" className="form-input" placeholder="Ditt navn" required />
-              </div>
-
-              <div className="form-group">
-                <label htmlFor="email">E-post</label>
-                <input type="email" id="email" name="Epost" className="form-input" placeholder="din@epost.no" required />
-              </div>
-
-              <div className="form-group">
-                <label htmlFor="website">Nettside (valgfritt)</label>
-                <input type="url" id="website" name="Nettside" className="form-input" placeholder="www.dinbedrift.no" />
-              </div>
-
-              <div className="form-group">
-                <label htmlFor="message">Hva ønsker du å oppnå? (valgfritt)</label>
-                <textarea id="message" name="Melding" className="form-textarea" placeholder="Beskriv kort hva du ønsker å oppnå..."></textarea>
-              </div>
-
-              <div style={{ marginTop: '16px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                <button type="submit" className="btn btn--primary" style={{ width: '100%', padding: '20px', fontSize: '18px', justifyContent: 'center' }}>
-                  Se hva som stopper deg fra flere kunder
-                </button>
-                <p style={{ marginTop: '16px', fontSize: '13px', color: 'var(--color-muted-70)', fontFamily: 'var(--font-body)' }}>
-                  Tar 10–15 min. Helt uforpliktende.
-                </p>
-              </div>
-            </form>
+            <ContactForm />
 
             {/* 3. DIRECT CONTACT (SECONDARY OPTION) */}
             <div className="direct-contact">

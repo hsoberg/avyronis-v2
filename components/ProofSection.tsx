@@ -39,12 +39,6 @@ export default function ProofSection() {
         <div className="proof-section__cta">
           <h3 className="proof-section__cta-heading">Vi viser deg nøyaktig hva som kan forbedres</h3>
           <a href="#contact" className="btn btn--primary">
-            <span className="btn__icon" aria-hidden="true">
-              <svg className="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#01200f" strokeWidth="2">
-                <line x1="5" y1="12" x2="19" y2="12" />
-                <polyline points="12 5 19 12 12 19" />
-              </svg>
-            </span>
             Få en konkret plan for din nettside
           </a>
           <p className="proof-section__microcopy">Se hva som kan forbedres – helt uforpliktende</p>

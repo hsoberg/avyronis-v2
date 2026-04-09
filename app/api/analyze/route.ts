@@ -18,231 +18,44 @@ type SiteCategory =
 interface CategoryConfig {
   label: string
   goal: string
-  pillar1Name: string
-  pillar1Criteria: string[]
-  pillar2Name: string
-  pillar2Criteria: string[]
-  pillar3Name: string
-  pillar3Criteria: string[]
-  scoringNote: string
 }
 
 const CATEGORY_CONFIGS: Record<SiteCategory, CategoryConfig> = {
   saas: {
     label: 'SaaS / Digital tjeneste',
     goal: 'Sign-ups, gratis prøveperioder og demo-bookinger',
-    pillar1Name: 'Konvertering & Vekst',
-    pillar1Criteria: [
-      'Er det krystallklart hva produktet gjør i én setning?',
-      'Er det en tydelig gratis prøveperiode eller demo-CTA over folden?',
-      'Besvarer de de viktigste innvendingene (pris, sikkerhet, integrasjoner)?',
-      'Er onboarding-prosessen kommunisert?',
-    ],
-    pillar2Name: 'AEO (Answer Engine Optimization)',
-    pillar2Criteria: [
-      'Kan en AI-assistent raskt forklare hva produktet gjør, hvem det er for og hva det koster?',
-      'Er det tydelige FAQer om funksjoner og prising?',
-      'Er sammenligninger med konkurrenter adressert?',
-    ],
-    pillar3Name: 'SEO & Søkeintensjon',
-    pillar3Criteria: [
-      'Er det samsvar mellom søkeord og hva de faktisk selger?',
-      'Er H1/H2-hierarkiet logisk og intensjonsdrevet?',
-      'Er meta-beskrivelsen konverteringsorientert?',
-    ],
-    scoringNote: 'Score lavt hvis verdiforslaget er uklart eller CTA mangler. Score høyt hvis produktet er forklart, innvendinger besvart og CTA er tydelig.',
   },
   ecommerce: {
     label: 'Nettbutikk / E-handel',
     goal: 'Produktsalg, handlekurv-konverteringer og gjenkjøp',
-    pillar1Name: 'Kjøpsopplevelse & Konvertering',
-    pillar1Criteria: [
-      'Er produktene enkle å finne og filtrere?',
-      'Er priser, fraktkostnader og leveringstid tydelig kommunisert?',
-      'Er det sosiale bevis (anmeldelser, stjerner, antall solgt)?',
-      'Er handlekurv og kasse-CTA fremtredende?',
-    ],
-    pillar2Name: 'Produktoppdagbarhet (AEO)',
-    pillar2Criteria: [
-      'Kan en AI-assistent eller søkemotor finne og beskrive produktene nøyaktig?',
-      'Er produktbeskrivelsene unike og informative?',
-      'Er vanlige spørsmål om produkter besvart?',
-    ],
-    pillar3Name: 'SEO & Produktsynlighet',
-    pillar3Criteria: [
-      'Er produkt- og kategorisider optimalisert for søkeord med kjøpsintensjon?',
-      'Er det fornuftig intern linking mellom kategorier og produkter?',
-      'Er meta-titler og beskrivelser unike per side?',
-    ],
-    scoringNote: 'Score lavt hvis priser er skjult eller kasse er komplisert. Score høyt hvis kjøpsreisen er friksjonsfri og produktinformasjonen er komplett.',
   },
   local_business: {
     label: 'Lokal bedrift',
     goal: 'Telefonsamtaler, bookinger og besøk til fysisk sted',
-    pillar1Name: 'Lokal tillit & konvertering',
-    pillar1Criteria: [
-      'Er NAP (navn, adresse, telefon) synlig uten å scrolle?',
-      'Er det en tydelig "Ring nå" eller "Bestill time"-CTA?',
-      'Er åpningstider klart kommunisert?',
-      'Er det anmeldelser eller tillitssignaler fra lokale kunder?',
-    ],
-    pillar2Name: 'Lokal AEO',
-    pillar2Criteria: [
-      'Kan en stemmeassistent svare på "Når er de åpne?", "Hva er adressen?" og "Hva tilbyr de?"?',
-      'Er tjenester og priser tydelig listet?',
-      'Er det strukturert innhold som gjør det lett for AI å anbefale bedriften?',
-    ],
-    pillar3Name: 'Lokal SEO',
-    pillar3Criteria: [
-      'Er bedriftsnavn, sted og tjenestetype til stede i H1/H2 og meta?',
-      'Er innholdet relevant for lokale søk (by, bydel, tjeneste)?',
-      'Er Google Business Profile-signaler forsterket på siden?',
-    ],
-    scoringNote: 'Score lavt hvis kontaktinfo er vanskelig å finne. Score høyt hvis man raskt kan ringe, booke eller finne veien.',
   },
   portfolio: {
     label: 'Portefølje / Personlig merkevare',
     goal: 'Forespørsler om samarbeid, prosjektarbeid og tillitsbygging',
-    pillar1Name: 'Inntrykk & Engasjement',
-    pillar1Criteria: [
-      'Kommuniserer arbeidet seg selv innen 5 sekunder?',
-      'Er det en tydelig "Ta kontakt" eller "Ansett meg"-sti?',
-      'Er det sosialt bevis (kundenavn, attester, resultater)?',
-      'Er spesialiteten og nisjen umiddelbart klar?',
-    ],
-    pillar2Name: 'Oppdagbarhet & Autoritet (AEO)',
-    pillar2Criteria: [
-      'Kan en AI oppsummere hva personen gjør, spesialiteten og hvordan kontakte dem?',
-      'Er det innhold som posisjonerer dem som ekspert i sin nisje?',
-      'Er det FAQer om samarbeidsprosess eller tjenester?',
-    ],
-    pillar3Name: 'SEO & Synlighet',
-    pillar3Criteria: [
-      'Er ferdighets-nøkkelord og nisje til stede i overskrifter og meta?',
-      'Er det innhold som kan rangere for relevante søk i bransjen?',
-      'Er siden teknisk optimalisert (hastighet, mobilvisning)?',
-    ],
-    scoringNote: 'Score lavt hvis det er uklart hva personen gjør eller hvordan man kontakter dem. Score høyt hvis arbeidet er imponerende presentert og kontakten er enkel.',
   },
   blog_media: {
     label: 'Blogg / Medieside',
     goal: 'Leserengasjement, abonnenter og gjentakende besøk',
-    pillar1Name: 'Engasjement & Leserbeholdning',
-    pillar1Criteria: [
-      'Er innholdet enkelt å navigere og finne?',
-      'Er det tydelige CTAer for nyhetsbrev eller abonnement?',
-      'Er relaterte artikler fremhevet for å beholde leseren?',
-      'Er innholdsformatet optimalisert for lesbarhet?',
-    ],
-    pillar2Name: 'Innholdsautoritet (AEO)',
-    pillar2Criteria: [
-      'Er artiklene strukturert slik at AI-assistenter kan trekke ut fakta og sitere innholdet?',
-      'Er det klare svar på spørsmål leserne har?',
-      'Er forfatterne og ekspertisen tydelig kommunisert?',
-    ],
-    pillar3Name: 'SEO & Organisk vekst',
-    pillar3Criteria: [
-      'Er artiklene optimalisert for søkeord med informasjonsintensjon?',
-      'Er overskrifthierarkiet (H1/H2/H3) logisk og søkemotorvennlig?',
-      'Er intern linking brukt aktivt for å styrke kategoriautoritet?',
-    ],
-    scoringNote: 'Score lavt hvis det er vanskelig å abonnere eller finne relatert innhold. Score høyt hvis leseren naturlig blir lenger og abonnerer.',
   },
   agency_service: {
     label: 'Byrå / Tjenesteleverandør',
     goal: 'Leadgenerering, tilbudsforespørsler og nye kunder',
-    pillar1Name: 'Konvertering & Tillitsbygging',
-    pillar1Criteria: [
-      'Er det klart hvilke problemer byrået løser og for hvem?',
-      'Er det tydelig case-studies eller resultater med tall?',
-      'Er prosessen fra første kontakt til levering kommunisert?',
-      'Er CTA for kontakt eller tilbud fremtredende?',
-    ],
-    pillar2Name: 'AEO & Ekspertposisjonering',
-    pillar2Criteria: [
-      'Kan en AI beskrive hva byrået gjør, hvem de har jobbet med og hva resultatene var?',
-      'Er det faglig innhold som bygger autoritet i bransjen?',
-      'Besvarer siden vanlige spørsmål potensielle kunder har?',
-    ],
-    pillar3Name: 'SEO & Synlighet',
-    pillar3Criteria: [
-      'Er tjenestetypene og bransjene de betjener representert i headings og meta?',
-      'Er det innhold som kan rangere for "byrå + tjeneste + sted"-søk?',
-      'Er backlink-potensialet styrket gjennom case studies og faginnhold?',
-    ],
-    scoringNote: 'Score lavt hvis det er uklart hvem de hjelper eller hva resultatene er. Score høyt hvis case studies er overbevisende og kontaktveien er enkel.',
   },
   nonprofit: {
     label: 'Non-profit / Institusjon',
     goal: 'Donasjoner, frivillige, bevissthet og støttespillere',
-    pillar1Name: 'Engasjement & Støtte',
-    pillar1Criteria: [
-      'Er oppdraget og formålet umiddelbart klart?',
-      'Er det enkelt å donere eller melde seg som frivillig?',
-      'Er det emosjonelt overbevisende innhold (historier, tall, bilder)?',
-      'Er transparensen om bruk av midler kommunisert?',
-    ],
-    pillar2Name: 'AEO & Formidling',
-    pillar2Criteria: [
-      'Kan en AI raskt forklare hva organisasjonen gjør og hvordan man støtter dem?',
-      'Er FAQer om donasjonsprosessen besvart?',
-      'Er innvirkningen dokumentert med konkrete eksempler?',
-    ],
-    pillar3Name: 'SEO & Synlighet',
-    pillar3Criteria: [
-      'Er nøkkelord knyttet til formål og sak til stede i headings?',
-      'Er innholdet optimalisert for å nå målgruppen organisk?',
-      'Er siden indeksert og teknisk korrekt?',
-    ],
-    scoringNote: 'Score lavt hvis det er uklart hva pengene går til eller hvordan man bidrar. Score høyt hvis oppdraget er rørende formidlet og støtte er friksjonsfri.',
   },
   info_product: {
     label: 'Infoprodukt / Kurs / Coaching',
     goal: 'Kjøp, påmelding og enrolment',
-    pillar1Name: 'Salg & Overbevisning',
-    pillar1Criteria: [
-      'Er transformasjonen (hva man oppnår) krystallklar?',
-      'Er det sosial bevis fra tidligere deltakere med konkrete resultater?',
-      'Er innvendinger mot kjøp adressert (pris, tid, garantier)?',
-      'Er CTAen for kjøp/påmelding fremtredende og gjentatt?',
-    ],
-    pillar2Name: 'AEO & Autoritet',
-    pillar2Criteria: [
-      'Kan en AI forklare hva kurset/coachingen inneholder, hvem det er for og hva det koster?',
-      'Er kursholder/coach posisjonert som troverdig ekspert?',
-      'Er pensum eller innhold beskrevet detaljert?',
-    ],
-    pillar3Name: 'SEO & Organisk rekkevidde',
-    pillar3Criteria: [
-      'Er emne-nøkkelord og målgruppe til stede i headings og meta?',
-      'Er det organisk innhold (blogg, gratis ressurser) som tiltrekker potensielle kjøpere?',
-      'Er langsidene strukturert for søkemotorer?',
-    ],
-    scoringNote: 'Score lavt hvis transformasjonen er uklar eller sosialt bevis mangler. Score høyt hvis siden selger overbevisende med sterk autoritet og tydelig CTA.',
   },
   general: {
     label: 'Generell nettside',
     goal: 'Engasjement, synlighet og konvertering etter sidens egne mål',
-    pillar1Name: 'Brukeropplevelse & Konvertering',
-    pillar1Criteria: [
-      'Er formålet med siden umiddelbart klart?',
-      'Er det en tydelig CTA som matcher sidens mål?',
-      'Er navigasjonen intuitiv og innholdet lett å finne?',
-      'Er det tillitssignaler (kontaktinfo, om oss, anmeldelser)?',
-    ],
-    pillar2Name: 'AEO (Answer Engine Optimization)',
-    pillar2Criteria: [
-      'Kan en AI-assistent raskt forstå hva siden handler om og anbefale den?',
-      'Er vanlige spørsmål besvart tydelig?',
-      'Er innholdet autoritativt og lett å sitere?',
-    ],
-    pillar3Name: 'SEO & Synlighet',
-    pillar3Criteria: [
-      'Er overskriftshierarkiet (H1/H2/H3) logisk?',
-      'Er innholdet relevant for hva siden faktisk tilbyr?',
-      'Er meta-tittel og beskrivelse optimalisert?',
-    ],
-    scoringNote: 'Vurder basert på hvor godt siden kommuniserer formålet sitt og gjør det enkelt for besøkende å ta neste steg.',
   },
 }
 
@@ -253,35 +66,27 @@ function detectSiteCategory(signals: string): SiteCategory {
     blog_media: 0, agency_service: 0, nonprofit: 0, info_product: 0, general: 0,
   }
 
-  // ecommerce
   if (/handlekurv|legg i kurv|add to cart|checkout|nettbutikk|shop|buy now|\bkr\s*\d|\bnok\b|fri frakt|prisgaranti/.test(s)) score.ecommerce += 3
   if (/produkt|kategori|filter|sorter|lager|på lager|utsolgt/.test(s)) score.ecommerce += 2
 
-  // local_business
   if (/åpningstider|opening hours|bestill bord|book a table|ring oss|call us|finn oss|find us|kart|google maps/.test(s)) score.local_business += 3
   if (/adresse|telefon|tlf|restaurant|kafé|frisør|tannlege|lege|rørlegger|elektriker|treningssenter|gym/.test(s)) score.local_business += 2
 
-  // saas
   if (/free trial|gratis prøve|prøv gratis|start free|sign up free|dashboard|api|integrasjon|integration|abonnement|subscription/.test(s)) score.saas += 3
   if (/funksjon|feature|pricing|plan|enterprise|onboarding|workflow|automation/.test(s)) score.saas += 2
 
-  // portfolio
   if (/portefølje|portfolio|mine prosjekter|mitt arbeid|case study|folio|hired|leid inn/.test(s)) score.portfolio += 3
   if (/designer|fotograf|illustratør|arkitekt|freelance|frilanser|se mitt arbeid/.test(s)) score.portfolio += 2
 
-  // blog_media
   if (/les mer|publisert|minutter å lese|min read|nyhetsbrev|newsletter|abonner|subscribe|redaksjon/.test(s)) score.blog_media += 3
   if (/artikkel|blogg|nyheter|innlegg|post|kategori|tags|forfatter|author/.test(s)) score.blog_media += 2
 
-  // agency_service
   if (/byrå|agency|studio|vi hjelper|vi leverer|tjenester|våre tjenester|case studies|resultater/.test(s)) score.agency_service += 3
   if (/kunder|klient|partner|prosjekt|løsning|strategi|rådgivning|konsulent/.test(s)) score.agency_service += 2
 
-  // nonprofit
   if (/donasjon|donate|frivillig|volunteer|støtt oss|non-profit|veldedighet|bidra|gi en gave/.test(s)) score.nonprofit += 3
   if (/formål|oppdrag|mission|organisasjon|members|støttespiller/.test(s)) score.nonprofit += 2
 
-  // info_product
   if (/kurs|course|enroll|påmelding|coaching|ebook|webinar|masterclass|modul|pensum|curriculum/.test(s)) score.info_product += 3
   if (/deltaker|student|lær|learn|leksjon|lesson|sertifikat|certificate/.test(s)) score.info_product += 2
 
@@ -294,45 +99,122 @@ function detectSiteCategory(signals: string): SiteCategory {
 
 function buildSystemPrompt(category: SiteCategory): string {
   const c = CATEGORY_CONFIGS[category]
-  return `Du er en verdensklasse digital strateg som spesialiserer seg på nettside-analyse.
+  return `Du er en senior Growth Strategist, Technical SEO Lead og Conversion Optimizer i én person. Oppgaven din er å gjennomføre en skarp, kommersiell og handlingsorientert nettside-audit basert på signalene som er hentet fra nettsiden.
 
-Nettsiden du analyserer er av typen: ${c.label}
-Nettsidens primære mål er: ${c.goal}
+Målet er ikke å gi generiske råd. Målet er å avdekke hva som mest sannsynlig holder nettsiden tilbake fra:
+1. å rangere organisk,
+2. å bli forstått av AI-assistenter og søkemotorer,
+3. å konvertere besøkende til leads, bookinger eller kjøp.
 
-Vurder siden basert på disse tre pilarene:
+Du skal vurdere nettsiden som en forretningsressurs, ikke bare som innhold.
 
-Pilar 1: ${c.pillar1Name}
-${c.pillar1Criteria.map(x => `- ${x}`).join('\n')}
+NETTSIDETYPE: ${c.label}
+PRIMÆRT MÅL: ${c.goal}
 
-Pilar 2: ${c.pillar2Name}
-${c.pillar2Criteria.map(x => `- ${x}`).join('\n')}
+ANALYSER SIDEN LANGS DISSE 6 OMRÅDENE:
 
-Pilar 3: ${c.pillar3Name}
-${c.pillar3Criteria.map(x => `- ${x}`).join('\n')}
+1) VERDIFORSLAG & POSISJONERING
+- Er det umiddelbart klart hva selskapet tilbyr?
+- Er det tydelig hvem løsningen er for?
+- Er differensieringen tydelig, eller kunne dette vært hvilken som helst konkurrent?
+- Kommuniseres utfall/verdi, ikke bare features?
+- Er budskapet konkret, spesifikt og troverdig?
 
-Scoring: ${c.scoringNote}
+2) KONVERTERING & CTA
+- Finnes det en primær CTA, og er den tydelig?
+- Finnes det for mange CTA-er som skaper friksjon?
+- Matcher CTA-en brukerens intensjon og modenhetsnivå?
+- Er neste steg lav-friksjon og lett å forstå?
+- Finnes det støtte-CTA-er for brukere som ikke er klare til å kjøpe?
+- Er CTA-språket handlingsdrevet og verdibasert?
 
-**INSTRUKSJON FOR OUTPUT:**
-Du SKAL utelukkende returnere et gyldig JSON-objekt og INGENTING ANNET (ingen markdown tags, kun ren JSON).
-Strukturen må være akkurat slik:
+3) TILLIT & BESLUTNINGSSTØTTE
+- Finnes det sosial proof, caser, testimonials, anmeldelser eller logoer?
+- Besvares viktige innvendinger?
+- Er pris, prosess, levering, garanti, sikkerhet eller risiko adressert?
+- Finnes det signaler som reduserer usikkerhet?
+- Fremstår siden som troverdig og profesjonell?
+
+4) SEO & SØKEINTENSJON
+- Samsvarer overskrifter og innhold med hva målgruppen faktisk søker etter?
+- Er H1, H2 og sidebudskap logisk strukturert?
+- Er titteltag og meta description sannsynligvis sterke nok for CTR?
+- Er innholdet spesifikt nok til å rangere for relevante søk?
+- Finnes det tydelig topical relevance mellom tilbud, problem og målgruppe?
+- Virker siden å være optimalisert for informasjons-, kommersiell- eller transaksjonell intensjon?
+
+5) AEO / GEO / AI-SYNLIGHET
+- Kan en AI-assistent enkelt forstå hva virksomheten gjør, hvem den hjelper og hvorfor den er et godt valg?
+- Finnes det tydelige, direkte svar på viktige spørsmål?
+- Er tjenestene/produktene beskrevet konkret og entydig?
+- Er innholdet sitérbart, strukturert og skrevet med høy semantisk klarhet?
+- Finnes det tydelige entities: merkevare, tjeneste, målgruppe, sted, pris, prosess, differensiering?
+- Er FAQ-lignende innhold eller forklarende seksjoner sterke nok til å brukes av AI-systemer?
+
+6) INFORMASJONSARKITEKTUR & INNHOLDSKLARHET
+- Er innholdet lett å skanne?
+- Er strukturen logisk, eller virker siden rotete?
+- Er det sannsynlig at brukeren finner det viktigste raskt?
+- Finnes det unødvendig fluff eller vag markedsføringstekst?
+- Er det tydelig hierarki mellom problem, løsning, proof og CTA?
+
+SCORINGMODELL (0–100 per område):
+- 90–100: Eksepsjonelt tydelig, strategisk og konverteringssterkt
+- 75–89: Solid, men med tydelige forbedringsmuligheter
+- 50–74: Middels — flere svakheter hemmer effekt
+- 25–49: Svakt — uklarhet eller friksjon reduserer resultater betydelig
+- 0–24: Kritisk svakt — mangler fundamentale elementer
+
+VIKTIGE REGLER:
+- Ikke anta ting som ikke støttes av signalene du har mottatt.
+- Hvis data mangler, si eksplisitt at det ikke kan bekreftes.
+- Prioriter observasjoner som påvirker trafikk, forståelse og konvertering mest.
+- Vær konkret. Unngå vage formuleringer som "kan forbedres".
+- Hver anbefaling skal være forretningsrelevant.
+- Ikke skriv som en hyggelig konsulent. Skriv som en skarp strateg som peker ut hva som faktisk koster dem vekst.
+- overallScore skal være et enkelt heltall (gjennomsnittet av de 6 scorecard-scorene, avrundet).
+
+RETURNER KUN GYLDIG JSON. Ingen markdown. Ingen ekstra tekst. Ingen kodeblokker.
+
+JSON-STRUKTUR:
 {
   "siteCategory": "${category}",
   "siteCategoryLabel": "${c.label}",
+  "executiveSummary": {
+    "diagnosis": "2-4 setninger som oppsummerer hva som er hovedproblemet på siden.",
+    "biggestLeak": "Den ene største svakheten som sannsynligvis koster mest trafikk eller konvertering.",
+    "fastestWin": "Det tiltaket som sannsynligvis vil gi raskest positiv effekt."
+  },
   "top3Updates": [
     {
-      "title": "Kort tittel på et problem",
-      "description": "Forklaring på hvorfor dette koster dem kunder eller synlighet."
+      "title": "Kort og tydelig problemformulering",
+      "impact": "high",
+      "whyItMatters": "Hvorfor dette påvirker vekst, SEO, AI-synlighet eller konvertering.",
+      "recommendedFix": "Hva de konkret bør gjøre."
     }
   ],
-  "fullAudit": {
-    "pillar1": { "name": "${c.pillar1Name}", "analysis": "Din ekspertuttalelse (2-3 avsnitt)." },
-    "pillar2": { "name": "${c.pillar2Name}", "analysis": "Din ekspertuttalelse (1-2 avsnitt)." },
-    "pillar3": { "name": "${c.pillar3Name}", "analysis": "Din vurdering (1-2 avsnitt)." },
-    "overallScore": 65
-  }
+  "scorecard": {
+    "valuePropPositioning": { "score": 0, "analysis": "Kort analyse." },
+    "conversionCTA": { "score": 0, "analysis": "Kort analyse." },
+    "trustDecisionSupport": { "score": 0, "analysis": "Kort analyse." },
+    "seoSearchIntent": { "score": 0, "analysis": "Kort analyse." },
+    "aeoGeoAiVisibility": { "score": 0, "analysis": "Kort analyse." },
+    "informationArchitectureClarity": { "score": 0, "analysis": "Kort analyse." }
+  },
+  "overallScore": 0,
+  "priorityActions": [
+    {
+      "priority": 1,
+      "action": "Konkret tiltak",
+      "expectedOutcome": "Hva dette sannsynligvis forbedrer"
+    }
+  ],
+  "missingSignals": [
+    "Liste over ting som ikke kunne verifiseres fra signalene, men som burde vært undersøkt."
+  ]
 }
 
-Her er den skrapede teksten fra nettsiden:`
+Her er de strukturerte signalene fra nettsiden:`
 }
 
 export async function POST(req: Request) {
@@ -351,10 +233,10 @@ export async function POST(req: Request) {
       }, { status: 500 })
     }
 
-    // 1. Skrap nettsiden
+    // 1. Hent nettsiden
     let html = ""
+    const parsedUrl = url.startsWith('http') ? url : `https://${url}`
     try {
-      const parsedUrl = url.startsWith('http') ? url : `https://${url}`
       const controller = new AbortController()
       const timeout = setTimeout(() => controller.abort(), 10000)
       const response = await fetch(parsedUrl, {
@@ -380,34 +262,144 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: msg }, { status: 400 })
     }
 
-    // 2. Rens HTML med Cheerio
+    // 2. Parse HTML og trekk ut strukturerte signaler
     const $ = cheerio.load(html)
-    $('script, style, noscript, iframe, img, svg, header, footer, nav, aside').remove()
 
+    // Metadata
     const pageTitle = $('title').text().trim()
     const metaDesc = $('meta[name="description"]').attr('content') || ''
-    const h1s = $('h1').map((_, el) => $(el).text().trim()).get().join(' | ')
-    const h2s = $('h2').map((_, el) => $(el).text().trim()).get().join(' | ')
-    const buttons = $('button, a.btn, .btn, a.button').map((_, el) => $(el).text().trim()).get().join(' | ')
-    const bodyText = $('body').text().replace(/\s+/g, ' ').trim().slice(0, 15000)
+    const canonical = $('link[rel="canonical"]').attr('href') || ''
+    const htmlLang = $('html').attr('lang') || ''
+    const ogTitle = $('meta[property="og:title"]').attr('content') || ''
+    const ogDesc = $('meta[property="og:description"]').attr('content') || ''
+
+    // Headings
+    const h1s = $('h1').map((_, el) => $(el).text().trim()).get().filter(Boolean).join(' | ')
+    const h2s = $('h2').map((_, el) => $(el).text().trim()).get().filter(Boolean).join(' | ')
+
+    // Structured data (JSON-LD) — extract before removing scripts
+    const jsonLdBlocks: string[] = []
+    $('script[type="application/ld+json"]').each((_, el) => {
+      try {
+        const raw = $(el).html() || ''
+        const parsed = JSON.parse(raw)
+        const type = parsed['@type'] || 'Unknown'
+        const name = parsed.name || parsed.headline || ''
+        const desc = parsed.description || ''
+        jsonLdBlocks.push(`[${type}${name ? ': ' + name : ''}${desc ? ' — ' + desc.slice(0, 100) : ''}]`)
+      } catch {}
+    })
+    const schemaSummary = jsonLdBlocks.length > 0 ? jsonLdBlocks.join('\n') : 'Ingen structured data funnet'
+
+    // CTA signals — primary (header/hero area) vs secondary (rest)
+    const primaryCtaTexts: string[] = []
+    const secondaryCtaTexts: string[] = []
+
+    $('header, [class*="hero"], [id*="hero"], section:first-of-type').find('a, button').each((_, el) => {
+      const text = $(el).text().trim()
+      if (text && text.length > 1 && text.length < 80) primaryCtaTexts.push(text)
+    })
+
+    $('a.btn, a.button, .btn, .button, [class*="cta"], [class*="call-to-action"]').each((_, el) => {
+      const text = $(el).text().trim()
+      if (text && text.length > 1 && text.length < 80 && !primaryCtaTexts.includes(text)) {
+        secondaryCtaTexts.push(text)
+      }
+    })
+
+    // Trust signals
+    const trustTexts: string[] = []
+    $('[class*="testimonial"], [class*="review"], [class*="rating"], [class*="logo"], [class*="partner"], [class*="trust"], [class*="award"], [class*="client"]').each((_, el) => {
+      const text = $(el).text().replace(/\s+/g, ' ').trim()
+      if (text && text.length > 5 && text.length < 300) trustTexts.push(text)
+    })
+
+    // Contact signals — regex on raw HTML
+    const contactSignals: string[] = []
+    const phoneMatches = html.match(/(\+47[\s\-]?)?[2-9]\d[\s\-]?\d{2}[\s\-]?\d{2}[\s\-]?\d{2}/g) || []
+    const emailMatches = html.match(/[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}/g) || []
+    if (phoneMatches.length > 0) contactSignals.push(`Telefon: ${[...new Set(phoneMatches)].slice(0, 3).join(', ')}`)
+    if (emailMatches.length > 0) contactSignals.push(`E-post: ${[...new Set(emailMatches)].slice(0, 3).join(', ')}`)
+
+    // FAQ-like content
+    const faqTexts: string[] = []
+    $('h2, h3, h4, dt').each((_, el) => {
+      const text = $(el).text().trim()
+      if (text.endsWith('?') && text.length > 10) {
+        const answer = $(el).next().text().replace(/\s+/g, ' ').trim().slice(0, 200)
+        faqTexts.push(`Q: ${text}${answer ? '\nA: ' + answer : ''}`)
+      }
+    })
+
+    // Internal links (anchor texts, same domain)
+    const domain = new URL(parsedUrl).hostname
+    const internalLinkTexts: string[] = []
+    $('a[href]').each((_, el) => {
+      const href = $(el).attr('href') || ''
+      const text = $(el).text().trim()
+      if (!text || text.length < 2 || text.length > 60) return
+      const isInternal = href.startsWith('/') || href.includes(domain)
+      if (isInternal) internalLinkTexts.push(text)
+    })
+
+    // Image alt texts
+    const imageAlts = $('img[alt]').map((_, el) => $(el).attr('alt')).get()
+      .filter((alt): alt is string => !!alt && alt.trim().length > 2)
+      .slice(0, 20)
+
+    // Now remove noise elements and extract clean body text
+    $('script, style, noscript, iframe, svg, header, footer, nav, aside').remove()
+    const bodyText = $('body').text().replace(/\s+/g, ' ').trim().slice(0, 12000)
 
     // 3. Detekter nettside-kategori
-    const signals = `${pageTitle} ${metaDesc} ${h1s} ${h2s} ${buttons} ${bodyText}`
+    const signals = `${pageTitle} ${metaDesc} ${h1s} ${h2s} ${primaryCtaTexts.join(' ')} ${secondaryCtaTexts.join(' ')} ${bodyText}`
     const siteCategory = detectSiteCategory(signals)
 
+    // 4. Bygg strukturert siteContext
     const siteContext = `
-      URL: ${url}
-      TITTEL: ${pageTitle}
-      META DESC: ${metaDesc}
-      H1s: ${h1s}
-      H2s: ${h2s}
-      CALL TO ACTIONS / BUTTONS: ${buttons}
+URL: ${parsedUrl}
+TITLE: ${pageTitle}
+META DESCRIPTION: ${metaDesc}
+CANONICAL: ${canonical || 'Ikke funnet'}
+LANG: ${htmlLang || 'Ikke funnet'}
+OG TITLE: ${ogTitle || 'Ikke funnet'}
+OG DESCRIPTION: ${ogDesc || 'Ikke funnet'}
 
-      BODY TEKST:
-      ${bodyText}
-    `
+H1:
+${h1s || 'Ingen H1 funnet'}
 
-    // 4. Spør OpenAI med dynamisk prompt
+H2:
+${h2s || 'Ingen H2 funnet'}
+
+PRIMARY CTA CANDIDATES (header/hero-seksjon):
+${primaryCtaTexts.slice(0, 10).join(' | ') || 'Ingen funnet'}
+
+SECONDARY CTA CANDIDATES:
+${[...new Set(secondaryCtaTexts)].slice(0, 15).join(' | ') || 'Ingen funnet'}
+
+TRUST SIGNALS (testimonials, anmeldelser, logoer, partnere):
+${trustTexts.slice(0, 5).join('\n') || 'Ingen strukturerte trust-signaler funnet'}
+
+CONTACT SIGNALS:
+${contactSignals.join('\n') || 'Ingen kontaktsignaler funnet'}
+
+FAQ / SPØRSMÅLSBASERT INNHOLD:
+${faqTexts.slice(0, 8).join('\n\n') || 'Ingen FAQ-lignende innhold funnet'}
+
+INTERNE LENKER (ankertekster):
+${[...new Set(internalLinkTexts)].slice(0, 20).join(' | ') || 'Ingen funnet'}
+
+BILDE ALT-TEKSTER:
+${imageAlts.join(' | ') || 'Ingen funnet'}
+
+STRUCTURED DATA (JSON-LD):
+${schemaSummary}
+
+BRØDTEKST:
+${bodyText}
+`.trim()
+
+    // 5. Spør OpenAI med ny prompt
     const openai = new OpenAI({ apiKey })
     const completion = await openai.chat.completions.create({
       model: 'gpt-4o-mini',

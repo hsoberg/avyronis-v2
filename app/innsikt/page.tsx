@@ -104,9 +104,34 @@ function UrlAnalyzer() {
   }
 
   if (status === "analyzed" && auditData) {
+    const scorecard = auditData.scorecard ?? {}
+    const summary = auditData.executiveSummary ?? {}
+
+    const SCORECARD_LABELS: Record<string, string> = {
+      valuePropPositioning: 'Verdiforslag & Posisjonering',
+      conversionCTA: 'Konvertering & CTA',
+      trustDecisionSupport: 'Tillit & Beslutningsstøtte',
+      seoSearchIntent: 'SEO & Søkeintensjon',
+      aeoGeoAiVisibility: 'AEO / GEO / AI-synlighet',
+      informationArchitectureClarity: 'Informasjonsarkitektur & Innholdsklarhet',
+    }
+
+    const IMPACT_LABELS: Record<string, string> = {
+      high: 'Høy',
+      medium: 'Middels',
+      low: 'Lav',
+    }
+
+    const IMPACT_COLORS: Record<string, string> = {
+      high: '#ff4444',
+      medium: '#f5a623',
+      low: '#4caf50',
+    }
+
     return (
       <div className="url-analyzer-report fade-up" style={{ textAlign: 'left', background: 'var(--color-bg-card)', padding: '40px', borderRadius: '24px', border: '1px solid var(--color-border-light)' }}>
-        
+
+        {/* Header */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '40px', borderBottom: '1px solid var(--color-border-light)', paddingBottom: '24px' }}>
           <div>
             <h2 className="insight-h2" style={{ margin: '0 0 8px' }}>Audit Report: {url}</h2>
@@ -117,52 +142,103 @@ function UrlAnalyzer() {
             )}
           </div>
           <div className="ia-score" style={{ background: 'var(--color-accent)', color: 'var(--color-black)', padding: '8px 16px', borderRadius: '20px', fontWeight: 700, whiteSpace: 'nowrap' }}>
-            Score: {auditData?.fullAudit?.overallScore ?? auditData?.overallScore ?? '–'} / 100
+            Score: {auditData.overallScore ?? '–'} / 100
           </div>
         </div>
 
-        <h3 className="insight-h3" style={{ marginTop: 0, color: 'var(--color-accent)' }}>Topp 3 prioriterte tiltak (Teaser)</h3>
+        {/* Executive Summary */}
+        {summary.diagnosis && (
+          <div style={{ marginBottom: '48px' }}>
+            <h3 className="insight-h3" style={{ marginTop: 0, color: 'var(--color-accent)' }}>Diagnose</h3>
+            <p className="insight-p" style={{ fontSize: '16px', marginBottom: '24px' }}>{summary.diagnosis}</p>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
+              <div style={{ padding: '20px', background: 'var(--color-surface)', border: '1px solid rgba(255,68,68,0.3)', borderRadius: '12px' }}>
+                <div style={{ fontSize: '12px', fontWeight: 700, color: '#ff6666', marginBottom: '8px', letterSpacing: '0.05em' }}>STØRSTE LEKKASJE</div>
+                <p style={{ margin: 0, color: 'var(--color-white)', fontSize: '15px', lineHeight: 1.5 }}>{summary.biggestLeak}</p>
+              </div>
+              <div style={{ padding: '20px', background: 'var(--color-surface)', border: '1px solid var(--color-border-light)', borderRadius: '12px', filter: 'blur(3px)', opacity: 0.5, userSelect: 'none' }}>
+                <div style={{ fontSize: '12px', fontWeight: 700, color: 'var(--color-accent)', marginBottom: '8px', letterSpacing: '0.05em' }}>RASKESTE GEVINST</div>
+                <p style={{ margin: 0, color: 'var(--color-white)', fontSize: '15px', lineHeight: 1.5 }}>Lås opp for å se det tiltaket som gir raskest effekt →</p>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Top 3 */}
+        <h3 className="insight-h3" style={{ marginTop: 0, color: 'var(--color-accent)' }}>Topp 3 prioriterte tiltak</h3>
         <p className="insight-p" style={{ fontSize: '16px' }}>Her er de tre viktigste forbedringsmulighetene AI-sjekken identifiserte:</p>
 
         <div className="audit-teasers" style={{ display: 'grid', gap: '16px', marginBottom: '48px' }}>
           {(auditData.top3Updates ?? []).map((update: any, i: number) => (
             <div key={i} className="audit-teaser-card" style={{ padding: '24px', background: 'var(--color-surface)', border: '1px solid var(--color-border-light)', borderRadius: '16px' }}>
-              <div style={{ color: 'var(--color-accent)', fontWeight: 700, marginBottom: '8px', fontSize: '14px' }}>TILTAK {i + 1}</div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '12px' }}>
+                <span style={{ color: 'var(--color-accent)', fontWeight: 700, fontSize: '14px' }}>TILTAK {i + 1}</span>
+                {update.impact && (
+                  <span style={{ fontSize: '12px', fontWeight: 600, color: IMPACT_COLORS[update.impact] ?? 'var(--color-muted)', background: 'rgba(255,255,255,0.05)', padding: '2px 10px', borderRadius: '20px', border: `1px solid ${IMPACT_COLORS[update.impact] ?? 'transparent'}` }}>
+                    {IMPACT_LABELS[update.impact] ?? update.impact} impact
+                  </span>
+                )}
+              </div>
               <h4 style={{ fontFamily: 'var(--font-sans)', fontSize: '20px', color: 'var(--color-white)', margin: '0 0 12px' }}>{update.title}</h4>
-              <p style={{ margin: 0, color: 'var(--color-muted-70)', fontSize: '16px', lineHeight: 1.5 }}>{update.description}</p>
+              <p style={{ margin: '0 0 16px', color: 'var(--color-muted-70)', fontSize: '15px', lineHeight: 1.5 }}>{update.whyItMatters}</p>
+              <div style={{ padding: '12px 16px', background: 'rgba(255,255,255,0.03)', border: '1px solid var(--color-border-light)', borderRadius: '8px', filter: 'blur(4px)', opacity: 0.4, userSelect: 'none' }}>
+                <span style={{ fontSize: '13px', color: 'var(--color-muted)' }}>Anbefalt fix: Lås opp for å se konkret tiltak →</span>
+              </div>
             </div>
           ))}
         </div>
 
-        <div className="audit-paywall" style={{ position: 'relative', marginTop: '64px' }}>
-            <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '100%', background: 'linear-gradient(to bottom, transparent, var(--color-bg-card) 60%)', zIndex: 1, pointerEvents: 'none' }}></div>
-            
-            <h3 className="insight-h3" style={{ marginTop: 0, filter: 'blur(3px)', opacity: 0.5 }}>Fullstendig Rapport (Låst)</h3>
-            <p className="insight-p" style={{ filter: 'blur(4px)', opacity: 0.5 }}>
-              {auditData?.fullAudit?.pillar1?.name}: Basert på analysen mangler siden flere viktige elementer som koster deg synlighet og leads. Her er vår ekspertvurdering...
+        {/* Scorecard */}
+        <h3 className="insight-h3" style={{ color: 'var(--color-accent)' }}>Scorecard</h3>
+        <div style={{ display: 'grid', gap: '12px', marginBottom: '64px' }}>
+          {Object.entries(SCORECARD_LABELS).map(([key, label]) => {
+            const area = scorecard[key] ?? {}
+            const score = area.score ?? 0
+            const scoreColor = score >= 75 ? '#4caf50' : score >= 50 ? '#f5a623' : '#ff4444'
+            return (
+              <div key={key} style={{ padding: '16px 20px', background: 'var(--color-surface)', border: '1px solid var(--color-border-light)', borderRadius: '12px' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
+                  <span style={{ fontSize: '15px', fontWeight: 600, color: 'var(--color-white)' }}>{label}</span>
+                  <span style={{ fontSize: '16px', fontWeight: 700, color: scoreColor }}>{score} / 100</span>
+                </div>
+                <div style={{ height: '4px', background: 'var(--color-border-light)', borderRadius: '2px' }}>
+                  <div style={{ height: '4px', width: `${score}%`, background: scoreColor, borderRadius: '2px', transition: 'width 0.6s ease' }} />
+                </div>
+              </div>
+            )
+          })}
+        </div>
+
+        {/* Paywall */}
+        <div className="audit-paywall" style={{ position: 'relative' }}>
+          <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '100%', background: 'linear-gradient(to bottom, transparent, var(--color-bg-card) 60%)', zIndex: 1, pointerEvents: 'none' }}></div>
+
+          <h3 className="insight-h3" style={{ marginTop: 0, filter: 'blur(3px)', opacity: 0.5 }}>Scorecard-analyser, prioriterte tiltak og manglende signaler</h3>
+          <p className="insight-p" style={{ filter: 'blur(4px)', opacity: 0.5 }}>
+            Basert på analysen mangler siden flere viktige elementer som koster deg synlighet og leads. Her er vår konkrete anbefalingsliste med prioriterte tiltak og hva som ikke kunne verifiseres fra nettsiden...
+          </p>
+
+          <div style={{ position: 'relative', zIndex: 2, textAlign: 'center', marginTop: '-80px', padding: '40px', background: 'var(--color-bg-dark)', border: '1px solid var(--color-border-light)', borderRadius: '20px', boxShadow: '0 20px 40px rgba(0,0,0,0.5)' }}>
+            <h3 className="insight-h3" style={{ marginTop: 0, marginBottom: '16px' }}>Lås opp din fulle {auditData.siteCategoryLabel ? `${auditData.siteCategoryLabel}-` : ''}analyse</h3>
+            <p className="insight-p" style={{ fontSize: '16px', maxWidth: '440px', margin: '0 auto 32px' }}>
+              Få de konkrete fixene, prioriterte tiltak og en fullstendig scorecard-analyse sendt til innboksen.
             </p>
 
-            <div style={{ position: 'relative', zIndex: 2, textAlign: 'center', marginTop: '-80px', padding: '40px', background: 'var(--color-bg-dark)', border: '1px solid var(--color-border-light)', borderRadius: '20px', boxShadow: '0 20px 40px rgba(0,0,0,0.5)' }}>
-              <h3 className="insight-h3" style={{ marginTop: 0, marginBottom: '16px' }}>Lås opp din fulle {auditData.siteCategoryLabel ? `${auditData.siteCategoryLabel}-` : ''}analyse</h3>
-              <p className="insight-p" style={{ fontSize: '16px', maxWidth: '400px', margin: '0 auto 32px' }}>
-                Legg igjen e-posten din for å få hele rapporten sendt til innboksen.
-              </p>
-              
-              <form onSubmit={handleLeadSubmit} style={{ display: "flex", gap: "12px", justifyContent: "center", maxWidth: "480px", margin: "0 auto" }}>
-                <input
-                  type="email"
-                  placeholder="din@epost.no"
-                  className="url-analyzer__input"
-                  style={{ border: "1px solid var(--color-border-light)", borderRadius: "12px", padding: "12px 24px" }}
-                  value={leadEmail}
-                  onChange={(e) => setLeadEmail(e.target.value)}
-                  required
-                />
-                <button type="submit" className="url-analyzer__btn" disabled={leadSending}>
-                  {leadSending ? "Sender..." : "Send meg full rapport →"}
-                </button>
-              </form>
-            </div>
+            <form onSubmit={handleLeadSubmit} style={{ display: "flex", gap: "12px", justifyContent: "center", maxWidth: "480px", margin: "0 auto" }}>
+              <input
+                type="email"
+                placeholder="din@epost.no"
+                className="url-analyzer__input"
+                style={{ border: "1px solid var(--color-border-light)", borderRadius: "12px", padding: "12px 24px" }}
+                value={leadEmail}
+                onChange={(e) => setLeadEmail(e.target.value)}
+                required
+              />
+              <button type="submit" className="url-analyzer__btn" disabled={leadSending}>
+                {leadSending ? "Sender..." : "Send meg full rapport →"}
+              </button>
+            </form>
+          </div>
         </div>
 
       </div>

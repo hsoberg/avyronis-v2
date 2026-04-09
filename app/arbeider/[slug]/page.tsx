@@ -27,7 +27,7 @@ export default function CaseStudyPage({ params }: { params: { slug: string } }) 
         <section className="cd-section cd-hero fade-up">
           <span className="cd-hero__label">CASE</span>
           <h1 className="cd-hero__title">
-            Fra trafikk til kunder – slik økte vi henvendelser med <span style={{ color: 'var(--color-accent)' }}>{caseData.resultMetric}</span>
+            Slik økte vi konverteringer for {caseData.title} med <span style={{ color: 'var(--color-accent)' }}>{caseData.resultMetric}</span>
           </h1>
           <p className="cd-hero__sub">
             Vi forbedret struktur, budskap og brukeropplevelse – slik at flere faktisk tok kontakt.

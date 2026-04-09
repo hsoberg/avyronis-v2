@@ -17,9 +17,14 @@ export default function Testimonial() {
       <div className="testimonial__overlay" aria-hidden="true" />
       <div className="testimonial__content">
         <blockquote className="testimonial__quote fade-up">
-          &ldquo;Etter at Avyronis tok over nettsiden vår, har vi sett en markant økning i henvendelser 
-          fra kvalifiserte kunder. Nettsiden fungerer nå som vår beste selger, 24 timer i døgnet.&rdquo;
-        </blockquote>
+  &ldquo;
+  <span>Etter at Avyronis tok over nettsiden vår, har vi fått jevn tilstrømning av nye pasienter – uten å måtte bruke mer tid på markedsføring selv.</span>
+  
+  <span>Nettsiden forklarer tydelig hva vi tilbyr, og gjør det enkelt for folk å ta kontakt.</span>
+  
+  <span className="highlight">Den fungerer nå som en viktig del av driften vår – ikke bare en side som ‘ligger der’.</span>
+  &rdquo;
+</blockquote>
         <div className="testimonial__author fade-up">
           <span className="testimonial__author-name">Øystein Grindstad</span>
           <span className="testimonial__author-title">Daglig leder, Aktiv Helse AS</span>

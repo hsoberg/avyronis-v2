@@ -104,29 +104,7 @@ function UrlAnalyzer() {
   }
 
   if (status === "analyzed" && auditData) {
-    const scorecard = auditData.scorecard ?? {}
     const summary = auditData.executiveSummary ?? {}
-
-    const SCORECARD_LABELS: Record<string, string> = {
-      valuePropPositioning: 'Verdiforslag & Posisjonering',
-      conversionCTA: 'Konvertering & CTA',
-      trustDecisionSupport: 'Tillit & Beslutningsstøtte',
-      seoSearchIntent: 'SEO & Søkeintensjon',
-      aeoGeoAiVisibility: 'AEO / GEO / AI-synlighet',
-      informationArchitectureClarity: 'Informasjonsarkitektur & Innholdsklarhet',
-    }
-
-    const IMPACT_LABELS: Record<string, string> = {
-      high: 'Høy',
-      medium: 'Middels',
-      low: 'Lav',
-    }
-
-    const IMPACT_COLORS: Record<string, string> = {
-      high: '#ff4444',
-      medium: '#f5a623',
-      low: '#4caf50',
-    }
 
     return (
       <div className="url-analyzer-report fade-up" style={{ textAlign: 'left', background: 'var(--color-bg-card)', padding: '40px', borderRadius: '24px', border: '1px solid var(--color-border-light)' }}>
@@ -173,53 +151,23 @@ function UrlAnalyzer() {
             <div key={i} className="audit-teaser-card" style={{ padding: '24px', background: 'var(--color-surface)', border: '1px solid var(--color-border-light)', borderRadius: '16px' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '12px' }}>
                 <span style={{ color: 'var(--color-accent)', fontWeight: 700, fontSize: '14px' }}>TILTAK {i + 1}</span>
-                {update.impact && (
-                  <span style={{ fontSize: '12px', fontWeight: 600, color: IMPACT_COLORS[update.impact] ?? 'var(--color-muted)', background: 'rgba(255,255,255,0.05)', padding: '2px 10px', borderRadius: '20px', border: `1px solid ${IMPACT_COLORS[update.impact] ?? 'transparent'}` }}>
-                    {IMPACT_LABELS[update.impact] ?? update.impact} impact
-                  </span>
-                )}
               </div>
-              <h4 style={{ fontFamily: 'var(--font-sans)', fontSize: '20px', color: 'var(--color-white)', margin: '0 0 12px' }}>{update.title}</h4>
-              <p style={{ margin: '0 0 16px', color: 'var(--color-muted-70)', fontSize: '15px', lineHeight: 1.5 }}>{update.whyItMatters}</p>
-              <div style={{ padding: '12px 16px', background: 'rgba(255,255,255,0.03)', border: '1px solid var(--color-border-light)', borderRadius: '8px', filter: 'blur(4px)', opacity: 0.4, userSelect: 'none' }}>
-                <span style={{ fontSize: '13px', color: 'var(--color-muted)' }}>Anbefalt fix: Lås opp for å se konkret tiltak →</span>
-              </div>
+              <h4 style={{ fontFamily: 'var(--font-sans)', fontSize: '20px', color: 'var(--color-white)', margin: 0 }}>{update.title}</h4>
             </div>
           ))}
-        </div>
-
-        {/* Scorecard */}
-        <h3 className="insight-h3" style={{ color: 'var(--color-accent)' }}>Scorecard</h3>
-        <div style={{ display: 'grid', gap: '12px', marginBottom: '64px' }}>
-          {Object.entries(SCORECARD_LABELS).map(([key, label]) => {
-            const area = scorecard[key] ?? {}
-            const score = area.score ?? 0
-            const scoreColor = score >= 75 ? '#4caf50' : score >= 50 ? '#f5a623' : '#ff4444'
-            return (
-              <div key={key} style={{ padding: '16px 20px', background: 'var(--color-surface)', border: '1px solid var(--color-border-light)', borderRadius: '12px' }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
-                  <span style={{ fontSize: '15px', fontWeight: 600, color: 'var(--color-white)' }}>{label}</span>
-                  <span style={{ fontSize: '16px', fontWeight: 700, color: scoreColor }}>{score} / 100</span>
-                </div>
-                <div style={{ height: '4px', background: 'var(--color-border-light)', borderRadius: '2px' }}>
-                  <div style={{ height: '4px', width: `${score}%`, background: scoreColor, borderRadius: '2px', transition: 'width 0.6s ease' }} />
-                </div>
-              </div>
-            )
-          })}
         </div>
 
         {/* Paywall */}
         <div className="audit-paywall" style={{ position: 'relative' }}>
           <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '100%', background: 'linear-gradient(to bottom, transparent, var(--color-bg-card) 60%)', zIndex: 1, pointerEvents: 'none' }}></div>
 
-          <h3 className="insight-h3" style={{ marginTop: 0, filter: 'blur(3px)', opacity: 0.5 }}>Scorecard-analyser, prioriterte tiltak og manglende signaler</h3>
+          <h3 className="insight-h3" style={{ marginTop: 0, filter: 'blur(3px)', opacity: 0.5 }}>Scorecard, anbefalte fixes og prioriterte tiltak</h3>
           <p className="insight-p" style={{ filter: 'blur(4px)', opacity: 0.5 }}>
             Basert på analysen mangler siden flere viktige elementer som koster deg synlighet og leads. Her er vår konkrete anbefalingsliste med prioriterte tiltak og hva som ikke kunne verifiseres fra nettsiden...
           </p>
 
           <div style={{ position: 'relative', zIndex: 2, textAlign: 'center', marginTop: '-80px', padding: '40px', background: 'var(--color-bg-dark)', border: '1px solid var(--color-border-light)', borderRadius: '20px', boxShadow: '0 20px 40px rgba(0,0,0,0.5)' }}>
-            <h3 className="insight-h3" style={{ marginTop: 0, marginBottom: '16px' }}>Lås opp din fulle {auditData.siteCategoryLabel ? `${auditData.siteCategoryLabel}-` : ''}analyse</h3>
+            <h3 className="insight-h3" style={{ marginTop: 0, marginBottom: '16px' }}>Lås opp den fulle rapporten</h3>
             <p className="insight-p" style={{ fontSize: '16px', maxWidth: '440px', margin: '0 auto 32px' }}>
               Få de konkrete fixene, prioriterte tiltak og en fullstendig scorecard-analyse sendt til innboksen.
             </p>

@@ -318,8 +318,8 @@ export async function POST(req: Request) {
     const contactSignals: string[] = []
     const phoneMatches = html.match(/(\+47[\s\-]?)?[2-9]\d[\s\-]?\d{2}[\s\-]?\d{2}[\s\-]?\d{2}/g) || []
     const emailMatches = html.match(/[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}/g) || []
-    if (phoneMatches.length > 0) contactSignals.push(`Telefon: ${[...new Set(phoneMatches)].slice(0, 3).join(', ')}`)
-    if (emailMatches.length > 0) contactSignals.push(`E-post: ${[...new Set(emailMatches)].slice(0, 3).join(', ')}`)
+    if (phoneMatches.length > 0) contactSignals.push(`Telefon: ${Array.from(new Set(phoneMatches)).slice(0, 3).join(', ')}`)
+    if (emailMatches.length > 0) contactSignals.push(`E-post: ${Array.from(new Set(emailMatches)).slice(0, 3).join(', ')}`)
 
     // FAQ-like content
     const faqTexts: string[] = []
@@ -375,7 +375,7 @@ PRIMARY CTA CANDIDATES (header/hero-seksjon):
 ${primaryCtaTexts.slice(0, 10).join(' | ') || 'Ingen funnet'}
 
 SECONDARY CTA CANDIDATES:
-${[...new Set(secondaryCtaTexts)].slice(0, 15).join(' | ') || 'Ingen funnet'}
+${Array.from(new Set(secondaryCtaTexts)).slice(0, 15).join(' | ') || 'Ingen funnet'}
 
 TRUST SIGNALS (testimonials, anmeldelser, logoer, partnere):
 ${trustTexts.slice(0, 5).join('\n') || 'Ingen strukturerte trust-signaler funnet'}
@@ -387,7 +387,7 @@ FAQ / SPØRSMÅLSBASERT INNHOLD:
 ${faqTexts.slice(0, 8).join('\n\n') || 'Ingen FAQ-lignende innhold funnet'}
 
 INTERNE LENKER (ankertekster):
-${[...new Set(internalLinkTexts)].slice(0, 20).join(' | ') || 'Ingen funnet'}
+${Array.from(new Set(internalLinkTexts)).slice(0, 20).join(' | ') || 'Ingen funnet'}
 
 BILDE ALT-TEKSTER:
 ${imageAlts.join(' | ') || 'Ingen funnet'}

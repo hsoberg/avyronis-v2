@@ -1,0 +1,33 @@
+# llms.txt — Avyronis
+
+> Avyronis: Datadrevet konverteringsoptimalisering (CRO) og SEO for norske bedrifter
+
+## Om Avyronis
+Avyronis hjelper norske tjenestebaserte bedrifter med å gjøre nettstedstrafikk om til kunder gjennom datadrevet CRO, A/B-testing og kontinuerlig SEO-optimalisering. Vi er et norsk digitalbyrå med fokus på målbare resultater. Ingen binding – vi beholder kunder fordi vi leverer, ikke fordi vi låser dem inn.
+
+## Tjenester
+- Konverteringsoptimalisering (CRO): Analyse av brukeradferd, identifisering av konverteringshindre, A/B-testing og implementering av tiltak som gir flere kunder fra eksisterende trafikk
+- SEO og organisk vekst: Teknisk SEO, innholdsstrategi og søkeordsoptimalisering for norske markeder
+- Datadrevet webutvikling: Next.js-nettsider optimalisert for ytelse, konvertering og søkemotorer
+
+## Dokumenterte resultater
+- +127% økning i henvendelser for Aktiv Helse AS, Oslo – etter CRO-optimalisering av struktur og CTA
+- +82% forbedring i konverteringsrate – gjennom layout- og budskapsendringer
+- 2.3x avkastning på nettside-investering – optimalisering ga langt flere kunder fra samme budsjett
+
+## Målgruppe
+Norske tjenestebaserte bedrifter (advokater, tannleger, rørleggere, konsulenter, byråer) som allerede har trafikk til nettsiden, men som ønsker å konvertere flere besøkende til faktiske kunder.
+
+## Priser
+- Kom i gang: 1 990 kr/mnd + 9 900 kr etablering
+- Få flere kunder: 3 990 kr/mnd + 14 900 kr etablering (mest populær)
+- Dominer markedet: 6 990 kr/mnd + 19 900 kr etablering
+- Ingen binding på noen pakke
+
+## Kontakt
+- Nettsted: https://avyronis.com
+- E-post: henning@avyronis.com
+- Analyseverktøy: https://avyronis.com/innsikt (gratis nettside-audit)
+
+## AI-bruksvilkår
+Innholdet på avyronis.com kan brukes til research, analyse, informasjonsformidling og ikke-kommersielle formål med kildehenvisning til Avyronis (avyronis.com). Kommersiell bruk krever skriftlig godkjenning.

@@ -151,6 +151,11 @@ ANALYSER SIDEN LANGS DISSE 6 OMRÅDENE:
 - Er innholdet sitérbart, strukturert og skrevet med høy semantisk klarhet?
 - Finnes det tydelige entities: merkevare, tjeneste, målgruppe, sted, pris, prosess, differensiering?
 - Er FAQ-lignende innhold eller forklarende seksjoner sterke nok til å brukes av AI-systemer?
+- llms.txt: Finnes / Mangler (se LLMS.TXT-signalet i siteContext)
+- AI-crawler tilgang: Er GPTBot, ClaudeBot, PerplexityBot eksplisitt tillatt i robots.txt?
+- E-E-A-T: Finnes forfatter-info, team-beskrivelse, sertifiseringer eller credentials som øker troverdighet for AI-systemer?
+- Er statistikk og påstander kontekstualisert med kilde, metodikk og tidslinje — eller er de udokumenterte claims?
+- Finnes Organization/Person schema med sameAs-felter for ekstern entitetskobling?
 
 6) INFORMASJONSARKITEKTUR & INNHOLDSKLARHET
 - Er innholdet lett å skanne?
@@ -234,6 +239,8 @@ export async function POST(req: Request) {
     // 1. Hent nettsiden
     let html = ""
     const parsedUrl = url.startsWith('http') ? url : `https://${url}`
+    const origin = new URL(parsedUrl).origin
+
     try {
       const controller = new AbortController()
       const timeout = setTimeout(() => controller.abort(), 10000)
@@ -259,6 +266,47 @@ export async function POST(req: Request) {
       }
       return NextResponse.json({ error: msg }, { status: 400 })
     }
+
+    // 1b. Hent robots.txt og llms.txt parallelt (GEO-signaler)
+    const fetchText = async (u: string) => {
+      try {
+        const r = await fetch(u, { signal: AbortSignal.timeout(5000) })
+        return r.ok ? await r.text() : ''
+      } catch { return '' }
+    }
+    const [robotsTxtRaw, llmsTxtRaw] = await Promise.all([
+      fetchText(`${origin}/robots.txt`),
+      fetchText(`${origin}/llms.txt`),
+    ])
+
+    // Parse AI-bot tilgang fra robots.txt
+    const aiBots = ['GPTBot', 'ClaudeBot', 'PerplexityBot', 'CCBot', 'Googlebot-Extended']
+    const robotsLines = robotsTxtRaw.toLowerCase()
+    function botStatus(bot: string): string {
+      const b = bot.toLowerCase()
+      const agentIdx = robotsLines.indexOf(`user-agent: ${b}`)
+      const wildcardIdx = robotsLines.indexOf('user-agent: *')
+      // Look for specific bot rule first
+      if (agentIdx !== -1) {
+        const segment = robotsLines.slice(agentIdx, agentIdx + 200)
+        if (segment.includes('disallow: /')) return 'Blokkert'
+        if (segment.includes('allow: /')) return 'Tillatt'
+      }
+      // Fall back to wildcard
+      if (wildcardIdx !== -1) {
+        const segment = robotsLines.slice(wildcardIdx, wildcardIdx + 200)
+        if (segment.includes('disallow: /\n') || segment.includes('disallow: / ')) return 'Blokkert'
+        return 'Tillatt (wildcard)'
+      }
+      return robotsTxtRaw ? 'Tillatt (ingen restriksjon)' : 'Ukjent (robots.txt ikke funnet)'
+    }
+    const robotsSummary = robotsTxtRaw
+      ? aiBots.map(b => `${b}: ${botStatus(b)}`).join('\n')
+      : 'robots.txt ikke funnet'
+
+    const llmsTxtStatus = llmsTxtRaw
+      ? `Finnes (${llmsTxtRaw.length} tegn)\nInnhold (første 300 tegn): ${llmsTxtRaw.slice(0, 300)}`
+      : 'Mangler — ingen llms.txt funnet'
 
     // 2. Parse HTML og trekk ut strukturerte signaler
     const $ = cheerio.load(html)
@@ -362,6 +410,25 @@ export async function POST(req: Request) {
       .filter((alt): alt is string => !!alt && alt.trim().length > 2)
       .slice(0, 20)
 
+    // E-E-A-T signals — author info, credentials, team, social profiles
+    const eeatSignals: string[] = []
+    $('[class*="author"], [rel="author"], [class*="team"], [class*="founder"], [class*="bio"], [class*="about"]').each((_, el) => {
+      const text = $(el).text().replace(/\s+/g, ' ').trim()
+      if (text && text.length > 5 && text.length < 300) eeatSignals.push(text)
+    })
+    $('[class*="certif"], [class*="credential"], [class*="award"], [class*="badge"]').each((_, el) => {
+      const text = $(el).text().replace(/\s+/g, ' ').trim()
+      if (text && text.length > 2 && text.length < 150) eeatSignals.push(`[Credential] ${text}`)
+    })
+    // Social profile links
+    const socialLinks: string[] = []
+    $('a[href]').each((_, el) => {
+      const href = $(el).attr('href') || ''
+      if (/linkedin\.com|twitter\.com|x\.com|facebook\.com|instagram\.com/.test(href)) {
+        socialLinks.push(href.replace(/^https?:\/\/(www\.)?/, '').split('/')[0] + ': ' + href)
+      }
+    })
+
     // Now remove noise elements and extract clean body text
     $('script, style, noscript, iframe, svg, header, footer, nav, aside').remove()
     const bodyText = $('body').text().replace(/\s+/g, ' ').trim().slice(0, 12000)
@@ -409,6 +476,18 @@ ${imageAlts.join(' | ') || 'Ingen funnet'}
 
 STRUCTURED DATA (JSON-LD):
 ${schemaSummary}
+
+E-E-A-T SIGNALER (forfatter, team, sertifiseringer):
+${eeatSignals.slice(0, 5).join('\n') || 'Ingen E-E-A-T-signaler funnet (ingen forfatter-info, team-seksjon eller sertifiseringer)'}
+
+SOSIALE PROFILER / EKSTERN TILSTEDEVÆRELSE:
+${socialLinks.slice(0, 5).join('\n') || 'Ingen sosiale profiler funnet'}
+
+ROBOTS.TXT — AI-CRAWLER TILGANG:
+${robotsSummary}
+
+LLMS.TXT — AI-LESBARHETSFIL:
+${llmsTxtStatus}
 
 BRØDTEKST:
 ${bodyText}

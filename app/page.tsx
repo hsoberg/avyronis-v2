@@ -20,11 +20,22 @@ const jsonLdOrg = {
   "@id": "https://avyronis.com/#organization",
   "name": "Avyronis",
   "url": "https://avyronis.com",
-  "description": "Avyronis hjelper norske bedrifter med å gjøre flere besøkende til kunder gjennom konverteringsoptimalisering (CRO), SEO og datadrevet webutvikling. Ingen binding – vi beholder kunder fordi vi leverer resultater.",
-  "areaServed": "NO",
-  "knowsAbout": ["Konverteringsoptimalisering", "CRO", "SEO", "Nettside-analyse", "Webutvikling"],
+  "logo": "https://avyronis.com/favicon.ico",
+  "description": "Avyronis hjelper norske tjenestebaserte bedrifter med å gjøre trafikk om til kunder gjennom datadrevet konverteringsoptimalisering (CRO), SEO og webutvikling. Ingen binding – vi beholder kunder fordi vi leverer resultater.",
+  "foundingDate": "2024",
+  "areaServed": {
+    "@type": "Country",
+    "name": "Norway",
+    "identifier": "NO"
+  },
+  "address": {
+    "@type": "PostalAddress",
+    "addressCountry": "NO"
+  },
+  "knowsAbout": ["Konverteringsoptimalisering", "CRO", "SEO", "A/B-testing", "Nettside-analyse", "Webutvikling", "Next.js"],
   "contactPoint": {
     "@type": "ContactPoint",
+    "email": "henning@avyronis.com",
     "contactType": "customer service",
     "availableLanguage": "Norwegian"
   }

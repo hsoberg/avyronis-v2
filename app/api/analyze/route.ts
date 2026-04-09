@@ -311,7 +311,7 @@ export async function POST(req: Request) {
     // Parse AI-bot tilgang fra robots.txt
     const aiBots = ['GPTBot', 'ClaudeBot', 'PerplexityBot', 'CCBot', 'Googlebot-Extended', 'YouBot', 'BraveBot', 'Bingbot', 'ChatGPT-User']
     const robotsLines = robotsTxtRaw.toLowerCase()
-    function botStatus(bot: string): string {
+    const botStatus = (bot: string): string => {
       const b = bot.toLowerCase()
       const agentIdx = robotsLines.indexOf(`user-agent: ${b}`)
       const wildcardIdx = robotsLines.indexOf('user-agent: *')

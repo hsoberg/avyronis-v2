@@ -41,9 +41,9 @@ export default function HowItWorksSection() {
         <div className="hiw-section__cta-area">
           <p className="hiw-section__friction">Du får konkrete tiltak du kan implementere selv</p>
           <a href="#contact" className="btn btn--primary">
-            Få en konkret plan for din nettside
+            Book en gratis gjennomgang (15 min)
           </a>
-          <p className="hiw-section__microcopy">Tar 15 min – helt uforpliktende</p>
+          <p className="hiw-section__microcopy">Du får konkrete tiltak – helt uforpliktende</p>
         </div>
 
       </div>

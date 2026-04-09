@@ -130,7 +130,7 @@ export default function FAQSection() {
 
         <div className="faq-section__bottom">
           <a href="#contact" className="btn btn--primary">
-            Få en konkret plan for din nettside
+            Book en gratis gjennomgang (15 min)
           </a>
           <p className="faq-section__microcopy">Tar 10–15 min. Helt uforpliktende.</p>
         </div>

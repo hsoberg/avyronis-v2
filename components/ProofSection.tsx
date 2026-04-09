@@ -39,7 +39,7 @@ export default function ProofSection() {
         <div className="proof-section__cta">
           <h3 className="proof-section__cta-heading">Vi viser deg nøyaktig hva som kan forbedres</h3>
           <a href="#contact" className="btn btn--primary">
-            Få en konkret plan for din nettside
+            Book en gratis gjennomgang (15 min)
           </a>
           <p className="proof-section__microcopy">Se hva som kan forbedres – helt uforpliktende</p>
         </div>

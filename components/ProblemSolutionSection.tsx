@@ -5,7 +5,7 @@ export default function ProblemSolutionSection() {
         
         <div className="problem-solution__header">
           <p className="problem-solution__pre-headline">De fleste nettsider mister kunder hver dag</p>
-          <h2 className="problem-solution__headline">Problemet er ikke nettsiden – det er hvordan den konverterer</h2>
+          <h2 className="problem-solution__headline">Konverteringsoptimalisering (CRO) for norske bedrifter – mer ut av trafikken du allerede har</h2>
         </div>
 
         <div className="problem-solution__grid">

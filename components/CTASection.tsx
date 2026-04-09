@@ -22,8 +22,8 @@ export default function CTASection({
         </ul>
 
         <div className="cta-section__actions">
-            <a href="mailto:henning@avyronis.com?subject=Få en konkret plan for min nettside" className="btn btn--primary btn--large">
-              Få en konkret plan for din nettside
+            <a href="mailto:henning@avyronis.com?subject=Book en gratis gjennomgang" className="btn btn--primary btn--large">
+              Book en gratis gjennomgang (15 min)
             </a>
             
             <a href="mailto:henning@avyronis.com" className="cta-section__secondary">

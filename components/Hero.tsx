@@ -57,7 +57,7 @@ export default function Hero() {
             Få 2–5x flere kunder fra nettsiden din
           </h1>
           <p className="hero__sub hero-entrance delay-1">
-            Vi gjør trafikk om til kunder – med datadrevet CRO, testing og kontinuerlig optimalisering basert på faktisk brukeradferd.
+            For norske bedrifter med trafikk som ikke konverterer. Vi gjør besøkende om til kunder – med datadrevet CRO, A/B-testing og kontinuerlig optimalisering.
           </p>
           <div className="hero__proof hero-entrance delay-2">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -66,7 +66,7 @@ export default function Hero() {
             <span>Ingen binding. Du betaler for resultater – ikke løfter.</span>
           </div>
           <div className="hero__buttons hero-entrance delay-3">
-            <a href="#contact" className="btn btn--primary">Få konkret vekstanalyse av nettsiden din</a>
+            <a href="#contact" className="btn btn--primary">Book en gratis gjennomgang (15 min)</a>
           </div>
         </div>
 

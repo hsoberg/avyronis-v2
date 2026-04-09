@@ -281,10 +281,22 @@ export async function POST(req: Request) {
       try {
         const raw = $(el).html() || ''
         const parsed = JSON.parse(raw)
-        const type = parsed['@type'] || 'Unknown'
-        const name = parsed.name || parsed.headline || ''
-        const desc = parsed.description || ''
-        jsonLdBlocks.push(`[${type}${name ? ': ' + name : ''}${desc ? ' — ' + desc.slice(0, 100) : ''}]`)
+        // Handle both @graph arrays and single schema objects
+        const items: any[] = parsed['@graph'] ? parsed['@graph'] : [parsed]
+        items.forEach((item: any) => {
+          const type = item['@type'] || 'Unknown'
+          const name = item.name || item.headline || ''
+          const desc = item.description || ''
+          jsonLdBlocks.push(`[${type}${name ? ': ' + name : ''}${desc ? ' — ' + desc.slice(0, 100) : ''}]`)
+          // For FAQPage: also extract Q&A pairs
+          if (type === 'FAQPage' && Array.isArray(item.mainEntity)) {
+            item.mainEntity.slice(0, 5).forEach((qa: any) => {
+              const q = qa.name || ''
+              const a = qa.acceptedAnswer?.text || ''
+              if (q) jsonLdBlocks.push(`FAQ: Q: ${q}${a ? ' A: ' + a.slice(0, 150) : ''}`)
+            })
+          }
+        })
       } catch {}
     })
     const schemaSummary = jsonLdBlocks.length > 0 ? jsonLdBlocks.join('\n') : 'Ingen structured data funnet'
@@ -321,12 +333,15 @@ export async function POST(req: Request) {
     if (phoneMatches.length > 0) contactSignals.push(`Telefon: ${Array.from(new Set(phoneMatches)).slice(0, 3).join(', ')}`)
     if (emailMatches.length > 0) contactSignals.push(`E-post: ${Array.from(new Set(emailMatches)).slice(0, 3).join(', ')}`)
 
-    // FAQ-like content
+    // FAQ-like content — check headings AND accordion/button triggers
     const faqTexts: string[] = []
-    $('h2, h3, h4, dt').each((_, el) => {
+    const faqSeen = new Set<string>()
+    $('h2, h3, h4, dt, [class*="accordion__title"], [class*="accordion__trigger"] span, button').each((_, el) => {
       const text = $(el).text().trim()
-      if (text.endsWith('?') && text.length > 10) {
-        const answer = $(el).next().text().replace(/\s+/g, ' ').trim().slice(0, 200)
+      if (text.endsWith('?') && text.length > 10 && !faqSeen.has(text)) {
+        faqSeen.add(text)
+        const answer = $(el).closest('[class*="accordion__item"]').find('[class*="accordion__body"]').text().replace(/\s+/g, ' ').trim().slice(0, 200)
+          || $(el).next().text().replace(/\s+/g, ' ').trim().slice(0, 200)
         faqTexts.push(`Q: ${text}${answer ? '\nA: ' + answer : ''}`)
       }
     })

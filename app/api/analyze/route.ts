@@ -153,20 +153,7 @@ ANALYSER SIDEN LANGS DISSE 6 OMRÅDENE:
 - Finnes det tydelig topical relevance mellom tilbud, problem og målgruppe?
 - Virker siden å være optimalisert for informasjons-, kommersiell- eller transaksjonell intensjon?
 
-5) AEO / GEO / AI-SYNLIGHET
-- Kan en AI-assistent enkelt forstå hva virksomheten gjør, hvem den hjelper og hvorfor den er et godt valg?
-- Finnes det tydelige, direkte svar på viktige spørsmål? (Answer-first format)
-- Er tjenestene/produktene beskrevet konkret og entydig?
-- Brukes de 9 Princeton GEO-metodene? (Siteringer, Statistikk, Sitater, Autoritær tone, Enkelhet, Tekniske termer, Ordmangfold, Flyt).
-- Er innholdet sitérbart, strukturert og skrevet med høy semantisk klarhet?
-- Finnes det tydelige entities: merkevare, tjeneste, målgruppe, sted, pris, prosess, differensiering?
-- llms.txt: Finnes / Mangler (se LLMS.TXT-signalet i siteContext)
-- AI-crawler tilgang: Er GPTBot, ClaudeBot, PerplexityBot, etc. eksplisitt tillatt i robots.txt?
-- E-E-A-T: Finnes forfatter-info, team-beskrivelse, sertifiseringer eller credentials som øker troverdighet for AI-systemer?
-- Er statistikk og påstander kontekstualisert med kilde, metodikk og tidslinje?
-- Finnes Organization/Person schema med sameAs-felter for ekstern entitetskobling (Socials, Wikipedia, LinkedIn)?
-
-6) INFORMASJONSARKITEKTUR & INNHOLDSKLARHET
+5) INFORMASJONSARKITEKTUR & INNHOLDSKLARHET
 - Er innholdet lett å skanne?
 - Er strukturen logisk, eller virker siden rotete?
 - Er det sannsynlig at brukeren finner det viktigste raskt?
@@ -231,16 +218,8 @@ JSON-STRUKTUR:
     "conversionCTA": { "score": 0, "analysis": "Kort analyse." },
     "trustDecisionSupport": { "score": 0, "analysis": "Kort analyse." },
     "seoSearchIntent": { "score": 0, "analysis": "Kort analyse." },
-    "aeoGeoAiVisibility": { "score": 0, "analysis": "Kort analyse." },
     "informationArchitectureClarity": { "score": 0, "analysis": "Kort analyse." }
   },
-  "priorityActions": [
-    {
-      "priority": 1,
-      "action": "Konkret tiltak",
-      "expectedOutcome": "Hva dette sannsynligvis forbedrer"
-    }
-  ],
   "missingSignals": [
     "Liste over ting som ikke kunne verifiseres fra signalene, men som burde vært undersøkt."
   ]

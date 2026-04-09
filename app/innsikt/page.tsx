@@ -156,7 +156,7 @@ function UrlAnalyzer() {
               {auditData.geoAnalysis.detailedGeoInsight}
             </p>
 
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: '12px' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: '12px', filter: 'blur(5px)', opacity: 0.4, userSelect: 'none' }}>
               {Object.entries(auditData.geoAnalysis.princetonMethods || {}).map(([key, data]: [string, any]) => (
                 <div key={key} style={{ padding: '12px', background: 'rgba(255,255,255,0.03)', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.05)' }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '4px' }}>
@@ -167,6 +167,9 @@ function UrlAnalyzer() {
                 </div>
               ))}
             </div>
+            <p style={{ margin: '16px 0 0', fontSize: '12px', textAlign: 'center', opacity: 0.6, fontStyle: 'italic' }}>
+              Lås opp full rapport for å se alle Princeton-metodene og detaljert score ↑
+            </p>
           </div>
         )}
 
@@ -180,7 +183,14 @@ function UrlAnalyzer() {
               <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '12px' }}>
                 <span style={{ color: 'var(--color-accent)', fontWeight: 700, fontSize: '14px' }}>TILTAK {i + 1}</span>
               </div>
-              <h4 style={{ fontFamily: 'var(--font-sans)', fontSize: '20px', color: 'var(--color-white)', margin: 0 }}>{update.title}</h4>
+              <h4 style={{ fontFamily: 'var(--font-sans)', fontSize: '20px', color: 'var(--color-white)', margin: '0 0 16px' }}>{update.title}</h4>
+              
+              <div style={{ opacity: 0.4, filter: 'blur(3px)', userSelect: 'none' }}>
+                <p style={{ fontSize: '14px', color: 'var(--color-accent)', marginBottom: '4px', fontWeight: 600 }}>Hvorfor det betyr noe:</p>
+                <p style={{ margin: '0 0 12px', fontSize: '14px', lineHeight: 1.4 }}>{update.whyItMatters}</p>
+                <p style={{ fontSize: '14px', color: 'var(--color-white)', marginBottom: '4px', fontWeight: 600 }}>Anbefalt fix:</p>
+                <p style={{ margin: 0, fontSize: '14px', lineHeight: 1.4 }}>{update.recommendedFix}</p>
+              </div>
             </div>
           ))}
         </div>

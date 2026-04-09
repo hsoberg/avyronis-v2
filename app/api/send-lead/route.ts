@@ -8,7 +8,6 @@ const SCORECARD_LABELS: Record<string, string> = {
   conversionCTA: 'Konvertering & CTA',
   trustDecisionSupport: 'Tillit & Beslutningsstøtte',
   seoSearchIntent: 'SEO & Søkeintensjon',
-  aeoGeoAiVisibility: 'AEO / GEO / AI-synlighet',
   informationArchitectureClarity: 'Informasjonsarkitektur & Innholdsklarhet',
 }
 
@@ -120,11 +119,8 @@ export async function POST(req: Request) {
           <h3>Topp 3 prioriterte tiltak</h3>
           ${top3Html}
 
-          <h3>Scorecard (6 områder)</h3>
+          <h3>Scorecard (5 områder)</h3>
           ${scorecardHtml}
-
-          <h3>Prioriterte handlinger</h3>
-          <ol style="padding-left: 20px;">${priorityActionsHtml}</ol>
 
           <h3>Manglende signaler</h3>
           <ul style="padding-left: 20px;">${missingSignalsHtml}</ul>

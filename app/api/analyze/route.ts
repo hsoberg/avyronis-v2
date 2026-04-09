@@ -72,8 +72,8 @@ function detectSiteCategory(signals: string): SiteCategory {
   if (/åpningstider|opening hours|bestill bord|book a table|ring oss|call us|finn oss|find us|kart|google maps/.test(s)) score.local_business += 3
   if (/adresse|telefon|tlf|restaurant|kafé|frisør|tannlege|lege|rørlegger|elektriker|treningssenter|gym/.test(s)) score.local_business += 2
 
-  if (/free trial|gratis prøve|prøv gratis|start free|sign up free|dashboard|api|integrasjon|integration|abonnement|subscription/.test(s)) score.saas += 3
-  if (/funksjon|feature|pricing|plan|enterprise|onboarding|workflow|automation/.test(s)) score.saas += 2
+  if (/free trial|gratis prøve|prøv gratis|start free|sign up free|dashboard|\bapi\b|integrasjon|integration|abonnement|subscription/.test(s)) score.saas += 3
+  if (/\bsaas\b|funksjon|feature|pricing|enterprise|onboarding|workflow|automation/.test(s)) score.saas += 2
 
   if (/portefølje|portfolio|mine prosjekter|mitt arbeid|case study|folio|hired|leid inn/.test(s)) score.portfolio += 3
   if (/designer|fotograf|illustratør|arkitekt|freelance|frilanser|se mitt arbeid/.test(s)) score.portfolio += 2
@@ -81,7 +81,8 @@ function detectSiteCategory(signals: string): SiteCategory {
   if (/les mer|publisert|minutter å lese|min read|nyhetsbrev|newsletter|abonner|subscribe|redaksjon/.test(s)) score.blog_media += 3
   if (/artikkel|blogg|nyheter|innlegg|post|kategori|tags|forfatter|author/.test(s)) score.blog_media += 2
 
-  if (/byrå|agency|studio|vi hjelper|vi leverer|tjenester|våre tjenester|case studies|resultater/.test(s)) score.agency_service += 3
+  if (/\bbyrå\b|webbyrå|nettbyrå|digitalbyrå|markedsføringsbyrå|\bagency\b|studio/.test(s)) score.agency_service += 5
+  if (/vi hjelper|vi leverer|tjenester|våre tjenester|case studies|resultater/.test(s)) score.agency_service += 3
   if (/kunder|klient|partner|prosjekt|løsning|strategi|rådgivning|konsulent/.test(s)) score.agency_service += 2
 
   if (/donasjon|donate|frivillig|volunteer|støtt oss|non-profit|veldedighet|bidra|gi en gave/.test(s)) score.nonprofit += 3

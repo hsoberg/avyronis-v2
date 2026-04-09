@@ -561,16 +561,18 @@ ${bodyText}
       return NextResponse.json({ error: 'AI returnerte et ugyldig format. Prøv igjen.' }, { status: 500 })
     }
 
-    // Compute overallScore deterministically from the 6 area scores
+    // Compute overallScore deterministically from the 5 scorecard areas + geoAnalysis
     const sc = parsedData.scorecard
+    const geo = parsedData.geoAnalysis
     const areaScores = [
       sc?.valuePropPositioning?.score,
       sc?.conversionCTA?.score,
       sc?.trustDecisionSupport?.score,
       sc?.seoSearchIntent?.score,
-      sc?.aeoGeoAiVisibility?.score,
       sc?.informationArchitectureClarity?.score,
+      geo?.citationReadiness
     ].filter((s): s is number => typeof s === 'number')
+
     if (areaScores.length === 6) {
       parsedData.overallScore = Math.round(areaScores.reduce((a, b) => a + b, 0) / 6)
     }

@@ -39,6 +39,30 @@ export async function POST(req: Request) {
       </div>
     `
 
+    const geoAnalysis = auditData.geoAnalysis ?? null
+    const geoAnalysisHtml = geoAnalysis ? `
+      <div style="background:#fffcf5; padding:20px; border-radius:8px; margin-bottom:24px; border:1px solid #ffb74d;">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+          <h3 style="margin:0;">GEO & AI-synlighet</h3>
+          <span style="background:#ffb74d; color:#000; padding:4px 12px; border-radius:12px; font-weight:700;">
+            Klarhet for AI: ${geoAnalysis.citationReadiness}%
+          </span>
+        </div>
+        <p style="margin:0 0 16px; color:#555;">${geoAnalysis.detailedGeoInsight ?? '–'}</p>
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px;">
+          ${Object.entries(geoAnalysis.princetonMethods || {}).map(([key, data]: [string, any]) => `
+            <div style="font-size:12px; padding:8px; background:#fff; border:1px solid #eee; border-radius:4px;">
+              <div style="display:flex; justify-content:space-between;">
+                <strong>${key.toUpperCase()}</strong>
+                <span style="color:#ffb74d;">${data.score}%</span>
+              </div>
+              <div style="color:#777; margin-top:4px;">${data.status}</div>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    ` : ''
+
     const top3Html = (auditData.top3Updates ?? [])
       .map((u: any, i: number) => `
         <div style="margin-bottom:16px; padding:16px; background:#f9f9f9; border-left:4px solid #1a1a1a; border-radius:4px;">
@@ -90,6 +114,8 @@ export async function POST(req: Request) {
 
           <h3>Executive Summary</h3>
           ${executiveSummaryHtml}
+
+          ${geoAnalysisHtml ? `<h3>GEO & AI-synlighet</h3>${geoAnalysisHtml}` : ''}
 
           <h3>Topp 3 prioriterte tiltak</h3>
           ${top3Html}

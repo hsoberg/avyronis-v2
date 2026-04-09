@@ -142,6 +142,34 @@ function UrlAnalyzer() {
           </div>
         )}
 
+        {/* GEO & AI Visibility Analysis */}
+        {auditData.geoAnalysis && (
+          <div style={{ marginBottom: '48px', padding: '32px', background: 'rgba(255,183,77,0.05)', border: '1px solid rgba(255,183,77,0.2)', borderRadius: '20px' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px' }}>
+              <h3 className="insight-h3" style={{ margin: 0, color: '#ffb74d' }}>GEO & AI-synlighet</h3>
+              <div style={{ background: '#ffb74d', color: '#000', padding: '4px 12px', borderRadius: '12px', fontSize: '14px', fontWeight: 700 }}>
+                Citation Readiness: {auditData.geoAnalysis.citationReadiness}%
+              </div>
+            </div>
+            
+            <p className="insight-p" style={{ fontSize: '15px', marginBottom: '24px', opacity: 0.9 }}>
+              {auditData.geoAnalysis.detailedGeoInsight}
+            </p>
+
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: '12px' }}>
+              {Object.entries(auditData.geoAnalysis.princetonMethods || {}).map(([key, data]: [string, any]) => (
+                <div key={key} style={{ padding: '12px', background: 'rgba(255,255,255,0.03)', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.05)' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '4px' }}>
+                    <span style={{ fontSize: '12px', textTransform: 'uppercase', opacity: 0.6 }}>{key}</span>
+                    <span style={{ fontSize: '12px', fontWeight: 700, color: data.score > 70 ? '#4ade80' : '#fbbf24' }}>{data.score}%</span>
+                  </div>
+                  <p style={{ margin: 0, fontSize: '13px', lineHeight: 1.4, opacity: 0.8 }}>{data.status}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
         {/* Top 3 */}
         <h3 className="insight-h3" style={{ marginTop: 0, color: 'var(--color-accent)' }}>Topp 3 prioriterte tiltak</h3>
         <p className="insight-p" style={{ fontSize: '16px' }}>Her er de tre viktigste forbedringsmulighetene AI-sjekken identifiserte:</p>

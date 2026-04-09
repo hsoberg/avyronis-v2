@@ -72,24 +72,40 @@ const faqItems = [
     content: (
       <>
         <p>
-          De fleste byråer fokuserer på design og "fine nettsider".
+          De fleste byråer leverer et design og sender en faktura. Du vet sjelden om nettsiden faktisk gir deg flere kunder.
         </p>
 
         <p>
-          Vi fokuserer på det som faktisk betyr noe:
-          <br />
-          <strong className="faq-highlight">flere kunder.</strong>
+          Vi jobber annerledes:
         </p>
 
-        <p>Alle forbedringer vi gjør er basert på:</p>
-
         <ul>
-          <li>Data</li>
-          <li>Testing</li>
-          <li>Faktisk brukeradferd</li>
+          <li>Alt vi gjør er basert på data og faktisk brukeradferd – ikke magefølelse</li>
+          <li>Vi måler konverteringer, ikke bare besøk</li>
+          <li>Vi jobber kontinuerlig med forbedringer – ikke bare én leveranse og ferdig</li>
+          <li>Ingen binding. Vi beholder kunder fordi vi leverer – ikke fordi vi låser deg inn</li>
         </ul>
 
-        <p>Ikke synsing.</p>
+        <p>
+          Kort sagt: vi behandler nettsiden din som et salgsinstrument, ikke et kunstverk.
+        </p>
+      </>
+    ),
+  },
+  {
+    id: 'faq-7',
+    title: 'Hva koster det?',
+    content: (
+      <>
+        <p>
+          Vi har faste pakker tilpasset ulike behov – fra enkeltanalyser til løpende månedlig samarbeid.
+        </p>
+        <p>
+          Prisen avhenger av hva du trenger og hvilket ambisjonsnivå du har. Vi gir deg et konkret tilbud etter gjennomgangen – ingen overraskelser.
+        </p>
+        <p>
+          Det enkleste er å starte med den gratis gjennomgangen, så ser vi hva som gir mest mening for deg.
+        </p>
       </>
     ),
   },

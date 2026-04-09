@@ -14,9 +14,102 @@ import Footer from '@/components/Footer'
 import ScrollAnimations from '@/components/ScrollAnimations'
 import CTASection from '@/components/CTASection'
 
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "ProfessionalService",
+      "@id": "https://avyronis.com/#organization",
+      "name": "Avyronis",
+      "url": "https://avyronis.com",
+      "description": "Avyronis hjelper norske bedrifter med å gjøre flere besøkende til kunder gjennom konverteringsoptimalisering (CRO), SEO og datadrevet webutvikling. Ingen binding – vi beholder kunder fordi vi leverer resultater.",
+      "areaServed": "NO",
+      "knowsAbout": ["Konverteringsoptimalisering", "CRO", "SEO", "Nettside-analyse", "Webutvikling"],
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "customer service",
+        "availableLanguage": "Norwegian"
+      }
+    },
+    {
+      "@type": "Service",
+      "name": "Konverteringsoptimalisering og SEO",
+      "provider": { "@type": "Organization", "name": "Avyronis" },
+      "description": "Vi analyserer nettsiden din og implementerer kontinuerlige forbedringer basert på data og brukeradferd for å øke antall leads og salg.",
+      "areaServed": "NO",
+      "serviceType": "Konverteringsoptimalisering"
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Hva får jeg egentlig i en gratis gjennomgang?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Du får en konkret gjennomgang av nettsiden din med tydelige forslag til hva som bør forbedres for å få flere kunder. Vi viser deg nøyaktig hva som ikke fungerer, hva som kan forbedres og hva du bør gjøre videre. Ingen generelle råd – kun det som faktisk gir effekt."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Er dette binding eller lang kontrakt?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Nei. Det er ingen binding. Du kan stoppe når som helst. Vi beholder kunder fordi vi leverer resultater – ikke fordi vi låser deg til en avtale."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Hvor raskt kan jeg forvente resultater?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Mange ser forbedringer raskt – spesielt når vi retter opp tydelige problemer på siden. Samtidig jobber vi kontinuerlig for å skape stabil vekst over tid, ikke bare kortsiktige løft."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Må jeg gjøre noe selv?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Det er helt opp til deg. Du får konkrete tiltak du kan implementere selv, eller vi kan håndtere alt for deg. De fleste velger at vi gjør jobben – men du har full fleksibilitet."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Passer dette for min bedrift?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Dette fungerer best for bedrifter som allerede har trafikk, men som ønsker flere kunder ut av den. Er du usikker, finner vi raskt ut av det i gjennomgangen."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Hva skiller dere fra andre byråer?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "De fleste byråer leverer et design og sender en faktura. Vi jobber annerledes: alt vi gjør er basert på data og faktisk brukeradferd, vi måler konverteringer ikke bare besøk, og vi jobber kontinuerlig med forbedringer. Ingen binding – vi beholder kunder fordi vi leverer resultater."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Hva koster det?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Vi har faste pakker tilpasset ulike behov – fra enkeltanalyser til løpende månedlig samarbeid. Prisen avhenger av hva du trenger og hvilket ambisjonsnivå du har. Vi gir deg et konkret tilbud etter gjennomgangen."
+          }
+        }
+      ]
+    }
+  ]
+}
+
 export default function Home() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <ScrollAnimations />
       <Nav />
 

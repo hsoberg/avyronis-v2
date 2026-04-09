@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "skills": {
+    "geo-audit": {
+      "source": "zubair-trabzada/geo-seo-claude",
+      "sourceType": "github",
+      "computedHash": "0a9c2cd9b39514a0e9993a01c2b403bb1f567bdd5ed7f01d370c68b0d38c5491"
+    },
+    "seo-geo": {
+      "source": "resciencelab/opc-skills",
+      "sourceType": "github",
+      "computedHash": "1d38520f453282af8712874c360e3e34a379827f737fb536bd45055e2d60d964"
+    },
+    "seo-local-business": {
+      "source": "jezweb/claude-skills",
+      "sourceType": "github",
+      "computedHash": "ceaaaf8c8412af1de45f160e512322e00c90f8df6789370678dcbd68064578dc"
+    }
+  }
+}

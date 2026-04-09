@@ -66,36 +66,45 @@ function detectSiteCategory(signals: string): SiteCategory {
     blog_media: 0, agency_service: 0, nonprofit: 0, info_product: 0, general: 0,
   }
 
-  if (/handlekurv|legg i kurv|add to cart|checkout|nettbutikk|shop|buy now|\bkr\s*\d|\bnok\b|fri frakt|prisgaranti/.test(s)) score.ecommerce += 3
-  if (/produkt|kategori|filter|sorter|lager|på lager|utsolgt/.test(s)) score.ecommerce += 2
+  // eCommerce: Products, cart, prices
+  if (/handlekurv|legg i kurv|add to cart|checkout|nettbutikk|shop|buy now|\bkr\s*\d|\bnok\b|fri frakt|prisgaranti/.test(s)) score.ecommerce += 4
+  if (/produkt|kategori|filter|sorter|lager|på lager|utsolgt|antall|størrelse|farge/.test(s)) score.ecommerce += 2
 
-  if (/åpningstider|opening hours|bestill bord|book a table|ring oss|call us|finn oss|find us|kart|google maps/.test(s)) score.local_business += 3
-  if (/adresse|telefon|tlf|restaurant|kafé|frisør|tannlege|lege|rørlegger|elektriker|treningssenter|gym/.test(s)) score.local_business += 2
+  // Local Business: Physical presence, contact, maps
+  if (/åpningstider|opening hours|bestill bord|book a table|ring oss|call us|finn oss|find us|kart|google maps|veibeskrivelse|get directions/.test(s)) score.local_business += 4
+  if (/adresse|telefon|tlf|restaurant|kafé|frisør|tannlege|lege|rørlegger|elektriker|treningssenter|gym|verksted|butikk|salong|klinikk|verksted|sentralt/.test(s)) score.local_business += 3
+  if (/[\d]{4}\s+[a-zæøå\s]+,?\s+norge/i.test(s)) score.local_business += 2 
 
-  if (/free trial|gratis prøve|prøv gratis|start free|sign up free|dashboard|\bapi\b|integrasjon|integration|abonnement|subscription/.test(s)) score.saas += 3
-  if (/\bsaas\b|funksjon|feature|pricing|enterprise|onboarding|workflow|automation/.test(s)) score.saas += 2
+  // SaaS: Digital product, trials, dashboard, tech ops
+  if (/free trial|gratis prøve|prøv gratis|start free|sign up free|dashboard|integrasjon|integration|abonnement|subscription|automatisering|workflow/.test(s)) score.saas += 4
+  if (/\bsaas\b|funksjon|feature|pricing|enterprise|onboarding|automation|innlogging|login|registrer/.test(s)) score.saas += 2
 
-  if (/portefølje|portfolio|mine prosjekter|mitt arbeid|case study|folio|hired|leid inn/.test(s)) score.portfolio += 3
+  // Portfolio: Showcase personal work
+  if (/portefølje|portfolio|mine prosjekter|mitt arbeid|case study|folio|hired|leid inn|prosjekter/.test(s)) score.portfolio += 4
   if (/designer|fotograf|illustratør|arkitekt|freelance|frilanser|se mitt arbeid/.test(s)) score.portfolio += 2
 
-  if (/les mer|publisert|minutter å lese|min read|nyhetsbrev|newsletter|abonner|subscribe|redaksjon/.test(s)) score.blog_media += 3
-  if (/artikkel|blogg|nyheter|innlegg|post|kategori|tags|forfatter|author/.test(s)) score.blog_media += 2
+  // Blog / Media: Articles, news, reading
+  if (/les mer|publisert|minutter å lese|min read|nyhetsbrev|newsletter|abonner|subscribe|redaksjon/.test(s)) score.blog_media += 4
+  if (/artikkel|blogg|nyheter|innlegg|post|kategori|tags|forfatter|author|opinion|debatt/.test(s)) score.blog_media += 2
 
+  // Agency / Service: B2B services, case studies, help
   if (/\bbyrå\b|webbyrå|nettbyrå|digitalbyrå|markedsføringsbyrå|\bagency\b|studio/.test(s)) score.agency_service += 5
-  if (/vi hjelper|vi leverer|tjenester|våre tjenester|case studies|resultater/.test(s)) score.agency_service += 3
-  if (/kunder|klient|partner|prosjekt|løsning|strategi|rådgivning|konsulent/.test(s)) score.agency_service += 2
+  if (/vi hjelper|vi leverer|tjenester|våre tjenester|case studies|resultater|vår kompetanse/.test(s)) score.agency_service += 3
+  if (/kunder|klient|partner|prosjekt|løsning|strategi|rådgivning|konsulent|rådgiver/.test(s)) score.agency_service += 2
 
-  if (/donasjon|donate|frivillig|volunteer|støtt oss|non-profit|veldedighet|bidra|gi en gave/.test(s)) score.nonprofit += 3
-  if (/formål|oppdrag|mission|organisasjon|members|støttespiller/.test(s)) score.nonprofit += 2
+  // Nonprofit / NGO: Missions, donations
+  if (/donasjon|donate|frivillig|volunteer|støtt oss|non-profit|veldedighet|bidra|gi en gave/.test(s)) score.nonprofit += 5
+  if (/formål|oppdrag|mission|organisasjon|members|støttespiller|forening|forbund/.test(s)) score.nonprofit += 2
 
-  if (/kurs|course|enroll|påmelding|coaching|ebook|webinar|masterclass|modul|pensum|curriculum/.test(s)) score.info_product += 3
-  if (/deltaker|student|lær|learn|leksjon|lesson|sertifikat|certificate/.test(s)) score.info_product += 2
+  // Info Product / EdTech: Learning, courses
+  if (/kurs|course|enroll|påmelding|coaching|ebook|webinar|masterclass|modul|pensum|curriculum/.test(s)) score.info_product += 4
+  if (/deltaker|student|lær|learn|leksjon|lesson|sertifikat|certificate|utdanning/.test(s)) score.info_product += 2
 
   const best = (Object.entries(score) as [SiteCategory, number][])
     .filter(([key]) => key !== 'general')
     .sort(([, a], [, b]) => b - a)[0]
 
-  return best && best[1] >= 3 ? best[0] : 'general'
+  return best && best[1] >= 4 ? best[0] : 'general'
 }
 
 function buildSystemPrompt(category: SiteCategory): string {
@@ -146,16 +155,16 @@ ANALYSER SIDEN LANGS DISSE 6 OMRÅDENE:
 
 5) AEO / GEO / AI-SYNLIGHET
 - Kan en AI-assistent enkelt forstå hva virksomheten gjør, hvem den hjelper og hvorfor den er et godt valg?
-- Finnes det tydelige, direkte svar på viktige spørsmål?
+- Finnes det tydelige, direkte svar på viktige spørsmål? (Answer-first format)
 - Er tjenestene/produktene beskrevet konkret og entydig?
+- Brukes de 9 Princeton GEO-metodene? (Siteringer, Statistikk, Sitater, Autoritær tone, Enkelhet, Tekniske termer, Ordmangfold, Flyt).
 - Er innholdet sitérbart, strukturert og skrevet med høy semantisk klarhet?
 - Finnes det tydelige entities: merkevare, tjeneste, målgruppe, sted, pris, prosess, differensiering?
-- Er FAQ-lignende innhold eller forklarende seksjoner sterke nok til å brukes av AI-systemer?
 - llms.txt: Finnes / Mangler (se LLMS.TXT-signalet i siteContext)
-- AI-crawler tilgang: Er GPTBot, ClaudeBot, PerplexityBot eksplisitt tillatt i robots.txt?
+- AI-crawler tilgang: Er GPTBot, ClaudeBot, PerplexityBot, etc. eksplisitt tillatt i robots.txt?
 - E-E-A-T: Finnes forfatter-info, team-beskrivelse, sertifiseringer eller credentials som øker troverdighet for AI-systemer?
-- Er statistikk og påstander kontekstualisert med kilde, metodikk og tidslinje — eller er de udokumenterte claims?
-- Finnes Organization/Person schema med sameAs-felter for ekstern entitetskobling?
+- Er statistikk og påstander kontekstualisert med kilde, metodikk og tidslinje?
+- Finnes Organization/Person schema med sameAs-felter for ekstern entitetskobling (Socials, Wikipedia, LinkedIn)?
 
 6) INFORMASJONSARKITEKTUR & INNHOLDSKLARHET
 - Er innholdet lett å skanne?
@@ -170,6 +179,15 @@ SCORINGMODELL (0–100 per område):
 - 50–74: Middels — flere svakheter hemmer effekt
 - 25–49: Svakt — uklarhet eller friksjon reduserer resultater betydelig
 - 0–24: Kritisk svakt — mangler fundamentale elementer
+
+VEKTING AV GEO SCORE (viktig):
+Bruk denne vektingen internt når du vurderer AEO/GEO-seksjonen:
+- AI Citability (Sitérbarhet): 25%
+- Brand Authority (Autoritet): 20%
+- Content E-E-A-T: 20%
+- Technical GEO (Crawler-tilgang, llms.txt): 15%
+- Schema & Structured Data: 10%
+- Platform Optimization: 10%
 
 VIKTIGE REGLER:
 - Ikke anta ting som ikke støttes av signalene du har mottatt.
@@ -188,6 +206,17 @@ JSON-STRUKTUR:
     "diagnosis": "2-4 setninger som oppsummerer hva som er hovedproblemet på siden.",
     "biggestLeak": "Den ene største svakheten som sannsynligvis koster mest trafikk eller konvertering.",
     "fastestWin": "Det tiltaket som sannsynligvis vil gi raskest positiv effekt."
+  },
+  "geoAnalysis": {
+    "citationReadiness": 0, // 0-100 score på hvor klar siden er for AI-sitering
+    "princetonMethods": {
+      "citations": { "score": 0, "status": "Kort vurdering" },
+      "statistics": { "score": 0, "status": "Kort vurdering" },
+      "quotations": { "score": 0, "status": "Kort vurdering" },
+      "authoritativeTone": { "score": 0, "status": "Kort vurdering" },
+      "fluency": { "score": 0, "status": "Kort vurdering" }
+    },
+    "detailedGeoInsight": "Dypere analyse av hvordan siden presterer i AI-søk (GEO)."
   },
   "top3Updates": [
     {
@@ -280,7 +309,7 @@ export async function POST(req: Request) {
     ])
 
     // Parse AI-bot tilgang fra robots.txt
-    const aiBots = ['GPTBot', 'ClaudeBot', 'PerplexityBot', 'CCBot', 'Googlebot-Extended']
+    const aiBots = ['GPTBot', 'ClaudeBot', 'PerplexityBot', 'CCBot', 'Googlebot-Extended', 'YouBot', 'BraveBot', 'Bingbot', 'ChatGPT-User']
     const robotsLines = robotsTxtRaw.toLowerCase()
     function botStatus(bot: string): string {
       const b = bot.toLowerCase()
@@ -318,6 +347,12 @@ export async function POST(req: Request) {
     const htmlLang = $('html').attr('lang') || ''
     const ogTitle = $('meta[property="og:title"]').attr('content') || ''
     const ogDesc = $('meta[property="og:description"]').attr('content') || ''
+
+    // Geo Tags
+    const geoRegion = $('meta[name="geo.region"]').attr('content') || ''
+    const geoPlacename = $('meta[name="geo.placename"]').attr('content') || ''
+    const geoPosition = $('meta[name="geo.position"]').attr('content') || ''
+    const icbm = $('meta[name="ICBM"]').attr('content') || ''
 
     // Headings
     const h1s = $('h1').map((_, el) => $(el).text().trim()).get().filter(Boolean).join(' | ')
@@ -424,7 +459,7 @@ export async function POST(req: Request) {
     const socialLinks: string[] = []
     $('a[href]').each((_, el) => {
       const href = $(el).attr('href') || ''
-      if (/linkedin\.com|twitter\.com|x\.com|facebook\.com|instagram\.com/.test(href)) {
+      if (/linkedin\.com|twitter\.com|x\.com|facebook\.com|instagram\.com|reddit\.com|youtube\.com|vimeo\.com|github\.com|wikipedia\.org/.test(href)) {
         socialLinks.push(href.replace(/^https?:\/\/(www\.)?/, '').split('/')[0] + ': ' + href)
       }
     })
@@ -437,15 +472,47 @@ export async function POST(req: Request) {
     const signals = `${pageTitle} ${metaDesc} ${h1s} ${h2s} ${primaryCtaTexts.join(' ')} ${secondaryCtaTexts.join(' ')} ${bodyText}`
     const siteCategory = detectSiteCategory(signals)
 
+    // JSON-LD (Schema.org types)
+    const schemaTypes: string[] = []
+    $('script[type="application/ld+json"]').each((_, el) => {
+      try {
+        const text = $(el).text()
+        const match = text.match(/"@type"\s*:\s*"([^"]+)"/g)
+        if (match) {
+          match.forEach(m => {
+            const t = m.split(':')[1].replace(/[",\s]/g, '')
+            if (!schemaTypes.includes(t)) schemaTypes.push(t)
+          })
+        }
+      } catch {}
+    })
+
+    // Semantic Structure (GEO Signals)
+    const tablesCount = $('table').length
+    const listsCount = $('ul, ol').length
+    const blockquotesCount = $('blockquote').length
+    const semanticStats = `Tabeller: ${tablesCount}, Lister: ${listsCount}, Sitater: ${blockquotesCount}`
+
     // 4. Bygg strukturert siteContext
-    const siteContext = `
-URL: ${parsedUrl}
-TITLE: ${pageTitle}
-META DESCRIPTION: ${metaDesc}
+    const siteContext = `URL: ${parsedUrl}
+DATE: ${new Date().toISOString().split('T')[0]}
+CATEGORY: ${siteCategory}
+TITLE: ${pageTitle || 'Ikke funnet'}
+DESCRIPTION: ${metaDesc || 'Ikke funnet'}
 CANONICAL: ${canonical || 'Ikke funnet'}
 LANG: ${htmlLang || 'Ikke funnet'}
+
 OG TITLE: ${ogTitle || 'Ikke funnet'}
 OG DESCRIPTION: ${ogDesc || 'Ikke funnet'}
+
+GEO TAGS:
+Region: ${geoRegion || 'Ikke funnet'}
+Placename: ${geoPlacename || 'Ikke funnet'}
+Position: ${geoPosition || 'Ikke funnet'}
+ICBM: ${icbm || 'Ikke funnet'}
+
+SCHEMA TYPES: ${schemaTypes.length > 0 ? schemaTypes.join(', ') : 'Ingen funnet'}
+SEMANTIC STRUCTURE: ${semanticStats}
 
 H1:
 ${h1s || 'Ingen H1 funnet'}

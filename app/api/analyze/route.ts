@@ -173,8 +173,6 @@ VIKTIGE REGLER:
 - Vær konkret. Unngå vage formuleringer som "kan forbedres".
 - Hver anbefaling skal være forretningsrelevant.
 - Ikke skriv som en hyggelig konsulent. Skriv som en skarp strateg som peker ut hva som faktisk koster dem vekst.
-- overallScore skal være et enkelt heltall (gjennomsnittet av de 6 scorecard-scorene, avrundet).
-
 RETURNER KUN GYLDIG JSON. Ingen markdown. Ingen ekstra tekst. Ingen kodeblokker.
 
 JSON-STRUKTUR:
@@ -202,7 +200,6 @@ JSON-STRUKTUR:
     "aeoGeoAiVisibility": { "score": 0, "analysis": "Kort analyse." },
     "informationArchitectureClarity": { "score": 0, "analysis": "Kort analyse." }
   },
-  "overallScore": 0,
   "priorityActions": [
     {
       "priority": 1,
@@ -301,12 +298,14 @@ export async function POST(req: Request) {
       if (text && text.length > 1 && text.length < 80) primaryCtaTexts.push(text)
     })
 
-    $('a.btn, a.button, .btn, .button, [class*="cta"], [class*="call-to-action"]').each((_, el) => {
-      const text = $(el).text().trim()
-      if (text && text.length > 1 && text.length < 80 && !primaryCtaTexts.includes(text)) {
-        secondaryCtaTexts.push(text)
-      }
-    })
+    $('a.btn, a.button, .btn, .button, [class*="cta"], [class*="call-to-action"]')
+      .not('nav *, [role="navigation"] *, .nav *, .mobile-menu *')
+      .each((_, el) => {
+        const text = $(el).text().trim()
+        if (text && text.length > 1 && text.length < 80 && !primaryCtaTexts.includes(text)) {
+          secondaryCtaTexts.push(text)
+        }
+      })
 
     // Trust signals
     const trustTexts: string[] = []
@@ -404,6 +403,7 @@ ${bodyText}
     const openai = new OpenAI({ apiKey })
     const completion = await openai.chat.completions.create({
       model: 'gpt-4o-mini',
+      temperature: 0,
       messages: [
         { role: 'system', content: buildSystemPrompt(siteCategory) },
         { role: 'user', content: siteContext }
@@ -419,6 +419,20 @@ ${bodyText}
     } catch (parseError) {
       console.error("Failed to parse OpenAI output:", rawJson)
       return NextResponse.json({ error: 'AI returnerte et ugyldig format. Prøv igjen.' }, { status: 500 })
+    }
+
+    // Compute overallScore deterministically from the 6 area scores
+    const sc = parsedData.scorecard
+    const areaScores = [
+      sc?.valuePropPositioning?.score,
+      sc?.conversionCTA?.score,
+      sc?.trustDecisionSupport?.score,
+      sc?.seoSearchIntent?.score,
+      sc?.aeoGeoAiVisibility?.score,
+      sc?.informationArchitectureClarity?.score,
+    ].filter((s): s is number => typeof s === 'number')
+    if (areaScores.length === 6) {
+      parsedData.overallScore = Math.round(areaScores.reduce((a, b) => a + b, 0) / 6)
     }
 
     return NextResponse.json({ success: true, data: parsedData })

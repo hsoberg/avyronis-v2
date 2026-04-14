@@ -230,7 +230,7 @@ function UrlAnalyzer() {
             transition: 'all 0.2s ease'
           }}
         >
-          {status === "loading" ? "..." : "Analyser"}
+          Analyser
         </button>
       </form>
       <div style={{ display: 'flex', justifyContent: 'center', gap: '20px', marginTop: '24px', opacity: 0.5 }}>

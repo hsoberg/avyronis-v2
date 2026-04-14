@@ -24,10 +24,10 @@ export default function ProofPage() {
               CASE / ARBEIDER
             </p>
             <h1 className="hero-sub__title" style={{ fontSize: 'clamp(40px, 8vw, 64px)', fontWeight: 500, color: 'var(--color-white)', lineHeight: 1.1, marginBottom: '32px' }}>
-              Dette skjer når nettsider faktisk fungerer<span style={{ color: 'var(--color-accent)' }}>.</span>
+              Bevis på at struktur selger bedre enn design alene<span style={{ color: 'var(--color-accent)' }}>.</span>
             </h1>
             <p className="hero-sub__body" style={{ fontSize: '20px', color: 'var(--color-muted-70)', maxWidth: '600px', margin: '0 auto', lineHeight: 1.5 }}>
-              Her er eksempler på hvordan små og mellomstore bedrifter kan få flere kunder med bedre struktur, tydeligere budskap og sterkere CTA-er.
+              De fleste nettsider er som brosjyrer – de ser pene ut, men gjør ikke jobben sin. Her er bevis på hva som skjer når vi bygger for konvertering.
             </p>
           </div>
         </section>
@@ -40,7 +40,7 @@ export default function ProofPage() {
             <article className="proof-card fade-up">
               <div className="proof-card__image-container">
                 <Image 
-                  src="https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=1400&q=80&auto=format&fit=crop" 
+                  src="/cases/aktiv-helse-lifestyle.png" 
                   alt="Aktiv Helse"
                   fill
                   style={{ objectFit: 'cover' }}
@@ -48,17 +48,17 @@ export default function ProofPage() {
               </div>
               <div className="proof-card__content">
                 <span className="proof-card__label">Helse / fysioterapi</span>
-                <div className="proof-card__metric">+68% flere henvendelser</div>
+                <div className="proof-card__metric">+68% bookinger</div>
                 <h3 className="proof-card__title">Aktiv Helse</h3>
                 <p className="proof-card__text" style={{ marginBottom: '24px' }}>
-                  Vi fjernet friksjon i booking, tydeliggjorde behandlingstilbudet og gjorde det enklere å ta kontakt. Resultatet var flere henvendelser fra samme trafikk.
+                  Den gamle siden fungerte kun som en oppslagstavle. Ved å innføre en visuell «Hvor har du vondt?»-funksjon og løfte frem tillitssignaler i første skjermbilde, reduserte vi friksjonen mellom smerte og booking drastisk.
                 </p>
                 
                 <ul className="proof-card__bullets" style={{ marginBottom: '16px' }}>
-                  <li>Klarere budskap</li>
-                  <li>Tydeligere CTA-er</li>
-                  <li>Forenklet bookingflyt</li>
-                  <li>Bedre mobilopplevelse</li>
+                  <li>Interaktiv "Problem-velger"</li>
+                  <li>Sømløs 3-stegs kundereise</li>
+                  <li>Trust-signaler i front (4.9/5)</li>
+                  <li>Optimalisert bookings-flyt</li>
                 </ul>
                 <p className="proof-card__note">Basert på analyse av faktisk brukeradferd</p>
                 
@@ -80,17 +80,17 @@ export default function ProofPage() {
               </div>
               <div className="proof-card__content">
                 <span className="proof-card__label">Håndverker / rørlegger</span>
-                <div className="proof-card__metric">2.1x flere kundehenvendelser</div>
+                <div className="proof-card__metric">Solid kundestrøm</div>
                 <h3 className="proof-card__title">Spyle & Rørleggervakta</h3>
                 <p className="proof-card__text" style={{ marginBottom: '24px' }}>
-                  Vi gjorde siden mer direkte, bygget rundt akutte behov og forenklet kontaktpunktene. Det førte til betydelig flere kundehenvendelser.
+                  Når røret sprekker, har man ikke tid til å lese om bedriftens historie. Vi bygget en strategisk nettside fra bunnen som spisset innholdet mot akutte behov og gjorde "Ring nå"-knappen til sidens eneste logiske steg.
                 </p>
                 
                 <ul className="proof-card__bullets" style={{ marginBottom: '16px' }}>
-                  <li>Bedre struktur på innhold</li>
-                  <li>Tydeligere tjenester</li>
-                  <li>Sterkere CTA-er</li>
-                  <li>Optimalisert mobilopplevelse</li>
+                  <li>Logisk innholdsstruktur</li>
+                  <li>Krystallklare tjenester</li>
+                  <li>Friksjonsfri kontakt</li>
+                  <li>Sømløs mobilopplevelse</li>
                 </ul>
                 <p className="proof-card__note">Basert på analyse av faktisk brukeradferd</p>
                 
@@ -104,25 +104,25 @@ export default function ProofPage() {
             <article className="proof-card fade-up">
               <div className="proof-card__image-container">
                 <Image 
-                  src="https://images.unsplash.com/photo-1524758631624-e2822e304c36?w=900&q=80&auto=format&fit=crop" 
+                  src="/cases/kaffe1-lifestyle.png" 
                   alt="Kaffe1 AS"
                   fill
                   style={{ objectFit: 'cover' }}
                 />
               </div>
               <div className="proof-card__content">
-                <span className="proof-card__label">Kafé / lokal bedrift</span>
-                <div className="proof-card__metric">+40–60% flere henvendelser</div>
+                <span className="proof-card__label">B2B / Kaffeløsninger</span>
+                <div className="proof-card__metric">40–60% vekst</div>
                 <h3 className="proof-card__title">Kaffe1 AS</h3>
                 <p className="proof-card__text" style={{ marginBottom: '24px' }}>
-                  Vi tydeliggjorde tilbudet, gjorde meny og bestilling mer tilgjengelig, og forbedret strukturen – slik at flere tok kontakt og bestilte.
+                  Den gamle siden var en passiv produktkatalog. Vi reposisjonerte Kaffe1 som en premium B2B-partner ved å selge selve opplevelsen – med skreddersydde løsninger for kontor og lager, og "få gratis forslag"-magneter som knuser friksjon.
                 </p>
                 
                 <ul className="proof-card__bullets" style={{ marginBottom: '16px' }}>
-                  <li>Tydeligere presentasjon av tilbud</li>
-                  <li>Enklere vei til bestilling</li>
-                  <li>Bedre struktur og flyt</li>
-                  <li>Optimalisert for mobilbruk</li>
+                  <li>Verdibasert B2B-posisjonering</li>
+                  <li>Skreddersydde kundereiser</li>
+                  <li>Fokus på trygg drift & service</li>
+                  <li>Høy-konverterende leadsmagnet</li>
                 </ul>
                 <p className="proof-card__note">Basert på analyse av faktisk brukeradferd</p>
                 
@@ -147,13 +147,13 @@ export default function ProofPage() {
             </p>
 
             <ul className="connecting-section__list">
-              <li>Tydelig budskap – du forstår hva de tilbyr på sekunder</li>
-              <li>Enkelt å ta kontakt – ingen friksjon</li>
-              <li>Fokus på handling – ikke bare informasjon</li>
+              <li>Budskap over dekor – brukeren forstår verdien din på under 3 sekunder</li>
+              <li>Null friksjon – vi fjerner alle unødvendige steg mellom nysgjerrighet og handel</li>
+              <li>Resultatfokus – siden er bygget for å generere leads, ikke bare for å se pen ut</li>
             </ul>
 
             <p style={{ marginTop: '32px' }}>Det er dette de fleste mangler.</p>
-            <p style={{ color: 'var(--color-white)', fontWeight: 500 }}>Og det er dette vi fikser.</p>
+            <p style={{ color: 'var(--color-white)', fontWeight: 500 }}>Og det er slik vi bygger.</p>
           </div>
         </section>
 
@@ -161,9 +161,9 @@ export default function ProofPage() {
         <section className="cta-section" id="contact" aria-label="Kontakt og konvertering">
           <div className="cta-section__inner fade-up">
             <p className="cta-section__pre-headline">KLAR FOR NESTE STEG?</p>
-            <h2 className="cta-section__headline">La oss finne ut hva som stopper deg fra å få flere kunder</h2>
+            <h2 className="cta-section__headline">Er din nettside bare en utgift – eller en salgsmaskin?</h2>
             <p className="cta-section__support">
-              Du får en konkret gjennomgang av nettsiden din – med tydelige tiltak du kan implementere med en gang.
+              Jeg går gjennom siden din live og peker ut akkurat hvor du taper penger i dag. Du får en konkret plan du kan bruke med en gang.
             </p>
 
             <ul className="cta-section__bullets" style={{ justifyContent: 'center' }}>

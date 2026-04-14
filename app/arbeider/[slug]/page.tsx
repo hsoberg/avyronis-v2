@@ -27,10 +27,15 @@ export default function CaseStudyPage({ params }: { params: { slug: string } }) 
         <section className="cd-section cd-hero fade-up">
           <span className="cd-hero__label">CASE</span>
           <h1 className="cd-hero__title">
-            Slik økte vi konverteringer for {caseData.title} med <span style={{ color: 'var(--color-accent)' }}>{caseData.resultMetric}</span>
+            {caseData.isNewSite 
+              ? <>Slik bygget vi en kundemaskin for {caseData.title}</>
+              : <>Slik økte vi konverteringer for {caseData.title} med <span style={{ color: 'var(--color-accent)' }}>{caseData.resultMetric}</span></>
+            }
           </h1>
           <p className="cd-hero__sub">
-            Vi forbedret struktur, budskap og brukeropplevelse – slik at flere faktisk tok kontakt.
+            {caseData.isNewSite 
+              ? 'Vi bygget og lanserte en komplett digital profil optimalisert for handling og konvertering.' 
+              : 'Vi transformerte en passiv informasjonsside til en aktiv kundemaskin drevet av psykologi og UX.'}
           </p>
 
           <div className="cd-meta">
@@ -44,7 +49,7 @@ export default function CaseStudyPage({ params }: { params: { slug: string } }) 
             </div>
             <div className="cd-meta__item">
               <span className="cd-meta__label">Resultat</span>
-              <span className="cd-meta__val" style={{ color: 'var(--color-accent)' }}>{caseData.resultMetric} henvendelser</span>
+              <span className="cd-meta__val" style={{ color: 'var(--color-accent)' }}>{caseData.resultMetric} {caseData.resultLabel}</span>
             </div>
           </div>
 
@@ -56,15 +61,49 @@ export default function CaseStudyPage({ params }: { params: { slug: string } }) 
           </div>
         </section>
 
-        {/* 1.5 HERO SHOWCASE IMAGE (NEW) */}
-        <div className="cd-full-image fade-up">
-          <Image 
-            src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1600&q=80&auto=format&fit=crop" 
-            alt="Visuell presentasjon av prosjektet"
-            fill
-            style={{ objectFit: 'cover' }}
-            priority
-          />
+        {/* 1.5 HERO SHOWCASE IMAGE (NEW FULL WIDTH OR DUAL DEVICE MOCKUP) */}
+        <div className="cd-full-image fade-up" style={{ padding: '60px 24px', backgroundColor: 'transparent', overflow: 'visible' }}>
+          {caseData.fullWidthImage ? (
+            <div className="container" style={{ maxWidth: '1200px', margin: '0 auto' }}>
+              <div style={{ position: 'relative', borderRadius: '24px', overflow: 'hidden', boxShadow: '0 40px 100px rgba(0,0,0,0.5)', border: '1px solid rgba(255,255,255,0.1)' }}>
+                <Image 
+                  src={caseData.fullWidthImage} 
+                  alt={caseData.title}
+                  width={1400}
+                  height={800}
+                  style={{ width: '100%', height: 'auto', display: 'block' }}
+                  priority
+                />
+              </div>
+            </div>
+          ) : (
+            <div className="mockup-showcase">
+              <div className="mockup-macbook">
+                <div className="mockup-macbook__notch"></div>
+                <div className="mockup-macbook__screen">
+                  <Image 
+                    src={caseData.desktopImage || (caseData.liveUrl ? `https://s.wordpress.com/mshots/v1/https://${caseData.liveUrl}?w=1200` : "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1600&q=80&auto=format&fit=crop")} 
+                    alt="Desktop visning"
+                    fill
+                    priority
+                    unoptimized={!!caseData.liveUrl && !caseData.desktopImage}
+                  />
+                </div>
+              </div>
+              
+              <div className="mockup-phone">
+                <div className="mockup-phone__notch"></div>
+                <div className="mockup-phone__screen">
+                  <Image 
+                    src={caseData.mobileImage || (caseData.liveUrl ? `https://s.wordpress.com/mshots/v1/https://${caseData.liveUrl}?v=1&w=480` : "https://images.unsplash.com/photo-1510557880182-3d4d3cba35a5?w=400&q=80&auto=format&fit=crop")} 
+                    alt="Mobil visning"
+                    fill
+                    unoptimized={!!caseData.liveUrl && !caseData.mobileImage}
+                  />
+                </div>
+              </div>
+            </div>
+          )}
         </div>
 
         {/* 2. RESULTAT */}
@@ -73,57 +112,96 @@ export default function CaseStudyPage({ params }: { params: { slug: string } }) 
           <div className="cd-result__label">{caseData.resultLabel}</div>
 
           <div className="cd-result__metrics">
-            <span className="cd-result__metric-item">Lavere bounce rate</span>
-            <span className="cd-result__metric-item">Lengre tid på siden</span>
-            <span className="cd-result__metric-item">Flere klikk på CTA</span>
+            <span className="cd-result__metric-item">{caseData.isNewSite ? 'Høyt engasjement' : 'Lavere bounce rate'}</span>
+            <span className="cd-result__metric-item">{caseData.isNewSite ? 'Fokusert navigasjon' : 'Lengre tid på siden'}</span>
+            <span className="cd-result__metric-item">{caseData.isNewSite ? 'Umiddelbar kontakt' : 'Flere klikk på CTA'}</span>
           </div>
 
           <p className="cd-result__exp">
-            Resultatet kom ikke fra mer trafikk – men fra en nettside som faktisk fungerer.
+            {caseData.isNewSite 
+              ? 'Resultatet kom ikke fra et stort markedsføringsbudsjett – men fra et skreddersydd fundament.' 
+              : 'Resultatet kom ikke fra mer trafikk – men fra en nettside som faktisk fungerer.'}
           </p>
         </section>
 
         {/* 3. UTGANGSPUNKT (EDITORIAL) */}
         <section className="cd-editorial fade-up">
           <div className="cd-editorial__nav">
-            <h2 className="cd-editorial__title">Problemet</h2>
+            <h2 className="cd-editorial__title">{caseData.isNewSite ? 'Bakgrunnen' : 'Problemet'}</h2>
           </div>
           <div className="cd-editorial__content">
-            <p>Nettsiden fikk trafikk – men konverterte dårlig.</p>
+            <p>
+              {caseData.isNewSite 
+                ? 'Målet var å skape en digital tilstedeværelse som umiddelbart skaffet nye kunder.' 
+                : 'Nettsiden fikk trafikk – men konverterte dårlig.'}
+            </p>
             <p style={{ marginTop: '24px' }}>Besøkende:</p>
             <ul className="cd-list">
-              <li>forsto ikke tydelig hva de fikk</li>
-              <li>visste ikke hva de skulle gjøre videre</li>
-              <li>falt fra før de tok kontakt</li>
+              {caseData.isNewSite ? (
+                <>
+                  <li>Helt ny aktør trenger trygg posisjonering</li>
+                  <li>Kunder har ofte kritiske, akutte behov</li>
+                  <li>Rask kontakt fra mobil er avgjørende</li>
+                </>
+              ) : (
+                <>
+                  <li>forsto ikke tydelig hva de fikk</li>
+                  <li>visste ikke hva de skulle gjøre videre</li>
+                  <li>falt fra før de tok kontakt</li>
+                </>
+              )}
             </ul>
-            <p style={{ marginTop: '24px' }}>Dette er typisk for de fleste nettsider.</p>
+            <p style={{ marginTop: '24px' }}>{caseData.isNewSite ? 'Krav til nettsiden:' : 'Dette er typisk for de fleste nettsider.'}</p>
           </div>
         </section>
 
-        {/* VISUAL BREAKOUT (NEW) */}
-        <div className="cd-full-image fade-up">
-          <Image 
-            src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1600&q=80&auto=format&fit=crop" 
-            alt="Analyse av nettsiden"
-            fill
-            style={{ objectFit: 'cover' }}
-          />
-        </div>
+        {/* VISUAL BREAKOUT (NEW MACBOOK MOCKUP) - ONLY IF NO FULL WIDTH IMAGE */}
+        {!caseData.fullWidthImage && (
+          <div className="cd-full-image fade-up" style={{ padding: '80px 24px', backgroundColor: 'var(--color-bg-alt)' }}>
+            <div className="mockup-macbook">
+              <div className="mockup-macbook__notch"></div>
+              <div className="mockup-macbook__screen">
+                <Image 
+                  src={caseData.desktopImage || (caseData.liveUrl ? `https://s.wordpress.com/mshots/v1/https://${caseData.liveUrl}?w=1200` : "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1600&q=80&auto=format&fit=crop")} 
+                  alt="Detaljert design"
+                  fill
+                  unoptimized={!!caseData.liveUrl && !caseData.desktopImage}
+                />
+              </div>
+            </div>
+          </div>
+        )}
 
         {/* 4. ANALYSE (EDITORIAL) */}
         <section className="cd-editorial fade-up">
           <div className="cd-editorial__nav">
-            <h2 className="cd-editorial__title">Hva vi oppdaget</h2>
+            <h2 className="cd-editorial__title">{caseData.isNewSite ? 'Strategiske valg' : 'Hva vi oppdaget'}</h2>
           </div>
           <div className="cd-editorial__content">
-            <p>Vi analyserte hvordan brukere faktisk oppførte seg på siden. Det viste seg at:</p>
+            <p>
+              {caseData.isNewSite 
+                ? 'Vi analyserte bransjen og målgruppen for å bygge en side som traff markedet umiddelbart:' 
+                : 'Vi analyserte hvordan brukere faktisk oppførte seg på siden. Det viste seg at:'}
+            </p>
             <ul className="cd-list">
-              <li>Viktig informasjon var skjult</li>
-              <li>CTA-er var svake eller uklare</li>
-              <li>Strukturen gjorde det vanskelig å ta neste steg</li>
+              {caseData.isNewSite ? (
+                <>
+                  <li>Fokus på umiddelbar verdi og tillit</li>
+                  <li>Eliminering av alle unødvendige steg</li>
+                  <li>Informasjonsarkitektur bygget for fart og handling</li>
+                </>
+              ) : (
+                <>
+                  <li>Viktig informasjon var skjult</li>
+                  <li>CTA-er var svake eller uklare</li>
+                  <li>Strukturen gjorde det vanskelig å ta neste steg</li>
+                </>
+              )}
             </ul>
-            <p style={{ marginTop: '32px' }}>Problemet var ikke trafikken.</p>
-            <p style={{ color: 'var(--color-white)', fontWeight: 500, fontSize: '24px', marginTop: '8px' }}>Det var hvordan siden fungerte.</p>
+            <p style={{ marginTop: '32px' }}>{caseData.isNewSite ? 'Suksessen lå i fundamentet.' : 'Problemet var ikke trafikken.'}</p>
+            <p style={{ color: 'var(--color-white)', fontWeight: 500, fontSize: '24px', marginTop: '8px' }}>
+              {caseData.isNewSite ? 'En side skreddersydd for salg.' : 'Det var hvordan siden fungerte.'}
+            </p>
           </div>
         </section>
 
@@ -135,7 +213,7 @@ export default function CaseStudyPage({ params }: { params: { slug: string } }) 
           <div className="cd-editorial__content">
             <div className="cd-grid-blocks" style={{ marginTop: 0 }}>
               <div className="cd-block">
-                <h3>Tydeligere budskap</h3>
+                <h3>{caseData.isNewSite ? 'Sylskarp posisjonering' : 'Tydeligere budskap'}</h3>
                 <ul>
                   <li>Hva de tilbyr ble klart på sekunder</li>
                   <li>Fjernet unødvendig tekst</li>
@@ -143,7 +221,7 @@ export default function CaseStudyPage({ params }: { params: { slug: string } }) 
               </div>
               
               <div className="cd-block">
-                <h3>Bedre struktur</h3>
+                <h3>{caseData.isNewSite ? 'Konverteringsdrevet struktur' : 'Bedre struktur'}</h3>
                 <ul>
                   <li>Guidet bruker gjennom siden</li>
                   <li>Fokus på handling, ikke informasjon</li>
@@ -151,7 +229,7 @@ export default function CaseStudyPage({ params }: { params: { slug: string } }) 
               </div>
               
               <div className="cd-block">
-                <h3>Sterkere CTA-er</h3>
+                <h3>{caseData.isNewSite ? 'Sømløs vei til kontakt' : 'Sterkere CTA-er'}</h3>
                 <ul>
                   <li>Klare neste steg</li>
                   <li>Mindre friksjon</li>
@@ -159,7 +237,7 @@ export default function CaseStudyPage({ params }: { params: { slug: string } }) 
               </div>
               
               <div className="cd-block">
-                <h3>Optimalisert for mobil</h3>
+                <h3>{caseData.isNewSite ? 'Mobil-først opplevelse' : 'Optimalisert for mobil'}</h3>
                 <ul>
                   <li>Enklere å kontakte fra mobil</li>
                   <li>Raskere opplevelse</li>
@@ -171,22 +249,42 @@ export default function CaseStudyPage({ params }: { params: { slug: string } }) 
 
         {/* 6. FØR VS ETTER (CARDS) */}
         <section className="cd-split-wrapper fade-up">
-          <h2>Før og etter endringene</h2>
+          <h2>{caseData.isNewSite ? 'Strategi og utførelse' : 'Før og etter endringene'}</h2>
           <div className="cd-split">
-            <div className="cd-split__col cd-split__col--before">
-              <h3>Før lansering</h3>
+            <div className={`cd-split__col ${caseData.isNewSite ? '' : 'cd-split__col--before'}`}>
+              <h3>{caseData.isNewSite ? 'Behov' : 'Før lansering'}</h3>
               <ul>
-                <li>Utydelig budskap</li>
-                <li>Lav respons og få skjemaer</li>
-                <li>Vanskelig å navigere i tjenester</li>
+                {caseData.isNewSite ? (
+                  <>
+                    <li>Manglet en digital plattform</li>
+                    <li>Måtte fange opp akutte kunder direkte</li>
+                    <li>Trengte en leadsmotor</li>
+                  </>
+                ) : (
+                  <>
+                    <li>Utydelig budskap</li>
+                    <li>Lav respons og få skjemaer</li>
+                    <li>Vanskelig å navigere i tjenester</li>
+                  </>
+                )}
               </ul>
             </div>
-            <div className="cd-split__col cd-split__col--after">
-              <h3>Etter optimalisering</h3>
+            <div className={`cd-split__col ${caseData.isNewSite ? '' : 'cd-split__col--after'}`}>
+              <h3>{caseData.isNewSite ? 'Løsning' : 'Etter lansering'}</h3>
               <ul>
-                <li>Klart hva de tilbyr umiddelbart</li>
-                <li>Betydelig flere henvendelser hver måned</li>
-                <li>Sømløs vei til kontakt</li>
+                {caseData.isNewSite ? (
+                  <>
+                    <li>Lanserte med et sylskarpt budskap</li>
+                    <li>Konverterer fra dag én</li>
+                    <li>Problemfri kontakt for kundene</li>
+                  </>
+                ) : (
+                  <>
+                    <li>Klart hva de tilbyr umiddelbart</li>
+                    <li>Betydelig flere henvendelser hver måned</li>
+                    <li>Sømløs vei til kontakt</li>
+                  </>
+                )}
               </ul>
             </div>
           </div>
@@ -199,10 +297,14 @@ export default function CaseStudyPage({ params }: { params: { slug: string } }) 
           </div>
           <div className="cd-editorial__content">
             <p style={{ fontSize: '24px', color: 'var(--color-white)', marginBottom: '24px' }}>
-              Etter endringene begynte flere å ta kontakt – uten å øke trafikken.
+              {caseData.isNewSite 
+                ? 'Etter lansering begynte telefonene å ringe umiddelbart.' 
+                : 'Etter endringene begynte flere å ta kontakt – uten å øke trafikken.'}
             </p>
             <p>
-              Små, men strategiske justeringer i struktur og budskap var alt som skulle til for å generere massiv effekt for bunnlinja. 
+              {caseData.isNewSite 
+                ? 'En gjennomtenkt struktur og et sylskarp budskap fra dag én sørget for massiv effekt for bunnlinja.' 
+                : 'Små, men strategiske justeringer i struktur og budskap var alt som skulle til for å generere massiv effekt for bunnlinja.'}
             </p>
             <p style={{ fontStyle: 'italic', marginTop: '32px' }}>
               "Dette er forskjellen på en nettside som bare eksisterer – og en som faktisk er en ansatt som jobber for deg."

@@ -11,243 +11,6 @@ import { insights } from "@/data/insights"
 
 const filters = ["Alle", "SEO", "Konvertering", "Strategi", "Markedsføring"]
 
-function UrlAnalyzer() {
-  const [url, setUrl] = useState("")
-  const [status, setStatus] = useState<"idle" | "loading" | "analyzed" | "error" | "submitted">("idle")
-  const [errorMessage, setErrorMessage] = useState("")
-  const [auditData, setAuditData] = useState<any>(null)
-  const [leadEmail, setLeadEmail] = useState("")
-  const [leadSending, setLeadSending] = useState(false)
-
-  const handleLeadSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    if (!leadEmail) return
-    setLeadSending(true)
-    try {
-      await fetch("/api/send-lead", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email: leadEmail, url, auditData })
-      })
-    } catch {}
-    setLeadSending(false)
-    setStatus("submitted")
-  }
-
-  const handleAnalyze = async (e: React.FormEvent) => {
-    e.preventDefault()
-    if (!url) return
-    setStatus("loading")
-    setErrorMessage("")
-    
-    try {
-      const res = await fetch("/api/analyze", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ url })
-      })
-
-      const data = await res.json()
-
-      if (!res.ok) {
-        throw new Error(data.error || "Noe gikk galt på serveren.")
-      }
-
-      setAuditData(data.data)
-      setStatus("analyzed")
-      
-    } catch (err: any) {
-      console.error(err)
-      setStatus("error")
-      setErrorMessage(err.message)
-    }
-  }
-
-  if (status === "submitted") {
-    return (
-      <div className="url-analyzer__lead-form fade-up" style={{ textAlign: 'center' }}>
-        <h3 className="insight-h3" style={{ marginTop: 0 }}>Takk!</h3>
-        <p className="url-analyzer__lead-text" style={{ maxWidth: '400px', margin: '0 auto 24px' }}>
-          Vi har mottatt forespørselen din og tar kontakt på <strong>{leadEmail}</strong> med din fulle rapport.
-        </p>
-        <button className="url-analyzer__btn" onClick={() => { setStatus("idle"); setUrl(""); setLeadEmail("") }}>
-          Analyser en ny nettside
-        </button>
-      </div>
-    )
-  }
-
-  if (status === "loading") {
-    return (
-      <div className="url-analyzer__loading fade-up">
-        <div className="url-analyzer__loader"></div>
-        <p className="url-analyzer__lead-text">
-          Identifiserer nettside-type og analyserer <strong>{url}</strong>...<br/>
-          <span style={{ fontSize: '14px', color: 'var(--color-muted)' }}>Dette tar gjerne 15-20 sekunder med OpenAI.</span>
-        </p>
-      </div>
-    )
-  }
-
-  if (status === "error") {
-    return (
-      <div className="url-analyzer__lead-form fade-up">
-        <h3 className="insight-h3" style={{ color: '#ff4444', marginTop: 0 }}>Analyse feilet</h3>
-        <p className="url-analyzer__lead-text" style={{ maxWidth: '400px', margin: '0 auto 24px' }}>
-          {errorMessage}
-        </p>
-        <button className="url-analyzer__btn" onClick={() => setStatus("idle")}>
-          Prøv en annen URL
-        </button>
-      </div>
-    )
-  }
-
-  if (status === "analyzed" && auditData) {
-    const summary = auditData.executiveSummary ?? {}
-
-    return (
-      <div className="url-analyzer-report fade-up" style={{ textAlign: 'left', background: 'var(--color-bg-card)', padding: '40px', borderRadius: '24px', border: '1px solid var(--color-border-light)' }}>
-
-        {/* Header */}
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '40px', borderBottom: '1px solid var(--color-border-light)', paddingBottom: '24px' }}>
-          <div>
-            <h2 className="insight-h2" style={{ margin: '0 0 8px' }}>Audit Report: {url}</h2>
-            {auditData.siteCategoryLabel && (
-              <span style={{ display: 'inline-block', background: 'var(--color-surface)', border: '1px solid var(--color-border-light)', color: 'var(--color-muted)', padding: '4px 12px', borderRadius: '20px', fontSize: '13px' }}>
-                Analysert som: {auditData.siteCategoryLabel}
-              </span>
-            )}
-          </div>
-          <div className="ia-score" style={{ background: 'var(--color-accent)', color: 'var(--color-black)', padding: '8px 16px', borderRadius: '20px', fontWeight: 700, whiteSpace: 'nowrap' }}>
-            Score: {auditData.overallScore ?? '–'} / 100
-          </div>
-        </div>
-
-        {/* Executive Summary */}
-        {summary.diagnosis && (
-          <div style={{ marginBottom: '48px' }}>
-            <h3 className="insight-h3" style={{ marginTop: 0, color: 'var(--color-accent)' }}>Diagnose</h3>
-            <p className="insight-p" style={{ fontSize: '16px', marginBottom: '24px' }}>{summary.diagnosis}</p>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
-              <div style={{ padding: '20px', background: 'var(--color-surface)', border: '1px solid rgba(255,68,68,0.3)', borderRadius: '12px' }}>
-                <div style={{ fontSize: '12px', fontWeight: 700, color: '#ff6666', marginBottom: '8px', letterSpacing: '0.05em' }}>STØRSTE LEKKASJE</div>
-                <p style={{ margin: 0, color: 'var(--color-white)', fontSize: '15px', lineHeight: 1.5 }}>{summary.biggestLeak}</p>
-              </div>
-              <div style={{ padding: '20px', background: 'var(--color-surface)', border: '1px solid var(--color-border-light)', borderRadius: '12px', filter: 'blur(3px)', opacity: 0.5, userSelect: 'none' }}>
-                <div style={{ fontSize: '12px', fontWeight: 700, color: 'var(--color-accent)', marginBottom: '8px', letterSpacing: '0.05em' }}>RASKESTE GEVINST</div>
-                <p style={{ margin: 0, color: 'var(--color-white)', fontSize: '15px', lineHeight: 1.5 }}>Lås opp for å se det tiltaket som gir raskest effekt →</p>
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* GEO & AI Visibility Analysis */}
-        {auditData.geoAnalysis && (
-          <div style={{ marginBottom: '48px', padding: '32px', background: 'rgba(255,183,77,0.05)', border: '1px solid rgba(255,183,77,0.2)', borderRadius: '20px' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px' }}>
-              <h3 className="insight-h3" style={{ margin: 0, color: '#ffb74d' }}>GEO & AI-synlighet</h3>
-              <div style={{ background: '#ffb74d', color: '#000', padding: '4px 12px', borderRadius: '12px', fontSize: '14px', fontWeight: 700 }}>
-                Citation Readiness: {auditData.geoAnalysis.citationReadiness}%
-              </div>
-            </div>
-            
-            <p className="insight-p" style={{ fontSize: '15px', marginBottom: '24px', opacity: 0.9 }}>
-              {auditData.geoAnalysis.detailedGeoInsight}
-            </p>
-
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: '12px', filter: 'blur(5px)', opacity: 0.4, userSelect: 'none' }}>
-              {Object.entries(auditData.geoAnalysis.princetonMethods || {}).map(([key, data]: [string, any]) => (
-                <div key={key} style={{ padding: '12px', background: 'rgba(255,255,255,0.03)', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.05)' }}>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '4px' }}>
-                    <span style={{ fontSize: '12px', textTransform: 'uppercase', opacity: 0.6 }}>{key}</span>
-                    <span style={{ fontSize: '12px', fontWeight: 700, color: data.score > 70 ? '#4ade80' : '#fbbf24' }}>{data.score}%</span>
-                  </div>
-                  <p style={{ margin: 0, fontSize: '13px', lineHeight: 1.4, opacity: 0.8 }}>{data.status}</p>
-                </div>
-              ))}
-            </div>
-            <p style={{ margin: '16px 0 0', fontSize: '12px', textAlign: 'center', opacity: 0.6, fontStyle: 'italic' }}>
-              Lås opp full rapport for å se alle Princeton-metodene og detaljert score ↑
-            </p>
-          </div>
-        )}
-
-        {/* Top 3 */}
-        <h3 className="insight-h3" style={{ marginTop: 0, color: 'var(--color-accent)' }}>Topp 3 prioriterte tiltak</h3>
-        <p className="insight-p" style={{ fontSize: '16px' }}>Her er de tre viktigste forbedringsmulighetene AI-sjekken identifiserte:</p>
-
-        <div className="audit-teasers" style={{ display: 'grid', gap: '16px', marginBottom: '48px' }}>
-          {(auditData.top3Updates ?? []).map((update: any, i: number) => (
-            <div key={i} className="audit-teaser-card" style={{ padding: '24px', background: 'var(--color-surface)', border: '1px solid var(--color-border-light)', borderRadius: '16px' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '12px' }}>
-                <span style={{ color: 'var(--color-accent)', fontWeight: 700, fontSize: '14px' }}>TILTAK {i + 1}</span>
-              </div>
-              <h4 style={{ fontFamily: 'var(--font-sans)', fontSize: '20px', color: 'var(--color-white)', margin: '0 0 16px' }}>{update.title}</h4>
-              
-              <div style={{ opacity: 0.4, filter: 'blur(3px)', userSelect: 'none' }}>
-                <p style={{ fontSize: '14px', color: 'var(--color-accent)', marginBottom: '4px', fontWeight: 600 }}>Hvorfor det betyr noe:</p>
-                <p style={{ margin: '0 0 12px', fontSize: '14px', lineHeight: 1.4 }}>{update.whyItMatters}</p>
-                <p style={{ fontSize: '14px', color: 'var(--color-white)', marginBottom: '4px', fontWeight: 600 }}>Anbefalt fix:</p>
-                <p style={{ margin: 0, fontSize: '14px', lineHeight: 1.4 }}>{update.recommendedFix}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        {/* Paywall */}
-        <div className="audit-paywall" style={{ position: 'relative' }}>
-          <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '100%', background: 'linear-gradient(to bottom, transparent, var(--color-bg-card) 60%)', zIndex: 1, pointerEvents: 'none' }}></div>
-
-          <h3 className="insight-h3" style={{ marginTop: 0, filter: 'blur(3px)', opacity: 0.5 }}>Scorecard, anbefalte fixes og prioriterte tiltak</h3>
-          <p className="insight-p" style={{ filter: 'blur(4px)', opacity: 0.5 }}>
-            Basert på analysen mangler siden flere viktige elementer som koster deg synlighet og leads. Her er vår konkrete anbefalingsliste med prioriterte tiltak og hva som ikke kunne verifiseres fra nettsiden...
-          </p>
-
-          <div style={{ position: 'relative', zIndex: 2, textAlign: 'center', marginTop: '-80px', padding: '40px', background: 'var(--color-bg-dark)', border: '1px solid var(--color-border-light)', borderRadius: '20px', boxShadow: '0 20px 40px rgba(0,0,0,0.5)' }}>
-            <h3 className="insight-h3" style={{ marginTop: 0, marginBottom: '16px' }}>Lås opp den fulle rapporten</h3>
-            <p className="insight-p" style={{ fontSize: '16px', maxWidth: '440px', margin: '0 auto 32px' }}>
-              Få de konkrete fixene, prioriterte tiltak og en fullstendig scorecard-analyse sendt til innboksen.
-            </p>
-
-            <form onSubmit={handleLeadSubmit} style={{ display: "flex", gap: "12px", justifyContent: "center", maxWidth: "480px", margin: "0 auto" }}>
-              <input
-                type="email"
-                placeholder="din@epost.no"
-                className="url-analyzer__input"
-                style={{ border: "1px solid var(--color-border-light)", borderRadius: "12px", padding: "12px 24px" }}
-                value={leadEmail}
-                onChange={(e) => setLeadEmail(e.target.value)}
-                required
-              />
-              <button type="submit" className="url-analyzer__btn" disabled={leadSending}>
-                {leadSending ? "Sender..." : "Send meg full rapport →"}
-              </button>
-            </form>
-          </div>
-        </div>
-
-      </div>
-    )
-  }
-
-  return (
-    <form className="url-analyzer fade-up" onSubmit={handleAnalyze}>
-      <input 
-        type="text" 
-        className="url-analyzer__input" 
-        placeholder="F.eks: www.dinside.no" 
-        value={url}
-        onChange={(e) => setUrl(e.target.value)}
-        required
-      />
-      <button type="submit" className="url-analyzer__btn">
-        Analyser nettsiden
-      </button>
-    </form>
-  )
-}
-
 export default function InnsiktPage() {
   const [activeFilter, setActiveFilter] = useState("Alle")
 
@@ -270,15 +33,19 @@ export default function InnsiktPage() {
       <Nav />
       <main>
         
-        {/* HERO & URL ANALYZER */}
+        {/* HERO */}
         <section className="innsikt-hero">
           <h1 className="innsikt-hero__title fade-up">
-            Hvorfor mister du kunder på nett?
+            Våre siste dykk ned i <span className="text-accent">vekst og data</span>
           </h1>
           <p className="innsikt-hero__sub fade-up">
-            Små feil koster titusenvis av kroner. Skriv inn nettsiden din nedenfor for å få en konkret analyse av hva du bør oppdatere.
+            Vi deler våre erfaringer fra innsiden av norske bedrifter – alt fra CRO-eksperimenter til de nyeste strategiene innen SEO og AI-synlighet.
           </p>
-          <UrlAnalyzer />
+          <div className="fade-up" style={{ marginTop: '32px' }}>
+            <Link href="/geo-audit" className="btn btn--primary">
+              Nervøs for AI-søk? Prøv vår gratis analyse her →
+            </Link>
+          </div>
         </section>
 
         <section className="container" style={{ paddingBottom: '120px' }}>
@@ -314,10 +81,6 @@ export default function InnsiktPage() {
                   <span>📅 {featuredArticle.date}</span>
                   <span>⏱ {featuredArticle.read} lestetid</span>
                 </div>
-                {/* 
-                  Link points to the dynamic article path. 
-                  (To be built in the future: /innsikt/[slug]) 
-                */}
                 <Link href={`/innsikt/${featuredArticle.slug}`} className="insight-featured__btn">
                   Les hele guiden →
                 </Link>

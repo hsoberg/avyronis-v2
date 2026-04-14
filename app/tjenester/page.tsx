@@ -2,6 +2,7 @@ import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
 import CTASection from '@/components/CTASection'
 import SystemAccordionSection from '@/components/SystemAccordionSection'
+import CreativePortal from '@/components/CreativePortal'
 import ScrollAnimations from '@/components/ScrollAnimations'
 
 export const metadata = {
@@ -50,6 +51,9 @@ export default function ServicesPage() {
 
         {/* 3. CORE SYSTEM SECTION */}
         <SystemAccordionSection />
+
+        {/* 3.5 CREATIVE STUDIO SECTION */}
+        <CreativePortal />
 
         {/* 4. POSITIONING SECTION */}
         <section className="positioning-section fade-up">

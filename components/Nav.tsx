@@ -7,6 +7,7 @@ const navLinks = [
   { label: 'Arbeider', href: '/arbeider' },
   { label: 'Tjenester', href: '/tjenester' },
   { label: 'Innsikt', href: '/innsikt' },
+  { label: 'Gratis Analyse', href: '/geo-audit' },
   { label: 'Kontakt', href: '/kontakt' },
 ]
 
@@ -39,7 +40,30 @@ export default function Nav() {
 
           <div className="nav__links" role="list">
             {navLinks.map((link) => (
-              <a key={link.href} href={link.href} className="nav__link" role="listitem">
+              <a 
+                key={link.href} 
+                href={link.href} 
+                className="nav__link" 
+                role="listitem"
+                style={{ position: 'relative', display: 'flex', flexDirection: 'column', alignItems: 'center' }}
+              >
+                {link.href === '/geo-audit' && (
+                  <span style={{ 
+                    position: 'absolute',
+                    top: '-14px',
+                    fontSize: '8px', 
+                    textTransform: 'uppercase', 
+                    backgroundColor: 'var(--color-accent)', 
+                    color: 'var(--color-black)', 
+                    padding: '1px 4px', 
+                    borderRadius: '3px',
+                    fontWeight: 900,
+                    letterSpacing: '0.05em',
+                    lineHeight: '1'
+                  }}>
+                    Nyhet
+                  </span>
+                )}
                 {link.label}
               </a>
             ))}

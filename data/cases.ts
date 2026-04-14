@@ -5,6 +5,11 @@ export interface CaseStudy {
   type: string
   resultMetric: string
   resultLabel: string
+  isNewSite?: boolean
+  liveUrl?: string
+  desktopImage?: string
+  mobileImage?: string
+  fullWidthImage?: string
 }
 
 export const caseStudies: CaseStudy[] = [
@@ -14,22 +19,28 @@ export const caseStudies: CaseStudy[] = [
     industry: 'Fysioterapi',
     type: 'Lokal bedrift',
     resultMetric: '+68%',
-    resultLabel: 'Flere henvendelser',
+    resultLabel: 'bookinger',
+    liveUrl: 'https://aktivhelse.vercel.app/',
+    fullWidthImage: '/hf_20260410_094220_669317af-37a3-455e-b975-8cfb9dda9d6f.png',
   },
   {
     slug: 'spyle-rorleggervakta',
     title: 'Spyle & Rørleggervakta',
     industry: 'Håndverker / rørlegger',
     type: 'Tjeneste',
-    resultMetric: '2.1x',
-    resultLabel: 'Flere kundehenvendelser',
+    resultMetric: 'Solid',
+    resultLabel: 'kundestrøm',
+    isNewSite: true,
   },
   {
     slug: 'kaffe1',
     title: 'Kaffe1 AS',
     industry: 'Kafé / servering',
-    type: 'Lokal bedrift',
+    type: 'B2B / Bedrift',
     resultMetric: '+40–60%',
-    resultLabel: 'Flere henvendelser',
+    resultLabel: 'B2B-leads',
+    liveUrl: 'https://kaffe1.vercel.app/',
+    desktopImage: '/cases/kaffe1-desktop.png',
+    mobileImage: '/cases/kaffe1-mobile.png',
   },
 ]

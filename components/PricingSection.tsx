@@ -2,7 +2,7 @@ export default function PricingSection() {
   return (
     <section className="pricing-section" id="priser" aria-label="Priser og pakker">
       <div className="pricing-section__inner fade-up">
-        
+
         <div className="pricing-section__header">
           <p className="pricing-section__pre-headline">Start enkelt – oppgrader når du vokser</p>
           <h2 className="pricing-section__headline">Velg løsningen som gir deg flere kunder</h2>
@@ -12,15 +12,15 @@ export default function PricingSection() {
         </div>
 
         <div className="pricing-grid">
-          
+
           {/* Card 1 */}
           <div className="pricing-card">
             <h3 className="pricing-card__title">Kom i gang</h3>
             <div className="pricing-card__price">1 990 kr <span className="mnd">/ mnd</span></div>
             <div className="pricing-card__etab">+ 9 900 kr etablering</div>
-            
+
             <p className="pricing-card__positioning">En nettside som faktisk representerer bedriften din</p>
-            
+
             <ul className="pricing-card__list">
               <li>Ferdig nettside tilpasset mobil</li>
               <li>Synlig på Google</li>
@@ -43,9 +43,9 @@ export default function PricingSection() {
             <p className="pricing-card__recommendation">Dette er det de fleste velger</p>
             <div className="pricing-card__price">3 990 kr <span className="mnd">/ mnd</span></div>
             <div className="pricing-card__etab">+ 14 900 kr etablering</div>
-            
+
             <p className="pricing-card__positioning">En nettside bygget for flere henvendelser og bedre konvertering</p>
-            
+
             <ul className="pricing-card__list">
               <li>Flere henvendelser fra samme trafikk</li>
               <li>Kontinuerlig forbedring av nettsiden</li>
@@ -66,13 +66,13 @@ export default function PricingSection() {
             <h3 className="pricing-card__title">Dominer markedet</h3>
             <div className="pricing-card__price">6 990 kr <span className="mnd">/ mnd</span></div>
             <div className="pricing-card__etab">+ 19 900 kr etablering</div>
-            
+
             <p className="pricing-card__positioning">En løsning for bedrifter som vil bli det naturlige valget i sin bransje</p>
-            
+
             <ul className="pricing-card__list">
               <li>Strategisk innhold og synlighet</li>
               <li>A/B-testing og løpende optimalisering</li>
-              <li>Prioritert support</li>
+              <li>AI-agent for kundeservice</li>
               <li>Fullt fokus på vekst og konvertering</li>
             </ul>
 

@@ -15,20 +15,20 @@ export default function PricingSection() {
 
           {/* Card 1 */}
           <div className="pricing-card">
-            <h3 className="pricing-card__title">Kom i gang</h3>
+            <h3 className="pricing-card__title">Synlig</h3>
             <div className="pricing-card__price">1 990 kr <span className="mnd">/ mnd</span></div>
             <div className="pricing-card__etab">+ 9 900 kr etablering</div>
 
-            <p className="pricing-card__positioning">En nettside som faktisk representerer bedriften din</p>
+            <p className="pricing-card__positioning">Du får en profesjonell nettside som gjør at folk faktisk finner deg – og tar deg seriøst.</p>
 
             <ul className="pricing-card__list">
-              <li>Ferdig nettside tilpasset mobil</li>
-              <li>Synlig på Google</li>
-              <li>Rask og brukervennlig struktur</li>
-              <li>Drift og løpende oppdateringer</li>
+              <li>Synlig på Google når kunder søker</li>
+              <li>Rask, mobiltilpasset og enkel å bruke</li>
+              <li>Struktur som gjør det lett å ta kontakt</li>
+              <li>Drift, sikkerhet og oppdateringer inkludert</li>
             </ul>
 
-            <div className="pricing-card__fit-text">For deg som trenger en nettside som faktisk representerer bedriften din</div>
+            <div className="pricing-card__fit-text">For deg som ikke har nettside i dag eller har en utdatert side som skader tilliten din</div>
 
             <div className="pricing-card__bottom">
               <a href="#contact" className="btn btn--secondary">Få en konkret plan for din nettside</a>
@@ -39,18 +39,18 @@ export default function PricingSection() {
           {/* Card 2 (Recommended) */}
           <div className="pricing-card pricing-card--popular">
             <div className="pricing-card__badge">Mest valgt</div>
-            <h3 className="pricing-card__title">Få flere kunder</h3>
+            <h3 className="pricing-card__title">Flere kunder</h3>
             <p className="pricing-card__recommendation">Dette er det de fleste velger</p>
             <div className="pricing-card__price">3 990 kr <span className="mnd">/ mnd</span></div>
             <div className="pricing-card__etab">+ 14 900 kr etablering</div>
 
-            <p className="pricing-card__positioning">En nettside bygget for flere henvendelser og bedre konvertering</p>
+            <p className="pricing-card__positioning">Vi bygger ikke bare en nettside – vi bygger et system som gjør flere besøkende til kunder.</p>
 
             <ul className="pricing-card__list">
-              <li>Flere henvendelser fra samme trafikk</li>
-              <li>Kontinuerlig forbedring av nettsiden</li>
-              <li>Fokus på konvertering og tydelige CTA-er</li>
-              <li>Tiltak basert på data og brukeradferd</li>
+              <li>Strukturert for konvertering (ikke bare design)</li>
+              <li>Tydelige CTA-er som faktisk blir brukt</li>
+              <li>Kontinuerlig forbedring basert på data</li>
+              <li>Måling av hva som gir henvendelser</li>
             </ul>
 
             <div className="pricing-card__fit-text">For deg som vil ha flere kunder – uten å øke annonsebudsjettet</div>
@@ -63,17 +63,17 @@ export default function PricingSection() {
 
           {/* Card 3 */}
           <div className="pricing-card">
-            <h3 className="pricing-card__title">Dominer markedet</h3>
+            <h3 className="pricing-card__title">Markedsleder</h3>
             <div className="pricing-card__price">6 990 kr <span className="mnd">/ mnd</span></div>
             <div className="pricing-card__etab">+ 19 900 kr etablering</div>
 
-            <p className="pricing-card__positioning">En løsning for bedrifter som vil bli det naturlige valget i sin bransje</p>
+            <p className="pricing-card__positioning">Dette er for deg som vil dominere – ikke bare være synlig.</p>
 
             <ul className="pricing-card__list">
-              <li>Strategisk innhold og synlighet</li>
-              <li>A/B-testing og løpende optimalisering</li>
-              <li>AI-agent for kundeservice</li>
-              <li>Fullt fokus på vekst og konvertering</li>
+              <li>A/B-testing av sider og budskap</li>
+              <li>Strategisk innhold som bygger tillit og autoritet</li>
+              <li>AI-chat som fanger og kvalifiserer leads 24/7</li>
+              <li>Løpende optimalisering av hele kundereisen</li>
             </ul>
 
             <div className="pricing-card__fit-text">For deg som vil være det naturlige valget i markedet ditt</div>

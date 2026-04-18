@@ -4056,4 +4056,149 @@ ul, ol { list-style: none; }
   .audio-mockup { flex-direction: column; text-align: center; }
 }
 
+/* ============================================================
+   DATA-REVEAL SCROLL ANIMATIONS
+   ============================================================ */
+
+/* Hero — word-by-word reveal */
+.hero__headline .word {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(80%);
+  transition: opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, opacity;
+}
+.hero__headline .word.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Hero sub / proof / buttons — auto-entrance via keyframes */
+@keyframes heroFadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.hero-entrance.delay-1 {
+  animation: heroFadeUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.50s both;
+}
+.hero-entrance.delay-2 {
+  animation: heroFadeUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.70s both;
+}
+.hero-entrance.delay-3 {
+  animation: heroFadeUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.90s both;
+}
+
+/* Cards — scroll-reveal base state (uses `translate` to avoid
+   conflicting with the existing `transform: translateY(-4px)` hover rules) */
+.ps-card,
+.proof-section__grid .proof-card,
+.hiw-card,
+.pricing-card {
+  opacity: 0;
+  translate: 0 28px;
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+              translate 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: translate, opacity;
+}
+.ps-card.is-in,
+.proof-section__grid .proof-card.is-in,
+.hiw-card.is-in,
+.pricing-card.is-in {
+  opacity: 1;
+  translate: 0 0;
+}
+
+/* Cascade stagger delays */
+.ps-card:nth-child(2)      { transition-delay: 0.09s; }
+.ps-card:nth-child(3)      { transition-delay: 0.18s; }
+.proof-section__grid .proof-card:nth-child(2) { transition-delay: 0.11s; }
+.proof-section__grid .proof-card:nth-child(3) { transition-delay: 0.22s; }
+.hiw-card:nth-child(2)     { transition-delay: 0.09s; }
+.hiw-card:nth-child(3)     { transition-delay: 0.18s; }
+.hiw-card:nth-child(4)     { transition-delay: 0.27s; }
+.pricing-card:nth-child(2) { transition-delay: 0.12s; }
+.pricing-card:nth-child(3) { transition-delay: 0.24s; }
+
+/* Popular pricing card lifts up slightly when revealed */
+.pricing-card--popular.is-in {
+  translate: 0 -6px;
+}
+
+/* Proof bars */
+.proof-card__bar {
+  margin-top: 20px;
+  height: 3px;
+  background: var(--color-border);
+  border-radius: 999px;
+  overflow: hidden;
+}
+.proof-card__bar > i {
+  display: block;
+  height: 100%;
+  background: linear-gradient(90deg, var(--color-accent), var(--color-accent-dark));
+  transform-origin: left center;
+  transform: scaleX(0);
+  transition: transform 1.1s cubic-bezier(0.16, 1, 0.3, 1) 0.2s;
+  will-change: transform;
+}
+.proof-section__grid .proof-card.is-in .proof-card__bar > i {
+  transform: scaleX(var(--bar-fill, 0.8));
+}
+
+/* FAQ accordion — slide in from left */
+.faq-section__list .accordion__item {
+  opacity: 0;
+  translate: -16px 0;
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+              translate 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: translate, opacity;
+}
+.faq-section__list .accordion__item.is-in {
+  opacity: 1;
+  translate: 0 0;
+}
+.faq-section__list .accordion__item:nth-child(2) { transition-delay: 0.06s; }
+.faq-section__list .accordion__item:nth-child(3) { transition-delay: 0.12s; }
+.faq-section__list .accordion__item:nth-child(4) { transition-delay: 0.18s; }
+.faq-section__list .accordion__item:nth-child(5) { transition-delay: 0.24s; }
+.faq-section__list .accordion__item:nth-child(6) { transition-delay: 0.30s; }
+.faq-section__list .accordion__item:nth-child(7) { transition-delay: 0.36s; }
+
+/* CTA button glow pulse */
+@keyframes ctaGlow {
+  0%, 100% { box-shadow: 0 0 14px rgba(255, 191, 0, 0.25), 0 4px 24px rgba(255, 191, 0, 0.10); }
+  50%       { box-shadow: 0 0 32px rgba(255, 191, 0, 0.55), 0 4px 36px rgba(255, 191, 0, 0.22); }
+}
+.cta-btn-glow {
+  animation: ctaGlow 2.6s ease-in-out infinite;
+}
+
+/* Reduced motion — disable all data-reveal transitions */
+@media (prefers-reduced-motion: reduce) {
+  .hero__headline .word,
+  .hero-entrance.delay-1,
+  .hero-entrance.delay-2,
+  .hero-entrance.delay-3 {
+    transition: none !important;
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  .ps-card,
+  .proof-section__grid .proof-card,
+  .hiw-card,
+  .pricing-card,
+  .faq-section__list .accordion__item {
+    opacity: 1 !important;
+    translate: none !important;
+    transition: none !important;
+  }
+  .proof-card__bar > i {
+    transition: none !important;
+    transform: scaleX(var(--bar-fill, 0.8)) !important;
+  }
+  .cta-btn-glow { animation: none !important; }
+}
+
 

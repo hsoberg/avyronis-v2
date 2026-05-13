@@ -271,6 +271,9 @@ function UrlAnalyzer() {
         <MiniCheck label="Sitemap crawl" />
         <MiniCheck label="Robots + llms.txt" />
       </div>
+      <p style={{ margin: "16px auto 0", maxWidth: "520px", textAlign: "center", color: "var(--color-muted)", fontSize: "13px", lineHeight: 1.55 }}>
+        Måler faktiske nettsidesignaler som schema, sitemap, robots.txt, CTA-er og innholdsstruktur før rapporten skrives.
+      </p>
     </div>
   )
 }
@@ -545,12 +548,12 @@ export default function GeoAuditPage() {
 
         <div className="container" style={{ position: "relative", zIndex: 1 }}>
           <div style={{ textAlign: "center", marginBottom: "72px" }}>
-            <span className="badge fade-up" style={{ marginBottom: "24px" }}>Gratis AI-readiness audit</span>
+            <span className="badge fade-up" style={{ marginBottom: "24px" }}>Gratis SEO- og AI-audit</span>
             <h1 className="insight-h1 fade-up" style={{ fontSize: "clamp(40px, 8vw, 76px)", lineHeight: 0.94, marginBottom: "24px", letterSpacing: "-0.03em" }}>
-              Mål hvor lett AI kan <span className="text-accent">forstå og sitere</span> nettsiden din
+              Finn de største <span className="text-accent">lekkasjene</span> på nettsiden din
             </h1>
             <p className="insight-p fade-up" style={{ fontSize: "clamp(18px, 2vw, 22px)", maxWidth: "740px", margin: "0 auto", opacity: 0.84, lineHeight: 1.55 }}>
-              Auditen crawler faktiske sider, sjekker robots.txt, llms.txt, schema, innholdsstruktur og konverteringssignaler. Resultatet skiller mellom bekreftede funn og ting som krever ekstern verifisering.
+              Få en rask rapport med målbare funn innen SEO, AI-synlighet, teknisk oppsett og hva som gjør det vanskeligere å få henvendelser.
             </p>
           </div>
 

@@ -33,18 +33,20 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: 'E-posttjenesten er ikke konfigurert.' }, { status: 500 })
     }
 
+    const effectiveLeadIntent = normalizeLeadIntent(leadIntent, auditData)
+
     await resend.emails.send({
       from: 'Avyronis Audit <henning@avyronis.com>',
       to: email,
       subject: `Din nettside-audit: ${safeText(auditData.finalUrl || url)}`,
-      html: buildAuditEmailHtml(email, url, auditData, leadIntent),
+      html: buildAuditEmailHtml(email, url, auditData, effectiveLeadIntent),
     })
 
     await resend.emails.send({
       from: 'Avyronis Audit <henning@avyronis.com>',
       to: INTERNAL_COPY,
       subject: `Ny audit-lead [${safeText(auditData.leadQualification?.temperature ?? 'lead')}]: ${safeText(auditData.finalUrl || url)}`,
-      html: buildInternalLeadHtml(email, url, auditData, leadIntent),
+      html: buildInternalLeadHtml(email, url, auditData, effectiveLeadIntent),
     })
 
     return NextResponse.json({ success: true })
@@ -257,6 +259,18 @@ function buildInternalLeadHtml(email: string, url: string, auditData: any, leadI
 
 function safeText(value: unknown): string {
   return escapeHtml(String(value ?? ''))
+}
+
+function normalizeLeadIntent(value: unknown, auditData: any): string {
+  if (typeof value === 'string' && value.trim()) return value.trim()
+
+  const serviceId = String(auditData?.recommendedService?.id ?? '')
+  if (serviceId === 'conversion_upgrade') return 'Få flere henvendelser'
+  if (serviceId === 'full_website_rebuild') return 'Vurdere ny nettside'
+  if (serviceId === 'technical_recovery') return 'Forbedre mobil / hastighet'
+  if (serviceId === 'seo_aeo_foundation') return 'Fikse SEO / AI-synlighet'
+
+  return 'Fikse SEO / AI-synlighet'
 }
 
 function escapeHtml(value: string): string {

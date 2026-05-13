@@ -232,7 +232,8 @@ function UrlAnalyzer() {
         className="url-analyzer-dedicated"
         onSubmit={handleAnalyze}
         style={{
-          display: "flex",
+          display: "grid",
+          gridTemplateColumns: "minmax(0, 1fr) auto",
           gap: "8px",
           background: "rgba(255,255,255,0.05)",
           padding: "8px",
@@ -241,6 +242,7 @@ function UrlAnalyzer() {
           boxShadow: "0 10px 30px rgba(0,0,0,0.5)",
           width: "100%",
           alignItems: "center",
+          boxSizing: "border-box",
         }}
       >
         <input
@@ -248,7 +250,6 @@ function UrlAnalyzer() {
           className="url-analyzer__input"
           placeholder="f.eks. avyronis.com"
           style={{
-            flex: 1,
             minWidth: 0,
             border: "none",
             background: "transparent",
@@ -261,7 +262,7 @@ function UrlAnalyzer() {
           onChange={(e) => setUrl(e.target.value)}
           required
         />
-        <button type="submit" className="btn btn--primary" style={{ borderRadius: "16px", padding: "0 18px", height: "44px", fontSize: "13px", fontWeight: 700, whiteSpace: "nowrap" }}>
+        <button type="submit" className="btn btn--primary" style={{ borderRadius: "16px", padding: "0 14px", height: "44px", minWidth: "92px", width: "auto", fontSize: "13px", fontWeight: 800, whiteSpace: "nowrap" }}>
           Analyser
         </button>
       </form>
@@ -396,7 +397,7 @@ function AuditReport({
         <p className="insight-p" style={{ fontSize: "16px", maxWidth: "560px", margin: "0 auto 28px", lineHeight: 1.6 }}>
           Rapporten inkluderer funnene og scoregrunnlaget. I tillegg ser vi hva som bør fikses først hvis målet er flere kunder, bedre synlighet eller en raskere nettside.
         </p>
-        <form onSubmit={onLeadSubmit} style={{ display: "flex", flexWrap: "wrap", gap: "12px", justifyContent: "center", maxWidth: "560px", margin: "0 auto" }}>
+        <form onSubmit={onLeadSubmit} style={{ display: "grid", gridTemplateColumns: "1fr", gap: "12px", justifyContent: "center", maxWidth: "560px", margin: "0 auto" }}>
           <div style={{ width: "100%", display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))", gap: "8px", marginBottom: "4px" }}>
             {leadIntentOptions.map((option) => (
               <label key={option} style={{ cursor: "pointer", border: leadIntent === option ? "1px solid rgba(var(--color-accent-rgb),0.65)" : "1px solid var(--color-border-light)", background: leadIntent === option ? "rgba(var(--color-accent-rgb),0.1)" : "rgba(255,255,255,0.035)", color: leadIntent === option ? "var(--color-white)" : "var(--color-muted)", borderRadius: "12px", padding: "11px 12px", fontSize: "13px", fontWeight: 700, textAlign: "left" }}>
@@ -416,12 +417,12 @@ function AuditReport({
             type="email"
             placeholder="din@epost.no"
             className="url-analyzer__input"
-            style={{ flex: 1, minWidth: "240px", border: "1px solid var(--color-border-light)", borderRadius: "14px", padding: "15px 18px" }}
+            style={{ width: "100%", boxSizing: "border-box", border: "1px solid var(--color-border-light)", borderRadius: "14px", padding: "16px 18px", fontSize: "16px" }}
             value={leadEmail}
             onChange={(e) => setLeadEmail(e.target.value)}
             required
           />
-          <button type="submit" className="btn btn--accent" style={{ height: "auto", padding: "15px 26px" }} disabled={leadSending}>
+          <button type="submit" className="btn btn--accent" style={{ width: "100%", minHeight: "54px", height: "auto", padding: "16px 26px", borderRadius: "16px", fontSize: "15px", fontWeight: 900, boxShadow: "0 14px 34px rgba(var(--color-accent-rgb), 0.28)" }} disabled={leadSending}>
             {leadSending ? "Sender..." : "Send rapport + vurdering"}
           </button>
         </form>

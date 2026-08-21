@@ -13,17 +13,29 @@ const nextConfig = {
     ],
   },
   async rewrites() {
+    const henningHost = [
+      {
+        type: 'host',
+        value: 'henning.avyronis.com',
+      },
+    ]
+
     return {
       beforeFiles: [
         {
           source: '/',
-          has: [
-            {
-              type: 'host',
-              value: 'henning.avyronis.com',
-            },
-          ],
+          has: henningHost,
           destination: '/henning',
+        },
+        {
+          source: '/robots.txt',
+          has: henningHost,
+          destination: '/henning/robots.txt',
+        },
+        {
+          source: '/sitemap.xml',
+          has: henningHost,
+          destination: '/henning/sitemap.xml',
         },
       ],
       afterFiles: [],

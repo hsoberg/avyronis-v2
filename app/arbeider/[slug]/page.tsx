@@ -27,15 +27,12 @@ export default function CaseStudyPage({ params }: { params: { slug: string } }) 
         <section className="cd-section cd-hero fade-up">
           <span className="cd-hero__label">CASE</span>
           <h1 className="cd-hero__title">
-            {caseData.isNewSite 
-              ? <>Slik bygget vi en kundemaskin for {caseData.title}</>
-              : <>Slik økte vi konverteringer for {caseData.title} med <span style={{ color: 'var(--color-accent)' }}>{caseData.resultMetric}</span></>
-            }
+            <>Slik bygget vi nettsiden for {caseData.title}</>
           </h1>
           <p className="cd-hero__sub">
             {caseData.isNewSite 
-              ? 'Vi bygget og lanserte en komplett digital profil optimalisert for handling og konvertering.' 
-              : 'Vi transformerte en passiv informasjonsside til en aktiv kundemaskin drevet av psykologi og UX.'}
+              ? 'Vi bygget og lanserte en komplett digital profil – og følger den opp videre.' 
+              : 'Vi bygget om siden rundt bedriften og kundene – og følger den opp videre.'}
           </p>
 
           <div className="cd-meta">
@@ -48,14 +45,14 @@ export default function CaseStudyPage({ params }: { params: { slug: string } }) 
               <span className="cd-meta__val">{caseData.type}</span>
             </div>
             <div className="cd-meta__item">
-              <span className="cd-meta__label">Resultat</span>
+              <span className="cd-meta__label">Kort fortalt</span>
               <span className="cd-meta__val" style={{ color: 'var(--color-accent)' }}>{caseData.resultMetric} {caseData.resultLabel}</span>
             </div>
           </div>
 
           <div className="cd-hero__actions">
             <Link href="/kontakt" className="btn btn--primary">
-              Få en konkret plan for din nettside
+              Få en uforpliktende vurdering
             </Link>
             <a href="#resultat" className="cd-hero__sec-btn">Se hva vi gjorde</a>
           </div>
@@ -108,7 +105,7 @@ export default function CaseStudyPage({ params }: { params: { slug: string } }) 
 
         {/* 2. RESULTAT */}
         <section id="resultat" className="cd-result-impact fade-up">
-          <div className="cd-result__number">{caseData.resultMetric}</div>
+          <div className="cd-result__outcome">{caseData.resultMetric}</div>
           <div className="cd-result__label">{caseData.resultLabel}</div>
 
           <div className="cd-result__metrics">
@@ -119,8 +116,8 @@ export default function CaseStudyPage({ params }: { params: { slug: string } }) 
 
           <p className="cd-result__exp">
             {caseData.isNewSite 
-              ? 'Resultatet kom ikke fra et stort markedsføringsbudsjett – men fra et skreddersydd fundament.' 
-              : 'Resultatet kom ikke fra mer trafikk – men fra en nettside som faktisk fungerer.'}
+              ? 'Ikke en ferdig mal – et fundament bygget rundt bedriften og kundene.' 
+              : 'Ikke en ferdig mal – siden ble bygget om rundt bedriften og kundene.'}
           </p>
         </section>
 
@@ -263,7 +260,7 @@ export default function CaseStudyPage({ params }: { params: { slug: string } }) 
                 ) : (
                   <>
                     <li>Utydelig budskap</li>
-                    <li>Lav respons og få skjemaer</li>
+                    <li>Uklart hva neste steg var</li>
                     <li>Vanskelig å navigere i tjenester</li>
                   </>
                 )}
@@ -281,7 +278,7 @@ export default function CaseStudyPage({ params }: { params: { slug: string } }) 
                 ) : (
                   <>
                     <li>Klart hva de tilbyr umiddelbart</li>
-                    <li>Betydelig flere henvendelser hver måned</li>
+                    <li>Tydelig vei til kontakt</li>
                     <li>Sømløs vei til kontakt</li>
                   </>
                 )}
@@ -298,46 +295,42 @@ export default function CaseStudyPage({ params }: { params: { slug: string } }) 
           <div className="cd-editorial__content">
             <p style={{ fontSize: '24px', color: 'var(--color-white)', marginBottom: '24px' }}>
               {caseData.isNewSite 
-                ? 'Etter lansering begynte telefonene å ringe umiddelbart.' 
-                : 'Etter endringene begynte flere å ta kontakt – uten å øke trafikken.'}
+                ? 'Siden var i drift fra dag én – og blir fulgt opp videre.' 
+                : 'Siden ble bygget om rundt det kundene faktisk er ute etter.'}
             </p>
             <p>
               {caseData.isNewSite 
-                ? 'En gjennomtenkt struktur og et sylskarp budskap fra dag én sørget for massiv effekt for bunnlinja.' 
-                : 'Små, men strategiske justeringer i struktur og budskap var alt som skulle til for å generere massiv effekt for bunnlinja.'}
-            </p>
-            <p style={{ fontStyle: 'italic', marginTop: '32px' }}>
-              "Dette er forskjellen på en nettside som bare eksisterer – og en som faktisk er en ansatt som jobber for deg."
+                ? 'Struktur og budskap ble lagt opp slik at besøkende raskt forstår tilbudet og vet hva neste steg er.' 
+                : 'Struktur og budskap ble justert slik at besøkende raskt forstår tilbudet og vet hva neste steg er.'}
             </p>
           </div>
         </section>
 
         {/* 8. KEY TAKEAWAY (PULL QUOTE) */}
         <div className="cd-pull-quote fade-up">
-          De fleste tror de trenger <span>mer trafikk.</span><br/>
-          I virkeligheten trenger de <span>en nettside som konverterer.</span><br/>
-          Det er der veksten ligger.
+          Nettsiden er ikke <span>sluttproduktet.</span><br/>
+          Den er <span>starten.</span>
         </div>
 
         {/* 9. CTA */}
         <section className="cta-section" style={{ borderTop: '1px solid var(--color-border-light)' }}>
           <div className="cta-section__inner fade-up">
-            <p className="cta-section__pre-headline">KLAR FOR NESTE STEG?</p>
-            <h2 className="cta-section__headline">La oss finne ut hva som stopper deg fra å få flere kunder</h2>
-            <p className="cta-section__support">Du får konkrete forbedringer du kan implementere med en gang.</p>
+            <p className="cta-section__pre-headline">NESTE STEG</p>
+            <h2 className="cta-section__headline">Fortell oss om nettsiden du trenger</h2>
+            <p className="cta-section__support">Du får en konkret anbefaling på hva nettsiden bør gjøre bedre – uten forpliktelser.</p>
 
             <ul className="cta-section__bullets" style={{ justifyContent: 'center' }}>
-              <li>Tar 10–15 min</li>
-              <li>Ingen binding</li>
-              <li>Kun konkrete tiltak</li>
+              <li>Uforpliktende</li>
+              <li>Du får en konkret anbefaling</li>
+              <li>Ingen ferdig salgspakke</li>
             </ul>
 
             <Link href="/kontakt" className="btn btn--primary">
-              Få en konkret plan for din nettside
+              Få en uforpliktende vurdering
             </Link>
 
             <p className="cta-section__microcopy" style={{ marginTop: '24px' }}>
-              Ingen synsing. Kun det som faktisk gir effekt.
+              Vi anbefaler ikke noe før vi har forstått behovet.
             </p>
           </div>
         </section>

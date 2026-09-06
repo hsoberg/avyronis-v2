@@ -28,6 +28,7 @@ export default function Accordion({ items }: AccordionProps) {
         return (
           <div key={item.id} className={`accordion__item${isOpen ? ' open' : ''}`} role="listitem">
             <button
+              type="button"
               className="accordion__trigger"
               aria-expanded={isOpen}
               aria-controls={`accordion-${item.id}`}

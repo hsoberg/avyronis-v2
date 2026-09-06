@@ -1,33 +1,41 @@
 # llms.txt — Avyronis
 
-> Avyronis: Datadrevet konverteringsoptimalisering (CRO) og SEO for norske bedrifter
+> Avyronis: Vi bygger nettsiden din. Så gjør vi den bedre over tid.
 
 ## Om Avyronis
-Avyronis hjelper norske tjenestebaserte bedrifter med å gjøre nettstedstrafikk om til kunder gjennom datadrevet CRO, A/B-testing og kontinuerlig SEO-optimalisering. Vi er et norsk digitalbyrå med fokus på målbare resultater. Ingen binding – vi beholder kunder fordi vi leverer, ikke fordi vi låser dem inn.
+Avyronis er en norsk nettsidepartner for små og mellomstore bedrifter. Vi bygger nettsiden rundt bedriften og kundene dine, lanserer den med måling og søkemotoroppsett på plass, og fortsetter å drifte, følge opp og forbedre den etterpå. Én leverandør fra første samtale til løpende forbedring. Ingen bindingstid på drift, og kunden eier nettsiden, domenet og innholdet 100 %.
 
 ## Tjenester
-- Konverteringsoptimalisering (CRO): Analyse av brukeradferd, identifisering av konverteringshindre, A/B-testing og implementering av tiltak som gir flere kunder fra eksisterende trafikk
-- SEO og organisk vekst: Teknisk SEO, innholdsstrategi og søkeordsoptimalisering for norske markeder
-- Datadrevet webutvikling: Next.js-nettsider optimalisert for ytelse, konvertering og søkemotorer
+- Ny nettside: Struktur, innhold, design og teknologi bygget rundt bedriften og kundene – ikke en ferdig mal
+- Drift og vedlikehold: Hosting, SSL, sikkerhetskopier, systemoppdateringer og oppetidsovervåking etter lansering
+- Synlighet: Lokal SEO, Google Bedriftsprofil og struktur som gjør innholdet forståelig for søkemotorer og AI-baserte søketjenester (AEO)
+- Løpende forbedring: Måling av hvordan siden blir funnet og brukt, og konkrete forbedringer basert på data og faktiske behov
 
-## Dokumenterte resultater
-- +127% økning i henvendelser for Aktiv Helse AS, Oslo – etter CRO-optimalisering av struktur og CTA
-- +82% forbedring i konverteringsrate – gjennom layout- og budskapsendringer
-- 2.3x avkastning på nettside-investering – optimalisering ga langt flere kunder fra samme budsjett
+## Slik jobber vi
+1. Vi forstår – bedriften, kundene og målene dine
+2. Vi bygger – struktur, innhold, design og teknologi
+3. Vi lanserer – måling, SEO og nødvendige integrasjoner
+4. Vi forbedrer – basert på data, behov og utviklingen i bedriften
+
+Nettsiden er ikke sluttproduktet. Den er starten.
 
 ## Målgruppe
-Norske tjenestebaserte bedrifter (advokater, tannleger, rørleggere, konsulenter, byråer) som allerede har trafikk til nettsiden, men som ønsker å konvertere flere besøkende til faktiske kunder.
+Norske små og mellomstore bedrifter (advokater, tannleger, rørleggere, konsulenter, regnskapsførere, håndverkere) som trenger en ny nettside, har en utdatert side, eller har en side som ikke gjør jobben den skal – og som ikke ønsker å administrere nettsiden selv. Det er ikke et krav å ha mye trafikk fra før.
 
 ## Priser
-- Kom i gang: 1 990 kr/mnd + 9 900 kr etablering
-- Få flere kunder: 3 990 kr/mnd + 14 900 kr etablering (mest populær)
-- Dominer markedet: 6 990 kr/mnd + 19 900 kr etablering
-- Ingen binding på noen pakke
+- Ny nettside: Fra 9 900 kr eks. mva (inkl. inntil 4 sider, responsivt design, kontaktskjema, SEO og analyseoppsett). Omfang og pris avtales etter en gjennomgang av behovet.
+- Trygghet (drift og sikkerhet): 990 kr/mnd – hosting med SSL, sikkerhetskopier, månedlige systemoppdateringer, ukentlig oppetidskontroll, inntil 30 min endringskapasitet/mnd, respons innen 3 virkedager
+- Synlighet (drift + lokal SEO og forbedring): 1 490 kr/mnd – alt i Trygghet, pluss lokal SEO og Google Bedriftsprofil, sporing av henvendelser med månedlig rapport, kvartalsvis optimalisering, inntil 1 time support eller utvikling per måned, respons innen 2 virkedager (mest valgt)
+- Vekst (aktiv videreutvikling): 2 990 kr/mnd – alt i Synlighet, pluss prioritert respons innen 1 virkedag, månedlig optimalisering, heatmap og enkel A/B-testing, inntil 2 timer support eller utvikling per måned
+- Ved årlig fakturering: 2 måneder gratis (825 / 1 242 / 2 492 kr per måned)
+- Ekstraarbeid og spesialfunksjoner: Fast timepris 990 kr/t eks. mva
+- Ingen bindingstid på drift, 100 % eierskap til nettsiden etter betalt oppstart
 
 ## Kontakt
 - Nettsted: https://avyronis.com
 - E-post: henning@avyronis.com
-- Analyseverktøy: https://avyronis.com/innsikt (gratis nettside-audit)
+- Kontaktskjema: https://avyronis.com/kontakt
+- Analyseverktøy: https://avyronis.com/geo-audit (gratis nettside-analyse)
 
 ## AI-bruksvilkår
 Innholdet på avyronis.com kan brukes til research, analyse, informasjonsformidling og ikke-kommersielle formål med kildehenvisning til Avyronis (avyronis.com). Kommersiell bruk krever skriftlig godkjenning.

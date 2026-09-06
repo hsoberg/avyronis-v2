@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef } from 'react'
 
 export default function Hero() {
   const headlineRef = useRef<HTMLHeadingElement>(null)
@@ -30,21 +30,20 @@ export default function Hero() {
       <div className="hero__container">
         {/* Left: Content */}
         <div className="hero__content">
+          <p className="hero__overline hero-entrance">Nettside + løpende forbedring</p>
           <h1 className="hero__headline hero-entrance" ref={headlineRef}>
-            Få flere kunder fra trafikken du allerede har
+            Vi bygger nettsiden din. Så gjør vi den bedre over tid.
           </h1>
           <p className="hero__sub hero-entrance delay-1">
-            Vi optimaliserer nettsiden din basert på faktisk brukerdata – slik at flere besøkende blir til kunder
+            En god nettside blir ikke ferdig på lanseringsdagen. Vi bygger en rask, tydelig og profesjonell nettside rundt bedriften og kundene dine – og følger den opp med drift, synlighet, måling og konkrete forbedringer.
           </p>
-          <div className="hero__proof hero-entrance delay-2">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-              <polyline points="20 6 9 17 4 12" />
-            </svg>
-            <span>✔ Snitt +30–70% flere henvendelser innen 90 dager</span>
+          <div className="hero__buttons hero-entrance delay-2">
+            <a href="/kontakt" className="btn btn--primary">Få en uforpliktende vurdering</a>
+            <a href="#modell" className="hero__secondary-link">Se hvordan vi jobber →</a>
           </div>
-          <div className="hero__buttons hero-entrance delay-3">
-            <a href="#contact" className="btn btn--primary">Book en gratis gjennomgang (15 min)</a>
-          </div>
+          <p className="hero__microcopy hero-entrance delay-3">
+            Fortell oss litt om bedriften din. Du får en konkret anbefaling på hva nettsiden bør gjøre bedre – uten forpliktelser.
+          </p>
         </div>
 
       </div>

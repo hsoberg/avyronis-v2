@@ -40,41 +40,18 @@ export default function ScrollAnimations() {
     const cardSelectors = [
       '.ps-card',
       '.hiw-card',
-      '.pricing-card',
-      '.faq-section__list .accordion__item',
     ]
     cardSelectors.forEach((sel) => {
       document.querySelectorAll(`${sel}:not(.is-in)`).forEach((el) => cardObserver.observe(el))
     })
 
-    // ── Proof cards: reveal + count-up + bar fill ─────────────
+    // ── Outcome cards: staggered reveal ───────────────────────
     const proofObserver = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (!entry.isIntersecting) return
           const card = entry.target as HTMLElement
           card.classList.add('is-in')
-
-          const metricEl = card.querySelector<HTMLElement>('[data-metric]')
-          if (metricEl) {
-            const target = parseFloat(metricEl.dataset.metricValue ?? '0')
-            const prefix = metricEl.dataset.metricPrefix ?? ''
-            const suffix = metricEl.dataset.metricSuffix ?? ''
-            const isFloat = !Number.isInteger(target)
-            const duration = 1400
-            const startTime = performance.now()
-
-            const tick = (now: number) => {
-              const p = Math.min(1, (now - startTime) / duration)
-              const eased = 1 - Math.pow(1 - p, 4)
-              const val = target * eased
-              metricEl.textContent =
-                prefix + (isFloat ? val.toFixed(1) : Math.round(val)) + suffix
-              if (p < 1) requestAnimationFrame(tick)
-            }
-            requestAnimationFrame(tick)
-          }
-
           proofObserver.unobserve(card)
         })
       },

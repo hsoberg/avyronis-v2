@@ -6,7 +6,7 @@ import ContactForm from '@/components/ContactForm'
 
 export const metadata = {
   title: 'Kontakt | Avyronis',
-  description: 'Få en konkret plan for nettsiden din. Ingen binding, kun konkrete tiltak.',
+  description: 'Fortell oss om nettsiden du trenger. Du får en konkret anbefaling – uten forpliktelser.',
 }
 
 export default function ContactPage() {
@@ -20,10 +20,10 @@ export default function ContactPage() {
         <section className="hero-sub fade-up" style={{ paddingTop: '160px', paddingBottom: '40px', textAlign: 'center' }}>
           <div className="container" style={{ maxWidth: '800px', margin: '0 auto', padding: '0 24px' }}>
             <h1 className="hero-sub__title" style={{ fontSize: 'clamp(40px, 8vw, 64px)', fontWeight: 500, color: 'var(--color-white)', lineHeight: 1.1, marginBottom: '24px' }}>
-              Få en konkret plan for nettsiden din – og se hva som stopper deg fra flere kunder<span style={{ color: 'var(--color-accent)' }}>.</span>
+              Fortell oss om nettsiden du trenger<span style={{ color: 'var(--color-accent)' }}>.</span>
             </h1>
             <p className="hero-sub__body" style={{ fontSize: '20px', color: 'var(--color-muted-70)', maxWidth: '600px', margin: '0 auto', lineHeight: 1.5 }}>
-              Jeg viser deg hva som stopper deg fra flere kunder – og hva du bør gjøre for å få flere.
+              Svar på noen korte spørsmål om bedriften, dagens nettside og hva du ønsker å få til. Deretter ser vi på hva som faktisk gir mening – før vi anbefaler løsning eller pris.
             </p>
           </div>
         </section>
@@ -100,15 +100,15 @@ export default function ContactPage() {
           <div className="contact-steps__grid">
             <div className="contact-step">
               <div className="contact-step__number">1</div>
-              <p className="contact-step__text">Vi analyserer nettsiden din</p>
+              <p className="contact-step__text">Vi blir kjent med bedriften og kundene dine</p>
             </div>
             <div className="contact-step">
               <div className="contact-step__number">2</div>
-              <p className="contact-step__text">Du får konkrete forbedringer</p>
+              <p className="contact-step__text">Du får en konkret anbefaling</p>
             </div>
             <div className="contact-step">
               <div className="contact-step__number">3</div>
-              <p className="contact-step__text">Vi viser deg hva som faktisk gir flere kunder</p>
+              <p className="contact-step__text">Vi blir enige om riktig neste steg</p>
             </div>
           </div>
         </section>
@@ -116,12 +116,12 @@ export default function ContactPage() {
         {/* 5. TRUST / RISK REDUCTION */}
         <div className="contact-trust-footer fade-up">
           <ul className="contact-trust-footer__bullets">
-            <li>Ingen binding</li>
-            <li>Ingen synsing</li>
-            <li>Kun konkrete tiltak</li>
+            <li>Uforpliktende</li>
+            <li>Ingen ferdig salgspakke</li>
+            <li>Du eier alt vi lager</li>
           </ul>
           <p className="contact-trust-footer__sub">
-            Du kan velge å gjøre tiltakene selv – eller få hjelp av oss.
+            Vi anbefaler ikke noe før vi har forstått behovet.
           </p>
         </div>
 

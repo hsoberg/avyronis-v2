@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server'
 import { Resend } from 'resend'
 
-const resend = new Resend(process.env.RESEND_API_KEY)
+const resend = new Resend(process.env.RESEND_API_KEY || 're_dummy_for_build')
 const INTERNAL_COPY = 'henning@avyronis.com'
 
 const IMPACT_LABELS: Record<string, string> = {
@@ -147,7 +147,7 @@ function buildAuditEmailHtml(email: string, url: string, auditData: any, leadInt
           <p style="margin:0 0 10px;">${safeText(recommendedService.summary)}</p>
           <p style="margin:0 0 16px; color:#555;">${safeText(recommendedService.estimatedScope)}</p>
           <a href="https://avyronis.com${safeHrefPath(recommendedService.bookingHref)}" style="display:inline-block; background:#111; color:#fff; text-decoration:none; padding:12px 18px; border-radius:999px; font-weight:700;">
-            Book gratis gjennomgang
+            Få en uforpliktende vurdering
           </a>
         </div>
       ` : ''}

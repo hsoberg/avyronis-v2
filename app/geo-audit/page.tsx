@@ -174,7 +174,7 @@ function UrlAnalyzer() {
             <h4 style={{ color: "var(--color-white)", margin: "0 0 8px", fontSize: "20px" }}>{auditData.recommendedService.title}</h4>
             <p style={{ color: "var(--color-muted)", margin: "0 0 18px", lineHeight: 1.55 }}>{auditData.recommendedService.nextStep}</p>
             <a className="btn btn--primary" href={auditData.recommendedService.bookingHref}>
-              Book gratis gjennomgang
+              Få en uforpliktende vurdering
             </a>
           </div>
         )}

@@ -1,11 +1,12 @@
 import Link from 'next/link'
 
 const pages = [
+  { label: 'Nettsider', href: '/tjenester' },
   { label: 'Arbeider', href: '/arbeider' },
-  { label: 'Om oss', href: '/#about' },
-  { label: 'Tjenester', href: '/#services' },
+  { label: 'Innsikt', href: '/innsikt' },
+  { label: 'Om Avyronis', href: '/om-oss' },
   { label: 'FAQ', href: '/#faq' },
-  { label: 'Kontakt', href: '/#contact' },
+  { label: 'Kontakt', href: '/kontakt' },
 ]
 
 
@@ -20,7 +21,7 @@ export default function Footer() {
               Avyronis<span className="text-accent">.</span>
             </span>
             <p className="footer__tagline">
-              Vi bygger nettsider som gjør besøkende til kunder – ikke bare pent design.
+              Vi bygger nettsiden din. Så gjør vi den bedre over tid.
             </p>
           </div>
 

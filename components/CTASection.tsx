@@ -1,7 +1,7 @@
 export default function CTASection({
-  overline = 'Klar for neste steg?',
-  headline = 'Få en konkret plan for nettsiden din',
-  body = 'Vi viser deg nøyaktig hva som bør forbedres – og hvilke tiltak som gir flest kunder.',
+  overline = 'Neste steg',
+  headline = 'Fortell oss om nettsiden du trenger',
+  body = 'Svar på noen korte spørsmål om bedriften, dagens nettside og hva du ønsker å få til. Deretter ser vi på hva som faktisk gir mening – før vi anbefaler løsning eller pris.',
 }: {
   overline?: string
   headline?: string
@@ -16,22 +16,22 @@ export default function CTASection({
         <p className="cta-section__support">{body}</p>
 
         <ul className="cta-section__bullets">
-          <li>Tar 10–15 min</li>
-          <li>Ingen forpliktelser</li>
-          <li>Du får konkrete tiltak du kan bruke med en gang</li>
+          <li>Uforpliktende</li>
+          <li>Du får en konkret anbefaling</li>
+          <li>Vi anbefaler ikke noe før vi har forstått behovet</li>
         </ul>
 
         <div className="cta-section__actions">
-            <a href="mailto:henning@avyronis.com?subject=Book en gratis gjennomgang" className="btn btn--primary btn--large">
-              Book en gratis gjennomgang (15 min)
+            <a href="/kontakt" className="btn btn--primary btn--large">
+              Få en uforpliktende vurdering →
             </a>
             
             <a href="mailto:henning@avyronis.com" className="cta-section__secondary">
-              eller kontakt oss direkte
+              eller send en e-post direkte
             </a>
 
             <p className="cta-section__trust">
-              Ingen binding. Ingen synsing. Kun konkrete tiltak.
+              Ingen ferdig salgspakke. Først finner vi ut hva dere faktisk trenger.
             </p>
         </div>
 

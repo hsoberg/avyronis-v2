@@ -1319,7 +1319,7 @@ function buildLeadQualification(
     temperature,
     reasons,
     recommendedPitch: temperature === 'hot'
-      ? 'Pitch en konkret gjennomgang med mål om å fikse de viktigste problemene raskt.'
+      ? 'Tilby en uforpliktende vurdering med mål om å fikse de viktigste problemene raskt.'
       : temperature === 'warm'
         ? 'Pitch en prioritert handlingsplan og en avgrenset forbedringssprint.'
         : 'Nurture med rapport, quick wins og tilbud om uforpliktende vurdering.',
@@ -1354,7 +1354,7 @@ function buildRecommendedService(
       summary: 'Nettsiden har flere fundamentale svakheter. Her vil enkeltfiks hjelpe, men den største gevinsten ligger trolig i å forbedre struktur, budskap, mobilopplevelse og teknisk fundament samlet.',
       estimatedScope: 'Strategi, ny struktur, copy, design, teknisk SEO/AEO og lanseringsklar implementering.',
       primaryCta: 'Få vurdering av ny nettside',
-      nextStep: 'Book en gratis 15-minutters gjennomgang, så prioriterer vi hva som bør bygges om først.',
+      nextStep: 'Få en uforpliktende vurdering, så prioriterer vi hva som bør bygges om først.',
       bookingHref: '/kontakt',
       reasons,
     }
@@ -1367,7 +1367,7 @@ function buildRecommendedService(
       summary: 'De største problemene ser tekniske ut: crawlbarhet, indexering, robots, sitemap, schema eller maskinlesbarhet. Dette er ofte lavthengende arbeid med tydelig effekt.',
       estimatedScope: 'Teknisk audit, prioriterte fixes, schema, llms.txt, sitemap/robots og kontroll etter publisering.',
       primaryCta: 'Fiks de tekniske problemene',
-      nextStep: 'Send rapporten til deg selv og book en gjennomgang av hva som blokkerer synlighet.',
+      nextStep: 'Send rapporten til deg selv og få en uforpliktende vurdering av hva som blokkerer synlighet.',
       bookingHref: '/kontakt',
       reasons,
     }
@@ -1380,7 +1380,7 @@ function buildRecommendedService(
       summary: 'Siden trenger et sterkere fundament for Google, AI-svar og søkeintensjon: bedre struktur, schema, svarblokker, FAQ og mer siterbart innhold.',
       estimatedScope: 'On-page SEO, AEO/GEO-struktur, schema, llms.txt, FAQ, internlenking og prioriterte innholdsforbedringer.',
       primaryCta: 'Få en synlighetsplan',
-      nextStep: 'Book en kort gjennomgang, så viser vi hvilke sider som bør fikses først.',
+      nextStep: 'Få en uforpliktende vurdering, så viser vi hvilke sider som bør fikses først.',
       bookingHref: '/kontakt',
       reasons,
     }
@@ -1393,7 +1393,7 @@ function buildRecommendedService(
       summary: 'Synligheten kan være brukbar, men siden bør gjøre det lettere for besøkende å forstå verdien, stole på deg og ta kontakt.',
       estimatedScope: 'Hero/CTA, budskap, trust-signaler, mobil UX, friksjonsreduksjon og bedre kontaktflyt.',
       primaryCta: 'Få flere henvendelser',
-      nextStep: 'Book en gratis gjennomgang av de viktigste konverteringslekkasjene.',
+      nextStep: 'Få en uforpliktende vurdering av de viktigste konverteringslekkasjene.',
       bookingHref: '/kontakt',
       reasons,
     }

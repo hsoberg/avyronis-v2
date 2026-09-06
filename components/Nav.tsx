@@ -4,11 +4,12 @@ import { useEffect, useState } from 'react'
 import Link from 'next/link'
 
 const navLinks = [
+  { label: 'Nettsider', href: '/tjenester' },
+  { label: 'Slik jobber vi', href: '/#modell' },
   { label: 'Arbeider', href: '/arbeider' },
-  { label: 'Tjenester', href: '/tjenester' },
   { label: 'Innsikt', href: '/innsikt' },
-  { label: 'Gratis Analyse', href: '/geo-audit' },
-  { label: 'Kontakt', href: '/kontakt' },
+  { label: 'Gratis analyse', href: '/geo-audit' },
+  { label: 'Om Avyronis', href: '/om-oss' },
 ]
 
 export default function Nav() {
@@ -69,8 +70,8 @@ export default function Nav() {
             ))}
           </div>
 
-          <a href="/#contact" className="nav__cta">
-            Ta kontakt
+          <a href="/kontakt" className="nav__cta">
+            Få en vurdering
             <svg className="icon" width="14" height="14" viewBox="0 0 24 24" aria-hidden="true">
               <line x1="5" y1="12" x2="19" y2="12" />
               <polyline points="12 5 19 12 12 19" />
@@ -106,8 +107,8 @@ export default function Nav() {
             </a>
           ))}
         </nav>
-        <a href="/#contact" className="mobile-menu__cta" onClick={closeMenu}>
-          Ta kontakt →
+        <a href="/kontakt" className="mobile-menu__cta" onClick={closeMenu}>
+          Få en vurdering →
         </a>
       </div>
     </>

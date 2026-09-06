@@ -4,12 +4,12 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/react";
 
 export const metadata: Metadata = {
-  title: 'Avyronis — Få 2–5x flere kunder fra nettsiden din',
+  title: 'Avyronis — Vi bygger nettsiden din. Så gjør vi den bedre over tid.',
   description:
-    'Avyronis hjelper norske bedrifter med å gjøre trafikk om til kunder gjennom datadrevet CRO og SEO. Ingen binding – vi leverer resultater, ikke løfter.',
+    'Avyronis bygger, drifter og videreutvikler nettsider for norske bedrifter. Én leverandør fra første samtale til løpende forbedring – uten bindingstid.',
   openGraph: {
-    title: 'Avyronis — Få 2–5x flere kunder fra nettsiden din',
-    description: 'Datadrevet konverteringsoptimalisering og SEO for norske bedrifter. Ingen binding – vi leverer resultater, ikke løfter.',
+    title: 'Avyronis — Vi bygger nettsiden din. Så gjør vi den bedre over tid.',
+    description: 'Vi bygger, drifter og videreutvikler nettsiden din. Én leverandør hele veien – uten bindingstid.',
     type: 'website',
   },
 }
